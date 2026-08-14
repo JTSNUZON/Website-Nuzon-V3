@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zonnepanelen, thuisbatterij &amp; slim energiebeheer | Nuzon BV</title>
+<meta name="description" content="Nuzon BV uit Soest installeert zonnepanelen, thuisbatterijen en laadpalen — 10.000+ panelen sinds 2012. Eigen monteurs via JTS, slim energiebeheer via Jullix.">
+<meta name="theme-color" content="#FAF7F0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23161208'/%3E%3Cpath d='M16 6l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6L7.3 12.3l6.1-.7L16 6z' fill='%23e6ad2e'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css?v=1">
+</head>
+<body>
+
+<!-- ============ TOPBALK ============ -->
+<header class="topbar">
+  <div class="topbar__inner">
+    <a class="brand" href="index.html" aria-label="Nuzon BV home">
+      <svg viewBox="0 0 48 48" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+          <line x1="24" y1="3" x2="24" y2="9"/><line x1="24" y1="39" x2="24" y2="45"/>
+          <line x1="3" y1="24" x2="9" y2="24"/><line x1="39" y1="24" x2="45" y2="24"/>
+          <line x1="9.5" y1="9.5" x2="13.7" y2="13.7"/><line x1="34.3" y1="34.3" x2="38.5" y2="38.5"/>
+          <line x1="38.5" y1="9.5" x2="34.3" y2="13.7"/><line x1="13.7" y1="34.3" x2="9.5" y2="38.5"/>
+        </g>
+        <circle cx="24" cy="24" r="9.5" fill="currentColor"/>
+      </svg>
+      <span class="brand__text"><span class="brand__name">nuzon</span><span class="brand__tag">Zonnepanelen</span></span>
+    </a>
+
+    <nav class="nav" aria-label="Hoofdmenu">
+      <button id="megaBtn" aria-expanded="false" aria-controls="mega">Producten<span class="caret">&#9662;</span></button>
+      <a href="index.html#besparen" class="hide-sm">Besparen</a>
+      <a href="index.html#reviews" class="hide-sm">Reviews</a>
+
+      <a class="btn btn--ghost btn--tel hide-sm" href="tel:+31307816767">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.2 1l-2.2 2.2z"/></svg>
+        030 781 6767
+      </a>
+      <a class="btn" href="#offerte">Gratis advies</a>
+    </nav>
+  </div>
+
+  <div class="mega" id="mega" data-open="false">
+    <div class="mega__grid">
+      <div>
+        <h4><a href="opwekken.html">Opwekken &#8594;</a></h4>
+        <ul>
+          <li><a href="opwekken.html#zonnepanelen">Zonnepanelen</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4><a href="opslaan.html">Opslaan &#8594;</a></h4>
+        <ul>
+          <li><a href="opslaan.html#thuisbatterij">Thuisbatterij</a></li>
+          <li><a href="opslaan.html#noodstroom">Noodstroom</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4><a href="laden-en-stroom.html">Laden &amp; stroom &#8594;</a></h4>
+        <ul>
+          <li><a href="laden-en-stroom.html#laadpaal">Laadpaal</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4><a href="zakelijk.html">Zakelijk &#8594;</a></h4>
+        <ul>
+          <li><a href="zakelijk.html">Zakelijk overzicht</a></li>
+          <li><a href="batterijopslag-zakelijk.html">Batterijopslag</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero" aria-label="Nuzon — zonne-energie en thuisbatterijen">
+  <div class="hero__media" aria-hidden="true">
+    <img class="hero__still" src="assets/hero/hero-eindbeeld.jpg" alt="" width="1600" height="900" fetchpriority="high">
+    <video class="hero__video" id="heroVideo" muted playsinline autoplay preload="none"
+           poster="assets/hero/hero-eindbeeld.jpg" tabindex="-1" disablepictureinpicture></video>
+  </div>
+  <div class="hero__scrim" aria-hidden="true"></div>
+
+  <div class="shell hero__body">
+    <p class="eyebrow">Zonne-energie die klopt</p>
+    <h1>Wek je eigen energie op. En benut 'm maximaal.</h1>
+    <p class="lede">Nuzon installeert en verbindt je zonnepanelen, thuisbatterij en laadpaal — slim aangestuurd door het Jullix-energiebeheersysteem. Van advies tot oplevering: één aanspreekpunt.</p>
+    <div class="hero__actions">
+      <a class="btn" href="#besparen">Bereken mijn voordeel</a>
+      <a class="btn btn--onDark" href="#keuze">Particulier of zakelijk? →</a>
+    </div>
+
+    <div class="hero__facts">
+      <div class="hero__fact">
+        <span class="meta">Geplaatst sinds 2012</span>
+        <strong>10.000+</strong>
+        <span class="sub">zonnepanelen</span>
+      </div>
+      <div class="hero__fact">
+        <span class="meta">Eigen monteurs</span>
+        <strong>JTS</strong>
+        <span class="sub">Installatietechniek, Soest</span>
+      </div>
+      <div class="hero__fact">
+        <span class="meta">Slim energiebeheer</span>
+        <strong>Jullix</strong>
+        <span class="sub">gecertificeerd partner</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KEUZE ============ -->
+<section class="section section--soft" id="keuze" aria-label="Kies particulier of zakelijk">
+  <div class="shell">
+    <div class="choice__intro">
+      <p class="eyebrow" style="margin-bottom:0">Waar kunnen we je mee helpen?</p>
+      <h2>Kies je startpunt</h2>
+    </div>
+
+    <div class="choice__grid">
+      <a class="choice__card" href="opwekken.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8M5 9.5V21h14V9.5M9 21v-6h6v6"/></svg>
+        <h3>Particulier</h3>
+        <p>Zonnepanelen, thuisbatterij en laden voor jouw woning. Bespaar elke dag.</p>
+        <span class="go">Voor thuis →</span>
+      </a>
+      <a class="choice__card" href="zakelijk.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21V7l8-4v18M11 21V9l8 4v8M3 21h18M7 11h0M7 15h0M15 15h0M15 18h0"/></svg>
+        <h3>Zakelijk</h3>
+        <p>Zonnepanelen, batterijopslag en laadpleinen voor bedrijven. Verlaag uw kosten.</p>
+        <span class="go">Voor bedrijven →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VOORDEEL BEREKENEN ============ -->
+<section class="section" id="besparen">
+  <div class="shell calc">
+    <div>
+      <p class="eyebrow">Bereken je voordeel</p>
+      <h2>Zie wat Nuzon jou per jaar oplevert</h2>
+      <p class="lede" style="margin-top:18px">Schuif je gemiddelde energierekening en ontdek je geschatte jaarvoordeel met zonnepanelen, batterij en dynamische stroom.</p>
+      <ul class="check">
+        <li>Geen vaste contractduur</li>
+        <li>Voordeel berekend op actuele tarieven</li>
+        <li>Vrijblijvend — geen verplichtingen</li>
+      </ul>
+    </div>
+
+    <div class="calc__card">
+      <label class="meta" for="bill">Mijn energierekening per maand</label>
+      <output class="calc__out" id="billOut" for="bill">€ 180</output>
+      <input type="range" id="bill" min="60" max="500" value="180" step="10">
+      <div class="calc__scale"><span class="meta">€ 60</span><span class="meta">€ 500</span></div>
+
+      <div class="calc__result">
+        <div class="calc__row is-lead">
+          <span class="meta">Voordeel per jaar</span>
+          <strong id="yearSave">€ 994</strong>
+        </div>
+        <div class="calc__row">
+          <span class="meta">Over 10 jaar</span>
+          <strong id="tenSave">€ 9.936</strong>
+        </div>
+        <div class="calc__row">
+          <span class="meta">CO₂ per jaar</span>
+          <strong id="co2Save">2,1 ton</strong>
+        </div>
+      </div>
+
+      <a href="#offerte" class="btn btn--block">Vraag persoonlijk advies aan</a>
+      <p class="calc__note">* Indicatie op basis van gemiddeld verbruik. Je exacte voordeel hangt af van je dak en gebruik.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section class="section section--soft" id="reviews">
+  <div class="shell">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">Klanten aan het woord</p>
+        <h2>Wat klanten over ons zeggen</h2>
+      </div>
+      <a class="google-link" href="https://www.google.com/search?q=Nuzon+B.V." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path fill="#4285F4" d="M22.5 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.9a5 5 0 0 1-2.2 3.3v2.7h3.6c2.1-2 3.3-4.9 3.3-7.8z"/>
+          <path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.7l-3.6-2.7c-1 .7-2.3 1.1-3.7 1.1-2.9 0-5.3-1.9-6.2-4.5H2.1v2.8A11 11 0 0 0 12 23z"/>
+          <path fill="#FBBC05" d="M5.8 14.2a6.6 6.6 0 0 1 0-4.2V7.2H2.1a11 11 0 0 0 0 9.8l3.7-2.8z"/>
+          <path fill="#EA4335" d="M12 5.4c1.6 0 3 .6 4.2 1.7l3.1-3.1A11 11 0 0 0 2.1 7.2L5.8 10c.9-2.6 3.3-4.6 6.2-4.6z"/>
+        </svg>
+        Bekijk onze reviews op Google
+      </a>
+    </div>
+
+    <div class="reviews" id="reviewGrid"></div>
+
+    <div class="reviews__more">
+      <button class="btn btn--ghost" id="moreBtn" type="button">Toon meer reviews</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ JULLIX ============ -->
+<section class="jullix" id="jullix">
+  <div class="shell jullix__inner">
+    <div>
+      <p class="eyebrow">Slim energiebeheer · Jullix</p>
+      <h2>Jullix: het brein achter je energie</h2>
+      <p class="lede" style="margin-top:20px">Zonnepanelen, een thuisbatterij, je laadpaal en warmtepomp werken pas écht samen met een slim energiebeheersysteem (EMS). Daarom werkt Nuzon met <strong>Jullix</strong> van Innovoltus. Het systeem beslist automatisch wanneer je stroom opslaat, gebruikt of laadt — op basis van je eigen opwek, je verbruik en de actuele energieprijzen.</p>
+      <ul class="check">
+        <li>Live inzicht in opwek, verbruik en opslag</li>
+        <li>Haalt het maximale uit je eigen zonnestroom</li>
+        <li>Laadt batterij en auto op het slimste moment</li>
+        <li>Werkt samen met dynamische stroom van NieuweStroom</li>
+      </ul>
+      <div class="jullix__badges">
+        <a class="btn" href="https://innovoltus.be" target="_blank" rel="noopener">Meer over Jullix</a>
+        <a class="btn btn--ghost" href="#offerte">Vraag advies aan</a>
+      </div>
+    </div>
+
+    <figure style="margin:0">
+      <div class="jullix__shot">
+        <img src="assets/jullix-app-flow.jpg" alt="Jullix-app: live energiestroom tussen zon, batterij, net, huis en auto" loading="lazy">
+      </div>
+      <figcaption class="jullix__cap meta">Live energiestroom in de Jullix-app</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ NETWERK ============ -->
+<section class="section" id="partners">
+  <div class="shell">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">Ons netwerk</p>
+        <h2>Sterke partners, één aanspreekpunt</h2>
+        <p class="lede">Nuzon brengt een compleet netwerk van specialisten samen — van toonaangevende leveranciers tot slimme techniek. Zo krijg jij de beste kwaliteit, scherp geprijsd en perfect op elkaar afgestemd.</p>
+      </div>
+    </div>
+
+    <div class="mains">
+      <article class="main-co">
+        <span class="role">Hoofdbedrijf · Regie</span>
+        <h3>Nuzon BV</h3>
+        <p>Jouw aanspreekpunt en regisseur voor zonnepanelen, thuisbatterijen, laadpalen en energieadvies — particulier én zakelijk. Actief sinds 2012 vanuit Soest.</p>
+      </article>
+      <article class="main-co">
+        <span class="role">Hoofdbedrijf · Installatie</span>
+        <h3>JTS Installatietechniek</h3>
+        <p>Onze vaste installatiepartner uit Soest met eigen gecertificeerde monteurs. Nuzon en JTS zijn twee zelfstandige bedrijven met dezelfde betrokken eigenaren.</p>
+        <a class="go" href="https://www.jtstechniek.nl/" target="_blank" rel="noopener">Bezoek JTS →</a>
+      </article>
+    </div>
+
+    <div class="partners">
+      <article class="partner">
+        <span class="role">Particuliere EMS</span>
+        <h3>Jullix (Innovoltus)</h3>
+        <p>Stuurt zon, batterij, laadpaal en verbruik thuis slim aan voor maximaal rendement. Nuzon en JTS zijn gecertificeerd Jullix-partner.</p>
+        <a class="go" href="https://innovoltus.be" target="_blank" rel="noopener">Over Jullix →</a>
+      </article>
+      <article class="partner">
+        <span class="role">Zakelijke EMS</span>
+        <h3>Embion</h3>
+        <p>Merk-onafhankelijk energiemanagement (Modbus/REST) voor peak shaving, netcongestie en curtailment — werkt 24/7, ook zonder internet.</p>
+        <a class="go" href="https://embion.eu/" target="_blank" rel="noopener">Over Embion →</a>
+      </article>
+      <article class="partner">
+        <span class="role">Leverancier</span>
+        <h3>Libra Energy</h3>
+        <p>Toonaangevende Europese PV-groothandel sinds 2007. A-merk panelen, omvormers en batterijen, getest door o.a. TÜV Rheinland.</p>
+        <a class="go" href="https://www.libra.energy/" target="_blank" rel="noopener">Over Libra Energy →</a>
+      </article>
+      <article class="partner">
+        <span class="role">Projecten</span>
+        <h3>East Connect</h3>
+        <p>Partner in duurzame installatietechniek en energiemanagement met 25+ jaar ervaring (Scope 12). Sterk in opslag- en laadoplossingen voor grotere projecten.</p>
+        <a class="go" href="https://eastconnect.nl/" target="_blank" rel="noopener">Over East Connect →</a>
+      </article>
+      <article class="partner">
+        <span class="role">Dynamische stroom</span>
+        <h3>NieuweStroom</h3>
+        <p>Onze partner voor dynamische stroom: je betaalt de echte uurprijs, zodat Jullix kan laden en gebruiken op de goedkoopste momenten. Nuzon is zelf geen energieleverancier.</p>
+        <a class="go" href="https://www.nieuwestroom.nl/" target="_blank" rel="noopener">Over NieuweStroom →</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta" id="offerte">
+  <div class="shell cta__inner">
+    <div>
+      <p class="eyebrow">Gratis en vrijblijvend</p>
+      <h2>Benieuwd wat jouw dak kan?</h2>
+      <p>Eén gesprek, een eerlijke berekening en een plan dat klopt. Geen verkoper aan de deur.</p>
+    </div>
+    <div class="cta__actions">
+      <a class="btn" href="mailto:info@nuzon.nl">Vraag gratis advies aan</a>
+      <a class="btn btn--onDark" href="tel:+31307816767">030 781 6767</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot">
+  <div class="shell">
+    <div class="foot__top">
+      <div>
+        <a class="brand" href="index.html">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+          <line x1="24" y1="3" x2="24" y2="9"/><line x1="24" y1="39" x2="24" y2="45"/>
+          <line x1="3" y1="24" x2="9" y2="24"/><line x1="39" y1="24" x2="45" y2="24"/>
+          <line x1="9.5" y1="9.5" x2="13.7" y2="13.7"/><line x1="34.3" y1="34.3" x2="38.5" y2="38.5"/>
+          <line x1="38.5" y1="9.5" x2="34.3" y2="13.7"/><line x1="13.7" y1="34.3" x2="9.5" y2="38.5"/>
+        </g>
+        <circle cx="24" cy="24" r="9.5" fill="currentColor"/>
+      </svg>
+          <span class="brand__text"><span class="brand__name">nuzon</span><span class="brand__tag">Zonnepanelen</span></span>
+        </a>
+        <p class="foot__mission">Nuzon BV installeert zonnepanelen, thuisbatterijen en laadpalen &mdash; met slim energiebeheer via Jullix. Actief sinds 2012.</p>
+        <a class="btn btn--onDark" href="#offerte">Plan een gratis dakcheck</a>
+      </div>
+      <div>
+        <h4>Producten</h4>
+        <ul>
+          <li><a href="opwekken.html">Opwekken</a></li>
+          <li><a href="opslaan.html">Opslaan</a></li>
+          <li><a href="laden-en-stroom.html">Laden &amp; stroom</a></li>
+          <li><a href="index.html#besparen">Bereken je voordeel</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Zakelijk</h4>
+        <ul>
+          <li><a href="zakelijk.html">Zakelijk overzicht</a></li>
+          <li><a href="batterijopslag-zakelijk.html">Batterijopslag</a></li>
+          <li><a href="index.html#partners">Embion EMS</a></li>
+          <li><a href="werkgebied.html">Werkgebied</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Nuzon</h4>
+        <ul>
+          <li><a href="index.html#partners">Netwerk</a></li>
+          <li><a href="index.html#reviews">Reviews</a></li>
+          <li><a href="mailto:info@nuzon.nl">info@nuzon.nl</a></li>
+          <li><a href="tel:+31307816767">030 781 6767</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot__legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="voorwaarden.html">Voorwaarden</a>
+      <a href="cookies.html">Cookies</a>
+      <span>Weteringpad 13A, 3762 EN Soest</span>
+      <span>KvK 54475260</span>
+      <span class="spacer">&copy; <span id="jaar">2026</span> Nuzon BV</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ WHATSAPP ============ -->
+<a class="wa" id="waLink" href="https://wa.me/31307816767" target="_blank" rel="noopener"
+   aria-label="Chat met ons via WhatsApp">
+  <span class="wa__label">Chat via WhatsApp</span>
+  <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+    <path d="M16.03 4.5c-6.33 0-11.47 5.14-11.47 11.47 0 2.02.53 3.99 1.53 5.73L4.5 27.5l5.95-1.55a11.42 11.42 0 0 0 5.58 1.43h.01c6.32 0 11.46-5.14 11.46-11.47 0-3.06-1.19-5.94-3.36-8.11a11.4 11.4 0 0 0-8.11-3.3zm0 2.06c2.5 0 4.85.98 6.62 2.75a9.31 9.31 0 0 1 2.74 6.63c0 5.19-4.22 9.41-9.4 9.41a9.4 9.4 0 0 1-4.79-1.31l-.34-.2-3.53.92.94-3.44-.22-.36a9.35 9.35 0 0 1-1.44-5.02c0-5.19 4.22-9.4 9.42-9.4zm-4.18 4.77c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.87 1.21 3.07c.15.2 2.06 3.14 5.02 4.29 2.46.95 2.96.76 3.49.71.53-.05 1.72-.7 1.96-1.38.24-.68.24-1.26.17-1.38-.07-.12-.27-.2-.56-.34-.3-.15-1.72-.85-1.99-.95-.27-.1-.46-.15-.66.15-.2.29-.75.94-.92 1.14-.17.2-.34.22-.63.07-.3-.15-1.24-.46-2.37-1.46-.88-.78-1.47-1.75-1.64-2.04-.17-.3-.02-.46.13-.6.13-.13.3-.34.44-.51.15-.17.2-.3.3-.49.1-.2.05-.37-.02-.51-.07-.15-.65-1.57-.9-2.15-.23-.56-.47-.49-.65-.5h-.55z"/>
+  </svg>
+</a>
+
+<script src="js/site.js?v=1"></script>
+<script>
+/* =====================================================================
+   REVIEWS — beheer hier alle reviews.
+   Teksten staan LETTERLIJK zoals de klant ze op Google schreef.
+
+     tekst  : reviewtekst (\n = regeleinde, precies zoals in de review)
+     naam   : naam zoals die op Google staat
+     bron   : "Nuzon" of "JTS Installatietechniek"
+     sterren: 1 t/m 5
+     foto   : optioneel, pad naar een foto
+     alt    : omschrijving van die foto
+   ===================================================================== */
+var REVIEWS = [
+  /* ---------- JTS Installatietechniek ---------- */
+  {
+    tekst: "Deze jonge en zeer professionele mannen, met heel goede omgangsvormen, kwamen in eerste instantie omvormers van onze zonnepanelen vervangen. Dit werd snel en professioneel uitgevoerd. Zij kwamen er achter dat een aantal van onze nokpannen stuk waren. Snel en professioneel hebben zij de hele nok vernieuwd. Er was nog net geen lekkage ontstaan en wij zijn zeer blij dat zij dit op tijd ontdekten en voor zover zien kwaliteit goed.",
+    naam: "Edith De Weger-Dahmen", bron: "JTS Installatietechniek", sterren: 5,
+    foto: "assets/reviews/de-weger-dakwerk.jpg",
+    alt: "Monteurs van JTS aan het werk op het dak en de nok van een woning"
+  },
+  {
+    tekst: "Deze jonge mannen hebben bij ons de zonnepanelen gedemonteerd en later, na de nieuwe dakpannen weer hermonteerd.\nWij zijn heel tevreden van JTS. Echt vriendelijke, meedenkende, professionele en eerlijke werkers, die hun afspraken na kwamen.\nDe kosten waren heel transparant en wij kwamen niet voor verassingen te staan. Ga zo door en succes met jullie bedrijf!",
+    naam: "Ria en Henny Damen", bron: "JTS Installatietechniek", sterren: 5,
+    foto: "assets/reviews/damen-zonnepanelen.jpg",
+    alt: "Monteurs die zonnepanelen terugplaatsen op een pannendak"
+  },
+  {
+    tekst: "Deze getalenteerde en jonge heren hebben mijn dak voorzien van een prachtige set zonnepanelen. Netjes op tijd, communicatief geweldig, professioneel en denken met je mee. Het resultaat mag er zeker zijn, zoals het netjes verwerken van de omvormer in de ombouwkast van de CV.\n\nIk zie ze graag nog eens terug voor wat andere klussen in de nabije toekomst!",
+    naam: "Jordy Willekens", bron: "JTS Installatietechniek", sterren: 5,
+    foto: "assets/reviews/willekens-omvormer.jpg",
+    alt: "Omvormer netjes weggewerkt in de ombouwkast naast de cv-ketel"
+  },
+  {
+    tekst: "Wij hebben 48 zonnepanelen en wilde een 50 KW batterij laten installeren. Dat hebben ze snel en zeer professioneel gedaan!! Alles mooi weggewerkt , nieuwe stoppenkast en een aansluiting voor een eventuele generator. Buiten het feit dat w hun werk zeer goed hebben gedaan zijn het ook nog aardige jongens !!! Zeer aan te bevelen",
+    naam: "jonas Bosscha", bron: "JTS Installatietechniek", sterren: 5
+  },
+
+  /* ---------- Nuzon ---------- */
+  {
+    tekst: "Voor het eerst in mijn leven is het een genot op de elektriciteitsmeter te kijken en te zien dat deze terugdraait!",
+    naam: "J. Karssen", bron: "Nuzon", sterren: 5
+  },
+  {
+    tekst: "Bij deze firma zijn hardwerkende en vakkundige techneuten werkzaam, die stevig materiaal gebruiken en prachtig werk hebben geleverd.",
+    naam: "S. Zeebregts", bron: "Nuzon", sterren: 5
+  },
+  {
+    tekst: "Binnen no-time lagen de panelen op het dak en kon ik genieten van een lage energierekening.",
+    naam: "Martine", bron: "Nuzon", sterren: 5
+  }
+];
+
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- hero-video ---- */
+  var video = document.getElementById('heroVideo');
+  if(video && !reduce){
+    var mobiel = window.matchMedia('(max-width: 720px)').matches;
+    var srcs = mobiel
+      ? [['assets/hero/hero-mobiel.mp4','video/mp4']]
+      : [['assets/hero/hero.webm','video/webm'], ['assets/hero/hero.mp4','video/mp4']];
+    srcs.forEach(function(s){
+      var el = document.createElement('source');
+      el.src = s[0]; el.type = s[1];
+      video.appendChild(el);
+    });
+    video.preload = 'auto';
+    video.load();
+    video.addEventListener('loadeddata', function(){ video.classList.add('is-on'); });
+    var p = video.play();
+    if(p && p.catch){ p.catch(function(){}); }
+  }
+
+  /* ---- mega menu ---- */
+  var btn = document.getElementById('megaBtn'), mega = document.getElementById('mega');
+  btn.addEventListener('click', function(){
+    var open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!open));
+    mega.dataset.open = String(!open);
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && mega.dataset.open === 'true'){
+      mega.dataset.open = 'false'; btn.setAttribute('aria-expanded','false'); btn.focus();
+    }
+  });
+  document.querySelectorAll('#mega a').forEach(function(a){
+    a.addEventListener('click', function(){ mega.dataset.open='false'; btn.setAttribute('aria-expanded','false'); });
+  });
+
+  /* ---- voordeel-calculator ---- */
+  var bill = document.getElementById('bill'),
+      billOut = document.getElementById('billOut'),
+      yearSave = document.getElementById('yearSave'),
+      tenSave = document.getElementById('tenSave'),
+      co2Save = document.getElementById('co2Save');
+  function euro(n){ return '€ ' + Math.round(n).toLocaleString('nl-NL'); }
+  function updateCalc(){
+    var monthly = +bill.value;
+    bill.style.setProperty('--p', ((monthly - bill.min) / (bill.max - bill.min)) * 100 + '%');
+    billOut.textContent = euro(monthly);
+    var yearly = monthly * 12 * 0.46;   // ~46% jaarvoordeel met zon + batterij + dynamisch
+    yearSave.textContent = euro(yearly);
+    tenSave.textContent  = euro(yearly * 10);
+    co2Save.textContent  = ((monthly / 180) * 2.1).toFixed(1).replace('.', ',') + ' ton';
+  }
+  if(bill){ bill.addEventListener('input', updateCalc); updateCalc(); }
+
+  /* ---- reviews ---- */
+  var grid = document.getElementById('reviewGrid');
+  var moreBtn = document.getElementById('moreBtn');
+  var OPEN = 4;
+
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){
+    return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]; }); }
+
+  // reviews met foto eerst; binnen die groepen blijft de volgorde hierboven
+  var lijst = REVIEWS.slice().sort(function(a,b){ return (b.foto?1:0) - (a.foto?1:0); });
+
+  lijst.forEach(function(r, i){
+    var n = r.sterren || 5;
+    var fig = document.createElement('figure');
+    fig.className = 'review';
+
+    var html = '';
+    if(r.foto){
+      html += '<img class="review__img" src="' + esc(r.foto) + '" alt="' + esc(r.alt || '') + '" loading="lazy">';
+    }
+    html += '<div class="review__text">'
+         +    '<div class="review__top">'
+         +      '<div class="stars" aria-label="' + n + ' van de 5 sterren">' + '★'.repeat(n) + '☆'.repeat(5-n) + '</div>'
+         +      '<span class="src">' + esc(r.bron) + '</span>'
+         +    '</div>'
+         +    '<blockquote class="is-clamped">' + esc(r.tekst).replace(/\n/g, '<br>') + '</blockquote>'
+         +    '<button class="review__toggle" type="button" hidden>Lees hele review</button>'
+         +    '<figcaption class="meta">' + esc(r.naam) + '</figcaption>'
+         +  '</div>';
+
+    fig.innerHTML = html;
+    if(i >= OPEN) fig.hidden = true;
+    grid.appendChild(fig);
+
+    var quote = fig.querySelector('blockquote');
+    var toggle = fig.querySelector('.review__toggle');
+    toggle.addEventListener('click', function(){
+      var dicht = quote.classList.toggle('is-clamped');
+      toggle.textContent = dicht ? 'Lees hele review' : 'Toon minder';
+    });
+  });
+
+  // knop alleen tonen als de tekst daadwerkelijk wordt afgekapt
+  function checkClamp(){
+    grid.querySelectorAll('.review').forEach(function(fig){
+      var quote = fig.querySelector('blockquote');
+      var toggle = fig.querySelector('.review__toggle');
+      if(!quote.classList.contains('is-clamped')) return;   // staat open, knop hoort te blijven
+      toggle.hidden = quote.scrollHeight <= quote.clientHeight + 2;
+    });
+  }
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(checkClamp); }
+  window.addEventListener('load', checkClamp);
+  var t; window.addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(checkClamp, 150); });
+  checkClamp();
+
+  if(lijst.length <= OPEN){
+    moreBtn.parentNode.style.display = 'none';
+  } else {
+    moreBtn.addEventListener('click', function(){
+      var dicht = grid.querySelector('.review[hidden]');
+      if(dicht){
+        grid.querySelectorAll('.review[hidden]').forEach(function(el){ el.hidden = false; });
+        moreBtn.textContent = 'Toon minder reviews';
+      } else {
+        grid.querySelectorAll('.review').forEach(function(el, i){ if(i >= OPEN) el.hidden = true; });
+        moreBtn.textContent = 'Toon meer reviews';
+        document.getElementById('reviews').scrollIntoView({ block:'start' });
+      }
+      checkClamp();
+    });
+  }
+
+  document.getElementById('jaar').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>

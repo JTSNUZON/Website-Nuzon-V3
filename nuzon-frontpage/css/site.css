@@ -88,7 +88,7 @@ h3{ font-size:1.2rem; }
 .nav{ display:flex; align-items:center; gap:clamp(10px,1.7vw,24px); }
 .nav a,.nav button{
   font-size:.78rem; font-weight:500; letter-spacing:.09em; text-transform:uppercase; color:var(--ink);
-  background:none; border:0; padding:6px 0; cursor:pointer;
+  background:none; border:0; padding:6px 0; cursor:pointer; white-space:nowrap;
   border-bottom:1px solid transparent; transition:color .15s, border-color .15s;
 }
 .nav a:hover,.nav button:hover,.nav [aria-expanded="true"]{ color:var(--gold-deep); border-color:var(--gold); }
@@ -138,22 +138,28 @@ h3{ font-size:1.2rem; }
 .mega ul{ list-style:none; margin:0; padding:0; display:grid; gap:9px; }
 .mega li a{ font-size:.94rem; color:var(--body); }
 .mega li a:hover{ color:var(--gold-deep); }
+/* Blok met de items die op de telefoon uit de balk verdwijnen; op grote
+   schermen staan die gewoon in de balk zelf. */
+.mega__mobiel{ display:none; }
 
 /* ===================================================================
    HERO — videoachtergrond, tekst linksonder
    =================================================================== */
 .hero{ position:relative; overflow:hidden; isolation:isolate; background:var(--dark); min-height:clamp(560px,82vh,860px); display:flex; align-items:flex-end; }
 .hero__media{ position:absolute; inset:0; z-index:-2; }
-.hero__still,.hero__video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.hero__still,.hero__video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  filter:brightness(1.18) saturate(1.04); }
 .hero__video{ opacity:0; transition:opacity .8s ease; }
 .hero__video.is-on{ opacity:1; }
+/* Sluier over de video. Links blijft hij donker genoeg om de tekst te dragen,
+   naar rechts loopt hij ver open zodat je het beeld zelf goed ziet. */
 .hero__scrim{
   position:absolute; inset:0; z-index:-1;
   background:
-    linear-gradient(102deg, rgba(12,10,5,.93) 0%, rgba(12,10,5,.78) 44%, rgba(12,10,5,.30) 80%, rgba(12,10,5,.55) 100%),
-    linear-gradient(180deg, rgba(12,10,5,.55) 0%, transparent 30%, rgba(12,10,5,.72) 100%);
+    linear-gradient(102deg, rgba(12,10,5,.82) 0%, rgba(12,10,5,.58) 44%, rgba(12,10,5,.10) 80%, rgba(12,10,5,.28) 100%),
+    linear-gradient(180deg, rgba(12,10,5,.34) 0%, transparent 30%, rgba(12,10,5,.52) 100%);
 }
-.hero__body{ width:100%; padding:clamp(110px,15vw,190px) 0 clamp(40px,4.5vw,64px); color:#fff; text-align:left; }
+.hero__body{ width:100%; padding-block:clamp(110px,15vw,190px) clamp(40px,4.5vw,64px); color:#fff; text-align:left; }
 .hero h1{ color:#fff; max-width:16ch; }
 .hero .eyebrow{ color:var(--gold-lite); }
 .hero .lede{ color:#E4DCCA; margin:24px 0 32px; max-width:52ch; }
@@ -326,6 +332,26 @@ input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%;
   :root{ --bar:64px; }
   body{ font-size:16px; }
   .nav .hide-sm{ display:none; }
+
+  /* De balk moet op één regel passen: minder ruimte, kortere merknaam,
+     en een compactere knop. */
+  .topbar__inner{ gap:12px; }
+  .brand__tag{ display:none; }
+  .brand svg{ width:24px; height:24px; }
+  .nav{ gap:14px; }
+  .topbar .btn{ padding:.62em .85em; font-size:.72rem; }
+  .nav button{ font-size:.74rem; }
+
+  /* Besparen, Reviews en bellen staan niet meer in de balk, dus komen ze
+     bovenaan in het uitklapmenu te staan. */
+  .mega__mobiel{ display:block; }
+  .mega__grid{ padding-block:22px 26px; }
+  .mega li a{ display:block; padding:9px 0; font-size:1rem; }
+  .mega h4{ margin-bottom:8px; }
+  /* Op de telefoon staat de tekst over de volle breedte van de video, dus
+     ook over lichte plekken. Een zachte schaduw houdt hem leesbaar zonder
+     dat het beeld er weer donker van wordt. */
+  .hero__body{ text-shadow:0 1px 14px rgba(8,6,2,.62); }
   .hero__facts{ grid-template-columns:1fr; }
   .hero__fact{ border-right:0; border-bottom:1px solid rgba(255,255,255,.18); padding:16px 0; }
   .hero__fact:last-child{ border-bottom:0; }
@@ -402,6 +428,9 @@ input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%;
 .prod--flip .prod__media{ order:2; }
 .prod__media{ border:1px solid var(--line-2); border-radius:8px; overflow:hidden; background:var(--bg-soft); box-shadow:var(--shadow); }
 .prod__media img{ width:100%; aspect-ratio:4/3; object-fit:cover; }
+/* Voor foto's die staand genomen zijn: een hoger kader, zodat er nauwelijks
+   iets wegvalt in plaats van dat de boven- en onderkant eraf gesneden worden. */
+.prod__media--staand img{ aspect-ratio:4/5; }
 .prod h2{ scroll-margin-top:calc(var(--bar) + 20px); }
 .prod__spec{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:26px; }
 .prod__spec div{ border:1px solid var(--line); border-radius:6px; background:var(--bg); padding:16px 14px; }

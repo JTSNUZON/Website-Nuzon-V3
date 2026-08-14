@@ -18,21 +18,15 @@ var WHATSAPP_BERICHT = "Hallo Nuzon, ik heb een vraag over ";
   /* ---- mega menu ---- */
   var btn = document.getElementById('megaBtn'), mega = document.getElementById('mega');
   if(btn && mega){
-    var closeTimer = null;
     var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
     function openMega(){
-      clearTimeout(closeTimer);
       btn.setAttribute('aria-expanded', 'true');
       mega.dataset.open = 'true';
     }
     function closeMega(){
       btn.setAttribute('aria-expanded', 'false');
       mega.dataset.open = 'false';
-    }
-    function scheduleClose(){
-      clearTimeout(closeTimer);
-      closeTimer = setTimeout(closeMega, 200);
     }
 
     btn.addEventListener('click', function(e){
@@ -44,10 +38,16 @@ var WHATSAPP_BERICHT = "Hallo Nuzon, ik heb een vraag over ";
     });
 
     if(canHover){
+      // De knop en het paneel zitten allebei in de topbalk, dus de muis kan
+      // van de een naar de ander zonder iets te verlaten. Daarom sluiten we
+      // op de balk als geheel: geen vertraging nodig en toch geen geflikker.
+      var bar = btn.closest('.topbar') || mega.parentNode;
       btn.addEventListener('mouseenter', openMega);
-      btn.addEventListener('mouseleave', scheduleClose);
-      mega.addEventListener('mouseenter', function(){ clearTimeout(closeTimer); });
-      mega.addEventListener('mouseleave', scheduleClose);
+      bar.addEventListener('mouseleave', closeMega);
+      // Ga je naar een ander item in de balk, dan sluit het menu ook meteen.
+      document.querySelectorAll('.nav a').forEach(function(a){
+        a.addEventListener('mouseenter', closeMega);
+      });
     }
 
     document.addEventListener('keydown', function(e){

@@ -459,22 +459,6 @@ var REVIEWS = [
     if(p && p.catch){ p.catch(function(){}); }
   }
 
-  /* ---- mega menu ---- */
-  var btn = document.getElementById('megaBtn'), mega = document.getElementById('mega');
-  btn.addEventListener('click', function(){
-    var open = btn.getAttribute('aria-expanded') === 'true';
-    btn.setAttribute('aria-expanded', String(!open));
-    mega.dataset.open = String(!open);
-  });
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape' && mega.dataset.open === 'true'){
-      mega.dataset.open = 'false'; btn.setAttribute('aria-expanded','false'); btn.focus();
-    }
-  });
-  document.querySelectorAll('#mega a').forEach(function(a){
-    a.addEventListener('click', function(){ mega.dataset.open='false'; btn.setAttribute('aria-expanded','false'); });
-  });
-
   /* ---- voordeel-calculator ---- */
   var bill = document.getElementById('bill'),
       billOut = document.getElementById('billOut'),

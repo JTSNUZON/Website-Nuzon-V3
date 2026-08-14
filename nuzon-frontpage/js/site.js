@@ -35,8 +35,11 @@ var WHATSAPP_BERICHT = "Hallo Nuzon, ik heb een vraag over ";
       closeTimer = setTimeout(closeMega, 200);
     }
 
-    btn.addEventListener('click', function(){
+    btn.addEventListener('click', function(e){
       var open = btn.getAttribute('aria-expanded') === 'true';
+      // Met een muis heeft hover het menu al geopend; een klik mag dat niet
+      // meteen weer dichtklappen. Toetsenbordgebruik (e.detail === 0) toggelt wel.
+      if(open && canHover && e.detail !== 0) return;
       if(open){ closeMega(); } else { openMega(); }
     });
 

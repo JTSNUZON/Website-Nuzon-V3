@@ -96,17 +96,31 @@ h3{ font-size:1.2rem; }
 .nav [aria-expanded="true"] .caret{ transform:rotate(180deg); }
 .topbar .btn{ padding:.6em 1.05em; }
 
+/* Het paneel hangt onder de balk en staat buiten de flow: dicht neemt het
+   geen enkele ruimte in, dus je ziet gewoon de achtergrond. Openen rolt het
+   naar beneden uit via grid-template-rows 0fr -> 1fr (animeert naar de
+   werkelijke hoogte van de inhoud). */
 .mega{
-  display:block; visibility:hidden; opacity:0; pointer-events:none;
-  transform:translateY(-8px);
-  background:var(--bg); border-bottom:1px solid var(--line); box-shadow:var(--shadow);
+  position:absolute; top:100%; left:0; right:0;
+  display:grid; grid-template-rows:0fr;
+  visibility:hidden; opacity:0; pointer-events:none;
+  background:var(--bg); border-bottom:1px solid transparent; box-shadow:var(--shadow);
   max-height:calc(100vh - var(--bar)); overflow:auto;
-  transition:opacity .18s ease, transform .18s ease, visibility .18s;
+  transition:grid-template-rows .3s cubic-bezier(.22,.61,.36,1),
+             opacity .22s ease,
+             border-color .3s ease,
+             visibility .3s;
 }
-.mega[data-open="true"]{ visibility:visible; opacity:1; pointer-events:auto; transform:translateY(0); }
+.mega[data-open="true"]{
+  grid-template-rows:1fr;
+  visibility:visible; opacity:1; pointer-events:auto;
+  border-bottom-color:var(--line);
+}
 @media (prefers-reduced-motion: reduce){
-  .mega{ transition:opacity .01s linear, visibility .01s; transform:none; }
+  .mega{ transition:opacity .01s linear, visibility .01s; grid-template-rows:1fr; max-height:0; }
+  .mega[data-open="true"]{ max-height:calc(100vh - var(--bar)); }
 }
+.mega__inner{ overflow:hidden; min-height:0; }
 .mega__grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:34px; max-width:var(--shell); margin-inline:auto; padding:34px var(--pad) 40px; }
 .mega h4{ font-size:.73rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase; color:var(--gold-deep); margin:0 0 13px; }
 .mega ul{ list-style:none; margin:0; padding:0; display:grid; gap:9px; }

@@ -183,10 +183,7 @@ body.has-hero .topbar:not(.is-scrolled):not(:has(.mega[data-open="true"])) .nav 
    in plaats van erboven. De streep hoort bij de volledige opbouw en zit
    hier bewust niet in — op 20px hoogte wordt dat een propje. Zie .logo
    in de footer voor het complete merk. */
-.brand{ display:flex; align-items:center; gap:11px; color:var(--merk-goud); }
-/* "Wat wij doen" staat links naast het logo; de auto-marge erachter duwt de
-   rest van het menu naar rechts. */
-.nav--hoofd{ margin-right:auto; }
+.brand{ display:flex; align-items:center; gap:11px; margin-right:auto; color:var(--merk-goud); }
 .brand__zon{ width:27px; height:auto; flex:none; color:var(--merk-goud); }
 .brand__text{ display:flex; flex-direction:column; line-height:1; }
 .brand__name{ font-family:var(--font-merk); font-weight:800; font-size:1.16rem; letter-spacing:-.035em; color:var(--merk-inkt); transition:color .35s ease; }

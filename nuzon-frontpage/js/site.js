@@ -99,8 +99,9 @@ var WHATSAPP_BERICHT = "Hallo Nuzon, ik heb een vraag over ";
       btn.addEventListener('mouseenter', openMega);
       bar.addEventListener('mouseleave', closeMega);
       // Ga je naar een ander item in de balk, dan sluit het menu ook meteen.
-      document.querySelectorAll('.nav a').forEach(function(a){
-        a.addEventListener('mouseenter', closeMega);
+      // Ook de knoppen tellen mee, want niet elk item is een link.
+      document.querySelectorAll('.nav a, .nav button').forEach(function(el){
+        if(el !== btn) el.addEventListener('mouseenter', closeMega);
       });
     }
 

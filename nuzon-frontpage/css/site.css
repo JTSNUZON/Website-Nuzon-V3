@@ -21,6 +21,15 @@
 
   --font:"Inter", system-ui, -apple-system, sans-serif;
 
+  /* Huisstijl-logo. Deze waarden komen letterlijk uit het aangeleverde
+     logobestand — niet aanpassen zonder nieuw bestand van de ontwerper.
+     De losse exports staan in assets/logo/. */
+  --font-merk:"Archivo", "Inter", system-ui, sans-serif;
+  --merk-goud:#C08C1C;
+  --merk-inkt:#201E1D;
+  --merk-tag:#7D766A;          /* tagline op een lichte achtergrond */
+  --merk-tag-donker:#B8B2A8;   /* tagline op een donkere achtergrond */
+
   --bar:70px;
   --shell:1280px;
   --pad:clamp(20px,4vw,56px);
@@ -81,21 +90,94 @@ h3{ font-size:1.2rem; }
   -webkit-backdrop-filter:blur(20px) saturate(1.7);
           backdrop-filter:blur(20px) saturate(1.7);
   border-bottom:1px solid rgba(236,230,218,.7);
+  transition:background .35s ease, border-color .35s ease, backdrop-filter .35s ease;
 }
 /* Zonder blur zou je dwars door de balk heen kijken; dan maar bijna dicht. */
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
   .topbar{ background:rgba(255,255,255,.94); border-bottom-color:var(--line); }
 }
+
+/* -------------------------------------------------------------------
+   DOORZICHTIGE BALK BOVEN DE HERO
+   Op pagina's met een videohero (body.has-hero) begint de balk volledig
+   doorzichtig: je ziet de video er onderdoor lopen, alleen de tekst en
+   het logo staan er in wit overheen. De hero schuift daarom ónder de
+   balk door — vandaar padding-top:0 op de body.
+
+   Zodra er gescrold wordt zet het script .is-scrolled op de balk en
+   komt het matglas er in .35s bij. Staat het productenmenu open, dan
+   moet de balk óók dicht zijn, anders hangt dat witte paneel los onder
+   een onzichtbare balk.
+   ------------------------------------------------------------------- */
+body.has-hero{ padding-top:0; }
+
+body.has-hero .topbar:not(.is-scrolled):not(:has(.mega[data-open="true"])){
+  background:transparent;
+  -webkit-backdrop-filter:none;
+          backdrop-filter:none;
+  border-bottom-color:transparent;
+}
+body.has-hero .topbar:not(.is-scrolled):not(:has(.mega[data-open="true"])) .brand__name,
+body.has-hero .topbar:not(.is-scrolled):not(:has(.mega[data-open="true"])) .nav a,
+body.has-hero .topbar:not(.is-scrolled):not(:has(.mega[data-open="true"])) .nav button{
+  color:#fff;
+}
+body.has-hero .topbar:not(.is-scrolled):not(:has(.mega[data-open="true"])) .brand__tag{ color:var(--merk-tag-donker); }
+body.has-hero .topbar:not(.is-scrolled):not(:has(.mega[data-open="true"])) .brand__zon{ color:var(--merk-goud); }
+body.has-hero .topbar:not(.is-scrolled):not(:has(.mega[data-open="true"])) .btn--ghost{
+  color:#fff; border-color:rgba(255,255,255,.42);
+}
+body.has-hero .topbar:not(.is-scrolled):not(:has(.mega[data-open="true"])) .nav a:hover,
+body.has-hero .topbar:not(.is-scrolled):not(:has(.mega[data-open="true"])) .nav button:hover{
+  color:var(--gold-lite); border-color:var(--gold-lite);
+}
+/* Browsers zonder :has() krijgen gewoon de dichte balk — nooit onleesbaar. */
+@supports not selector(:has(*)){
+  body.has-hero .topbar{ background:rgba(255,255,255,.66); }
+}
 .topbar__inner{ display:flex; align-items:center; gap:clamp(12px,2.4vw,34px); height:var(--bar); max-width:var(--shell); margin-inline:auto; padding-inline:var(--pad); }
-.brand{ display:flex; align-items:center; gap:11px; margin-right:auto; color:var(--gold); }
-.brand svg{ width:27px; height:27px; flex:none; }
+/* Compacte variant van het logo voor de balk: de zon naast het woordmerk
+   in plaats van erboven. De streep hoort bij de volledige opbouw en zit
+   hier bewust niet in — op 20px hoogte wordt dat een propje. Zie .logo
+   in de footer voor het complete merk. */
+.brand{ display:flex; align-items:center; gap:11px; margin-right:auto; color:var(--merk-goud); }
+.brand__zon{ width:27px; height:auto; flex:none; color:var(--merk-goud); }
 .brand__text{ display:flex; flex-direction:column; line-height:1; }
-.brand__name{ font-weight:800; font-size:1.2rem; letter-spacing:-.03em; color:var(--ink); }
-.brand__tag{ font-size:.6rem; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin-top:5px; }
+.brand__name{ font-family:var(--font-merk); font-weight:800; font-size:1.16rem; letter-spacing:-.035em; color:var(--merk-inkt); transition:color .35s ease; }
+.brand__tag{ font-family:var(--font-merk); font-size:.5rem; font-weight:600; letter-spacing:.093em; text-transform:uppercase; white-space:nowrap; color:var(--merk-tag); margin-top:6px; transition:color .35s ease; }
+/* "Slim energiebeheer" is een stuk breder dan "Zonnepanelen" was. Tussen
+   ~720 en 1024px vecht dat om ruimte met het menu, dus daar valt de
+   tagline weg en blijft het merkteken over. */
+@media (max-width:1024px){ .brand__tag{ display:none; } }
+
+/* ------------------------------------------------------------------
+   VOLLEDIG LOGO — zon boven het woordmerk, streep, tagline.
+   De verhoudingen komen 1-op-1 uit het logobestand (woordmerk 100/286
+   van de breedte, tagline 22/286, zon 141/286), dus schalen doe je met
+   één knop: --logo-breedte.
+   ------------------------------------------------------------------ */
+.logo{
+  --logo-breedte:230px;
+  display:inline-flex; flex-direction:column; align-items:flex-start;
+  width:var(--logo-breedte); color:var(--merk-goud);
+}
+.logo__zon{ width:calc(var(--logo-breedte) * .493); height:auto; align-self:center; margin-bottom:calc(var(--logo-breedte) * .031); }
+.logo__naam{ font-family:var(--font-merk); font-weight:800; font-size:calc(var(--logo-breedte) * .35); line-height:.78; letter-spacing:-.035em; color:var(--merk-inkt); }
+.logo__lijn{ width:100%; height:max(2px, calc(var(--logo-breedte) * .0105)); background:var(--merk-inkt); margin:calc(var(--logo-breedte) * .063) 0 calc(var(--logo-breedte) * .049); }
+.logo__tag{ font-family:var(--font-merk); font-weight:600; font-size:calc(var(--logo-breedte) * .0769); letter-spacing:.093em; text-transform:uppercase; white-space:nowrap; color:var(--merk-tag); }
+
+/* Op een donkere ondergrond: woordmerk en streep wit, tagline lichtgrijs.
+   De zon houdt exact dezelfde goudtint — zo staat het in het bestand. */
+.logo--opDonker .logo__naam,
+.foot .logo__naam{ color:#fff; }
+.logo--opDonker .logo__lijn,
+.foot .logo__lijn{ background:#fff; }
+.logo--opDonker .logo__tag,
+.foot .logo__tag{ color:var(--merk-tag-donker); }
 
 .nav{ display:flex; align-items:center; gap:clamp(10px,1.7vw,24px); }
 .nav a,.nav button{
-  font-size:.78rem; font-weight:500; letter-spacing:.09em; text-transform:uppercase; color:var(--ink);
+  font-size:.72rem; font-weight:500; letter-spacing:.09em; text-transform:uppercase; color:var(--ink);
   background:none; border:0; padding:6px 0; cursor:pointer; white-space:nowrap;
   border-bottom:1px solid transparent; transition:color .15s, border-color .15s;
 }
@@ -153,32 +235,104 @@ h3{ font-size:1.2rem; }
 /* ===================================================================
    HERO — videoachtergrond, tekst linksonder
    =================================================================== */
-.hero{ position:relative; overflow:hidden; isolation:isolate; background:var(--dark); min-height:clamp(560px,82vh,860px); display:flex; align-items:flex-end; }
+.hero{
+  position:relative; overflow:hidden; isolation:isolate; background:var(--dark);
+  min-height:clamp(600px,100svh,1040px); display:flex;
+}
 .hero__media{ position:absolute; inset:0; z-index:-2; }
 .hero__still,.hero__video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
   filter:brightness(1.18) saturate(1.04); }
 .hero__video{ opacity:0; transition:opacity .8s ease; }
 .hero__video.is-on{ opacity:1; }
-/* Sluier over de video. Links blijft hij donker genoeg om de tekst te dragen,
-   naar rechts loopt hij ver open zodat je het beeld zelf goed ziet. */
+/* Sluier over de video. Linksboven en langs de onderrand net genoeg om de
+   tekst te dragen; het midden en rechtsboven blijven open zodat je het
+   beeld zelf goed ziet. */
 .hero__scrim{
   position:absolute; inset:0; z-index:-1;
   background:
-    linear-gradient(102deg, rgba(12,10,5,.82) 0%, rgba(12,10,5,.58) 44%, rgba(12,10,5,.10) 80%, rgba(12,10,5,.28) 100%),
-    linear-gradient(180deg, rgba(12,10,5,.34) 0%, transparent 30%, rgba(12,10,5,.52) 100%);
+    linear-gradient(118deg, rgba(12,10,5,.74) 0%, rgba(12,10,5,.44) 40%, rgba(12,10,5,.06) 74%, rgba(12,10,5,.22) 100%),
+    linear-gradient(180deg, rgba(12,10,5,.46) 0%, transparent 34%, transparent 58%, rgba(12,10,5,.62) 100%);
 }
-.hero__body{ width:100%; padding-block:clamp(110px,15vw,190px) clamp(40px,4.5vw,64px); color:#fff; text-align:left; }
+
+/* De hero vult het scherm; de inhoud wordt tegen de hoeken geduwd met
+   overal dezelfde marge, zodat niets tegen de rand plakt. De bovenmarge
+   telt de hoogte van de doorzichtige balk erbij op. */
+.hero__body{
+  --hero-marge:clamp(18px,3.2vw,44px);
+  width:100%; display:flex; flex-direction:column; justify-content:space-between;
+  gap:clamp(28px,5vw,64px);
+  padding:calc(var(--bar) + var(--hero-marge)) var(--hero-marge) var(--hero-marge);
+  color:#fff; text-align:left;
+}
+.hero__top{ max-width:min(58ch,100%); }
 .hero h1{ color:#fff; max-width:16ch; }
 .hero .eyebrow{ color:var(--gold-lite); }
-.hero .lede{ color:#E4DCCA; margin:24px 0 32px; max-width:52ch; }
-.hero__actions{ display:flex; gap:12px; flex-wrap:wrap; }
+.hero .lede{ color:#E4DCCA; margin:24px 0 0; max-width:52ch; }
 
-.hero__facts{ display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid rgba(255,255,255,.18); margin-top:clamp(40px,5.5vw,72px); }
-.hero__fact{ padding:24px 18px 4px; text-align:center; border-right:1px solid rgba(255,255,255,.18); }
-.hero__fact:last-child{ border-right:0; }
-.hero__fact .meta{ color:#B9AF9A; }
-.hero__fact strong{ display:block; font-weight:800; font-size:clamp(1.5rem,2.4vw,2rem); letter-spacing:-.03em; margin:8px 0 4px; color:#fff; }
-.hero__fact .sub{ display:block; color:#B9AF9A; font-size:.92rem; }
+/* De uitleg staat nu onderin, met de knoppen eronder. */
+.hero__bottom{ display:flex; flex-direction:column; align-items:flex-start; gap:clamp(18px,2.2vw,28px); max-width:min(52ch,100%); }
+.hero__actions{ display:flex; gap:12px; flex-wrap:wrap; }
+.btn--storing svg{ width:16px; height:16px; flex:none; }
+
+/* Google-cijfer rechtsonder — klikt door naar de reviews op deze pagina.
+   Het hangt op dezelfde rechtermarge als de WhatsApp-knop en precies erboven,
+   zodat die twee samen één kolom in de hoek vormen. */
+.hero__rating{
+  --wa-marge:clamp(16px,2.4vw,28px);
+  --wa-hoogte:60px;
+  position:absolute; z-index:2;
+  right:var(--wa-marge); bottom:calc(var(--wa-marge) + var(--wa-hoogte) + 14px);
+  display:inline-flex; align-items:center; gap:12px;
+  padding:10px 16px; border-radius:6px; color:#fff;
+  background:rgba(12,10,5,.40); border:1px solid rgba(255,255,255,.22);
+  -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+  transition:border-color .2s, background .2s, transform .2s;
+}
+.hero__rating:hover{ border-color:var(--gold-lite); background:rgba(12,10,5,.56); transform:translateY(-2px); }
+.hero__rating-g{ flex:none; }
+.hero__rating-cijfer{ font-size:1.35rem; font-weight:800; letter-spacing:-.03em; line-height:1; }
+.hero__rating-tekst{ display:flex; flex-direction:column; gap:3px; }
+.hero__rating-sterren{ color:var(--gold-lite); font-size:.82rem; letter-spacing:.12em; line-height:1; }
+.hero__rating-sub{ font-size:.74rem; font-weight:500; letter-spacing:.07em; text-transform:uppercase; color:#D6CCB8; }
+
+@media (max-width:720px){
+  /* De WhatsApp-knop is hier 50px hoog en zit dichter op de rand. Het
+     cijfer volgt dat, en de hero krijgt onderin ruimte zodat de knoppen
+     er niet achter verdwijnen. */
+  .hero__rating{ --wa-marge:14px; --wa-hoogte:50px; }
+  .hero__body{ padding-bottom:calc(14px + 50px + 14px + 62px); }
+}
+
+/* ===================================================================
+   INTRO — het logo bij het openen, dat wegdraait naar de video
+   De onderdelen komen één voor één binnen (zon, woordmerk, streep,
+   tagline) en daarna schuift het hele scherm weg met een lichte zoom,
+   alsof je de video in duikt.
+   =================================================================== */
+.intro{
+  position:fixed; inset:0; z-index:200;
+  display:grid; place-items:center;
+  background:var(--merk-inkt);
+  transition:opacity .7s ease, transform .9s cubic-bezier(.4,0,.2,1);
+}
+.intro__logo{ --logo-breedte:min(300px,62vw); }
+/* Het introscherm heeft altijd de donkere ondergrond, dus het logo hoort
+   hier hoe dan ook wit te zijn — ook als de klasse ooit uit de HTML valt. */
+.intro .logo__naam{ color:#fff; }
+.intro .logo__lijn{ background:#fff; }
+.intro .logo__tag{ color:var(--merk-tag-donker); }
+.intro.is-weg{ opacity:0; transform:scale(1.08); pointer-events:none; }
+
+@keyframes introOp{ from{ opacity:0; transform:translateY(12px); } to{ opacity:1; transform:none; } }
+@keyframes introLijn{ from{ transform:scaleX(0); } to{ transform:scaleX(1); } }
+.intro .logo__zon{  animation:introOp .55s .05s both ease-out; }
+.intro .logo__naam{ animation:introOp .55s .20s both ease-out; }
+.intro .logo__lijn{ animation:introLijn .5s .40s both cubic-bezier(.4,0,.2,1); transform-origin:left center; }
+.intro .logo__tag{  animation:introOp .55s .52s both ease-out; }
+
+/* Wie beweging heeft uitgezet krijgt het scherm helemaal niet te zien;
+   het script haalt het dan ook meteen weg. */
+@media (prefers-reduced-motion: reduce){ .intro{ display:none; } }
 
 /* ===================================================================
    KEUZE particulier / zakelijk
@@ -345,7 +499,7 @@ input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%;
      en een compactere knop. */
   .topbar__inner{ gap:12px; }
   .brand__tag{ display:none; }
-  .brand svg{ width:24px; height:24px; }
+  .brand__zon{ width:27px; }
   .nav{ gap:14px; }
   .topbar .btn{ padding:.62em .85em; font-size:.72rem; }
   .nav button{ font-size:.74rem; }
@@ -360,12 +514,10 @@ input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%;
      ook over lichte plekken. Een zachte schaduw houdt hem leesbaar zonder
      dat het beeld er weer donker van wordt. */
   .hero__body{ text-shadow:0 1px 14px rgba(8,6,2,.62); }
-  .hero__facts{ grid-template-columns:1fr; }
-  .hero__fact{ border-right:0; border-bottom:1px solid rgba(255,255,255,.18); padding:16px 0; }
-  .hero__fact:last-child{ border-bottom:0; }
   .reviews,.partners{ grid-template-columns:1fr; }
   .mega__grid{ grid-template-columns:1fr; gap:24px; }
   .foot__top{ grid-template-columns:1fr; }
+  .logo{ --logo-breedte:200px; }
   .wa{ height:50px; width:50px; padding:0; justify-content:center; right:14px; bottom:14px; border-radius:25px; }
   .wa svg{ width:28px; height:28px; }
   .wa__label{ display:none; }

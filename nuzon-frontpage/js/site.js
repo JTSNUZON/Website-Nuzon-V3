@@ -60,6 +60,19 @@ var WHATSAPP_BERICHT = "Hallo Nuzon, ik heb een vraag over ";
     });
   }
 
+  /* ---- topbalk: doorzichtig boven de hero, matglas zodra je scrollt ----
+     Alleen op pagina's met een videohero. De klasse .is-scrolled laat het
+     CSS de achtergrond in .35s invaden; 8px speling voorkomt dat de balk
+     staat te knipperen bij het kleinste duwtje aan het wiel. */
+  var balk = document.querySelector('.topbar');
+  if(balk && document.body.classList.contains('has-hero')){
+    var volgScroll = function(){
+      balk.classList.toggle('is-scrolled', window.scrollY > 8);
+    };
+    volgScroll();                                   // ook goed bij herladen halverwege de pagina
+    window.addEventListener('scroll', volgScroll, { passive:true });
+  }
+
   /* ---- jaartal in de footer ---- */
   var jaar = document.getElementById('jaar');
   if(jaar) jaar.textContent = new Date().getFullYear();

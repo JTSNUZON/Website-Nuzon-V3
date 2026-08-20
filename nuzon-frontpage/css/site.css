@@ -73,10 +73,18 @@ h3{ font-size:1.2rem; }
 /* ===================================================================
    TOPBAR — blijft altijd in beeld
    =================================================================== */
+/* Matglas: je ziet de pagina er doorheen bewegen als je scrollt, in plaats
+   van een dichte witte balk die er los bovenop ligt. */
 .topbar{
   position:fixed; top:0; left:0; right:0; z-index:80;
-  background:rgba(255,255,255,.94); backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--line);
+  background:rgba(255,255,255,.66);
+  -webkit-backdrop-filter:blur(20px) saturate(1.7);
+          backdrop-filter:blur(20px) saturate(1.7);
+  border-bottom:1px solid rgba(236,230,218,.7);
+}
+/* Zonder blur zou je dwars door de balk heen kijken; dan maar bijna dicht. */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .topbar{ background:rgba(255,255,255,.94); border-bottom-color:var(--line); }
 }
 .topbar__inner{ display:flex; align-items:center; gap:clamp(12px,2.4vw,34px); height:var(--bar); max-width:var(--shell); margin-inline:auto; padding-inline:var(--pad); }
 .brand{ display:flex; align-items:center; gap:11px; margin-right:auto; color:var(--gold); }

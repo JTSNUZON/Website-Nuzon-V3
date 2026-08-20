@@ -8,6 +8,60 @@ var WHATSAPP_NUMMER  = "31307816767";
 var WHATSAPP_BERICHT = "Hallo Nuzon, ik heb een vraag over ";
 
 (function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ==================================================================
+     INTROSCHERM — het logo bij elke paginawissel
+
+     Staat op elke pagina, dus ook als je van de home naar Zakelijk
+     klikt. Op de homepage wacht hij op de hero-video (die roept
+     nuzonSluitIntro zelf aan); elders gaat hij na de logo-animatie open.
+
+     De scrollpositie: browsers zetten je bij een herlaadbeurt terug waar
+     je was. Met het introscherm eroverheen en de scroll op slot leverde
+     dat een sprong naar het midden of het eind van de pagina op. Daarom
+     nemen we het herstel hier zelf over: bovenaan beginnen, tenzij er een
+     anker in de URL staat — dan springen we daar netjes heen zodra het
+     scherm opengaat.
+     ================================================================== */
+  var intro = document.getElementById('intro');
+  var introWeg = false;
+
+  function naarAnkerOfTop(){
+    var doel = location.hash && document.getElementById(location.hash.slice(1));
+    if(doel){ doel.scrollIntoView(); } else { window.scrollTo(0, 0); }
+  }
+
+  function sluitIntro(){
+    if(introWeg) return;
+    introWeg = true;
+    document.documentElement.style.overflow = '';
+    naarAnkerOfTop();
+    if(intro){
+      intro.classList.add('is-weg');
+      setTimeout(function(){
+        if(intro && intro.parentNode) intro.parentNode.removeChild(intro);
+      }, 1000);
+    }
+    document.dispatchEvent(new CustomEvent('nuzon:intro-klaar'));
+  }
+  window.nuzonSluitIntro = sluitIntro;
+
+  if(intro){
+    if(reduce){
+      intro.parentNode.removeChild(intro);
+      intro = null;
+      introWeg = true;
+    } else {
+      if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
+      window.scrollTo(0, 0);
+      document.documentElement.style.overflow = 'hidden';
+      // Noodrem: het scherm gaat hoe dan ook open. Pagina's met de
+      // hero-video krijgen wat langer, want die wachten op het beeld.
+      setTimeout(sluitIntro, document.body.classList.contains('has-hero') ? 2400 : 1200);
+    }
+  }
+
   /* ---- WhatsApp ---- */
   var wa = document.getElementById('waLink');
   if(wa){

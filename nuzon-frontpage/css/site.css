@@ -76,6 +76,32 @@ h3{ font-size:1.2rem; }
 
 .section{ padding:clamp(58px,7vw,104px) 0; }
 .section--soft{ background:var(--bg-soft); border-block:1px solid var(--line); }
+
+/* -------------------------------------------------------------------
+   KLEURVERLOOP VAN DE HOMEPAGE
+   De hero is donker. In plaats van meteen naar wit te springen bouwt de
+   pagina op: twee tinten donker, dan warm goud, dan wit, dan zacht, en
+   onderaan weer donker. De blokken hieronder zetten alleen de tokens
+   opnieuw — kaarten, koppen, lijnen en knoppen erbinnen gebruiken die
+   tokens al, dus die kleuren vanzelf mee.
+   ------------------------------------------------------------------- */
+.section--donker,
+.section--donkerWarm{
+  --ink:#FFFFFF;
+  --body:#C6BDAB;
+  --muted:#8E8574;
+  --line:rgba(255,255,255,.13);
+  --line-2:rgba(255,255,255,.20);
+  --bg-soft:rgba(255,255,255,.05);
+  --gold-deep:var(--gold-lite);
+  --shadow:0 18px 50px rgba(0,0,0,.34);
+  --shadow-lg:0 30px 80px rgba(0,0,0,.46);
+  color:var(--body);
+  border-block:1px solid rgba(255,255,255,.09);
+}
+.section--donker{     background:var(--dark);   --bg:#211C14; }
+.section--donkerWarm{ background:var(--dark-2); --bg:#2E2617; }
+.section--warm{ background:var(--bg-gold); border-block:1px solid var(--line-2); }
 .section__head{ display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap; margin-bottom:clamp(28px,4vw,44px); }
 .section__head p{ margin:14px 0 0; }
 
@@ -323,6 +349,12 @@ body.has-hero .topbar:not(.is-scrolled):not(:has(.mega[data-open="true"])) .nav 
 .intro .logo__tag{ color:var(--merk-tag-donker); }
 .intro.is-weg{ opacity:0; transform:scale(1.08); pointer-events:none; }
 
+/* Noodrem zonder JavaScript. Laadt site.js niet of struikelt het script,
+   dan haalt niemand dit scherm weg en staart de bezoeker naar een zwart
+   vlak. Deze animatie doet dat na 4 seconden alsnog, puur in CSS. */
+@keyframes introNoodrem{ to{ opacity:0; visibility:hidden; pointer-events:none; } }
+.intro{ animation:introNoodrem 0s linear 4s forwards; }
+
 @keyframes introOp{ from{ opacity:0; transform:translateY(12px); } to{ opacity:1; transform:none; } }
 @keyframes introLijn{ from{ transform:scaleX(0); } to{ transform:scaleX(1); } }
 .intro .logo__zon{  animation:introOp .55s .05s both ease-out; }
@@ -405,7 +437,7 @@ input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%;
 /* ===================================================================
    JULLIX
    =================================================================== */
-.jullix{ background:var(--bg-gold); border-block:1px solid var(--line-2); }
+.jullix{ background:var(--bg); border-block:1px solid var(--line); }
 .jullix__inner{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(30px,5vw,76px); align-items:center; padding-block:clamp(56px,7vw,100px); }
 .jullix h2{ max-width:14ch; }
 .jullix__badges{ display:flex; gap:12px; flex-wrap:wrap; margin-top:30px; }

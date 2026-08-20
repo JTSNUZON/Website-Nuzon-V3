@@ -10,11 +10,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/site.css?v=5">
+<link rel="stylesheet" href="css/site.css?v=11">
 </head>
 <body class="has-hero">
 
-<!-- ============ INTRO — logo dat overgaat in de hero-video ============ -->
+<!-- ============ INTRO — logo als laadscherm ============ -->
 <div class="intro" id="intro" role="presentation">
   <span class="logo logo--opDonker intro__logo">
     <svg class="logo__zon" viewBox="6 14 36 20" aria-hidden="true">
@@ -32,6 +32,9 @@
     <span class="logo__tag">Slim energiebeheer</span>
   </span>
 </div>
+<!-- Zonder JavaScript blijft dit scherm anders voor altijd staan. -->
+<noscript><style>.intro{ display:none; }</style></noscript>
+
 
 <!-- ============ TOPBALK ============ -->
 <header class="topbar">
@@ -117,7 +120,7 @@
 <section class="hero" aria-label="Nuzon — zonne-energie en thuisbatterijen">
   <div class="hero__media" aria-hidden="true">
     <img class="hero__still" src="assets/hero/hero-eindbeeld.jpg" alt="" width="1600" height="900" fetchpriority="high">
-    <video class="hero__video" id="heroVideo" muted playsinline autoplay preload="none"
+    <video class="hero__video" id="heroVideo" muted playsinline preload="none"
            poster="assets/hero/hero-eindbeeld.jpg" tabindex="-1" disablepictureinpicture></video>
   </div>
   <div class="hero__scrim" aria-hidden="true"></div>
@@ -167,7 +170,7 @@
 </section>
 
 <!-- ============ KEUZE ============ -->
-<section class="section section--soft" id="keuze" aria-label="Kies particulier of zakelijk">
+<section class="section section--donker" id="keuze" aria-label="Kies particulier of zakelijk">
   <div class="shell">
     <div class="choice__intro">
       <p class="eyebrow" style="margin-bottom:0">Waar kunnen we je mee helpen?</p>
@@ -192,7 +195,7 @@
 </section>
 
 <!-- ============ VOORDEEL BEREKENEN ============ -->
-<section class="section" id="besparen">
+<section class="section section--donkerWarm" id="besparen">
   <div class="shell calc">
     <div>
       <p class="eyebrow">Bereken je voordeel</p>
@@ -233,7 +236,7 @@
 </section>
 
 <!-- ============ REVIEWS ============ -->
-<section class="section section--soft" id="reviews">
+<section class="section section--warm" id="reviews">
   <div class="shell">
     <div class="section__head">
       <div>
@@ -288,7 +291,7 @@
 </section>
 
 <!-- ============ NETWERK ============ -->
-<section class="section" id="partners">
+<section class="section section--soft" id="partners">
   <div class="shell">
     <div class="section__head">
       <div>
@@ -438,7 +441,7 @@
   </svg>
 </a>
 
-<script src="js/site.js?v=5"></script>
+<script src="js/site.js?v=11"></script>
 <script>
 /* =====================================================================
    REVIEWS — beheer hier alle reviews.
@@ -502,91 +505,166 @@ var REVIEWS = [
         had nog geen bron). Nu zetten we muted expliciet in JS, vangen we
         de afwijzing op en proberen we het opnieuw bij de eerste aanraking.
      2. De video liep één keer en bleef daarna op het laatste beeld staan.
-        Nu kijkt een IntersectionObserver of de hero in beeld is: eruit =
-        pauze, er weer in = terug naar 0 en opnieuw afspelen.
+        Nu wordt bij het scrollen berekend of de hero in beeld staat:
+        eruit = pauze, er weer in = terug naar 0 en opnieuw afspelen.
      3. Bij het openen van de site komt eerst het logo in beeld, dat
         wegdraait zodra de video klaar is om te spelen.
      ================================================================== */
   var video = document.getElementById('heroVideo');
   var hero  = document.querySelector('.hero');
-  var intro = document.getElementById('intro');
 
-  function startVideo(){
-    if(!video) return;
-    if(video.readyState > 0){ try{ video.currentTime = 0; }catch(e){} }
+  /* Het introscherm zit in js/site.js, want het staat op elke pagina.
+     Hier haken we er alleen op in: zolang het logo in beeld is wachten
+     we met de video, en zodra het beeld klaar is duwen we het scherm
+     open (eerder dan de noodrem van 2,4s). */
+  var magSpelen = !document.getElementById('intro');
+  var inBeeld   = false;
+  var pogingen  = 0;
+  var zelfGepauzeerd = false;
+  var hervat    = 0;
+
+  /* Tweede noodrem, voor de video zelf. Het startsein komt van het
+     introscherm in site.js; blijft dat uit (oud script uit de cache, een
+     fout daarboven), dan zou de video nooit beginnen. Na 3,5s pakken we
+     het hier zelf op. */
+  setTimeout(function(){
+    if(magSpelen) return;
+    var nog = document.getElementById('intro');
+    if(window.nuzonSluitIntro){ window.nuzonSluitIntro(); return; }
+    if(nog && nog.parentNode) nog.parentNode.removeChild(nog);
+    document.documentElement.style.overflow = '';
+    magSpelen = true;
+    startVideo(true);
+  }, 3500);
+
+  document.addEventListener('nuzon:intro-klaar', function(){
+    magSpelen = true;
+    pogingen  = 0;
+    startVideo(true);
+  });
+
+  /* play() kan geweigerd worden (Safari in energiebesparing, een tab die
+     op de achtergrond opent, een browserinstelling). Die afwijzing werd
+     eerder stil weggegooid en niets probeerde het opnieuw — dan bleef de
+     posterfoto staan. Nu een paar pogingen met oplopende pauze. */
+  function startVideo(herstart){
+    if(!video || !magSpelen) return;
+    // Alleen terugspoelen als hij echt al ergens staat. Blind currentTime
+    // op 0 zetten dwingt een seek af, en midden in het opstarten leverde
+    // dat een mislukte play() op — precies het gat dat je zag.
+    if(herstart && video.readyState > 0 && video.currentTime > 0.1){
+      try{ video.currentTime = 0; }catch(e){}
+    }
     var p = video.play();
-    if(p && p.catch){ p.catch(function(){}); }
-  }
-
-  if(video && !reduce){
-    var mobiel = window.matchMedia('(max-width: 720px)').matches;
-    var srcs = mobiel
-      ? [['assets/hero/hero-mobiel.mp4','video/mp4']]
-      : [['assets/hero/hero.webm','video/webm'], ['assets/hero/hero.mp4','video/mp4']];
-    srcs.forEach(function(s){
-      var el = document.createElement('source');
-      el.src = s[0]; el.type = s[1];
-      video.appendChild(el);
-    });
-    // Autoplay lukt alleen gegarandeerd als het element écht muted is;
-    // het attribuut alleen is niet altijd genoeg na een herlaadbeurt.
-    video.muted = true;
-    video.playsInline = true;
-    video.preload = 'auto';
-    video.load();
-
-    function toonVideo(){ video.classList.add('is-on'); }
-    if(video.readyState >= 2){ toonVideo(); }
-    else { video.addEventListener('loadeddata', toonVideo, { once:true }); }
-
-    // Zonder intro meteen starten; met intro pas als die weg is.
-    var magSpelen = !intro;
-    if(magSpelen) startVideo();
-
-    if(hero && 'IntersectionObserver' in window){
-      new IntersectionObserver(function(entries){
-        entries.forEach(function(e){
-          if(e.isIntersecting){ if(magSpelen) startVideo(); }
-          else { video.pause(); }
-        });
-      }, { threshold:0.25 }).observe(hero);
+    if(p && p.then){
+      p.then(function(){ pogingen = 0; })
+       .catch(function(){
+         if(++pogingen <= 8) setTimeout(function(){ startVideo(false); }, 300 * pogingen);
+       });
     }
-
-    // Blokkeert de browser autoplay alsnog, dan pakken we de eerste
-    // aanraking of klik van de bezoeker als startsein.
-    document.addEventListener('pointerdown', function eersteTik(){
-      document.removeEventListener('pointerdown', eersteTik);
-      if(magSpelen && video.paused) startVideo();
-    });
   }
 
-  /* ---- intro wegdraaien ---- */
-  if(intro){
-    if(reduce){
-      intro.parentNode.removeChild(intro);
-    } else {
-      document.documentElement.style.overflow = 'hidden';
-      var weg = false;
-      var sluitIntro = function(){
-        if(weg) return;
-        weg = true;
-        intro.classList.add('is-weg');
-        document.documentElement.style.overflow = '';
-        if(video){ magSpelen = true; startVideo(); }
+  try{
+    if(video && !reduce){
+      var mobiel = window.matchMedia('(max-width: 720px)').matches;
+      var bron = document.createElement('source');
+      bron.src  = mobiel ? 'assets/hero/hero-mobiel.mp4' : 'assets/hero/hero.mp4';
+      bron.type = 'video/mp4';
+      video.appendChild(bron);
+
+      // Autoplay lukt alleen gegarandeerd als het element écht muted is;
+      // het attribuut alleen is niet altijd genoeg na een herlaadbeurt.
+      video.muted = true;
+      video.playsInline = true;
+      video.preload = 'auto';
+      video.load();
+
+      function toonVideo(){ video.classList.add('is-on'); }
+      if(video.readyState >= 2){ toonVideo(); }
+      else { video.addEventListener('loadeddata', toonVideo, { once:true }); }
+
+      // Beeld binnen? Dan mag het introscherm weg; de logo-animatie
+      // krijgt eerst even de tijd om af te lopen.
+      video.addEventListener('loadeddata', function(){
         setTimeout(function(){
-          if(intro.parentNode) intro.parentNode.removeChild(intro);
-        }, 1000);
-      };
-      // Weg zodra de video kan spelen, maar de logo-animatie mag eerst af.
-      if(video){
-        video.addEventListener('loadeddata', function(){
-          setTimeout(sluitIntro, 1500);
-        }, { once:true });
+          if(window.nuzonSluitIntro) window.nuzonSluitIntro();
+        }, 1200);
+      }, { once:true });
+
+      /* In beeld = van voren af aan afspelen, uit beeld = pauze.
+
+         Dit liep eerder via een IntersectionObserver, maar die levert in
+         sommige situaties helemaal geen meldingen — dan blijft de video
+         dus stil staan als je terugscrollt. Een rechttoe rechtaan
+         berekening op de scrollpositie is hier betrouwbaarder: we kijken
+         hoeveel van het scherm de hero vult. Meer dan 30% telt als in
+         beeld, en we reageren alleen op de overgang, niet op elke
+         scrollstap. */
+      function heroZichtbaar(){
+        var r = hero.getBoundingClientRect();
+        var schermhoogte = window.innerHeight || document.documentElement.clientHeight;
+        var overlap = Math.min(r.bottom, schermhoogte) - Math.max(r.top, 0);
+        return overlap > schermhoogte * 0.3;
       }
-      // Laadt de video niet (traag netwerk, geen bron), dan gaat het scherm
-      // hoe dan ook na 2,4s open — nooit een bezoeker die vast blijft zitten.
-      setTimeout(sluitIntro, 2400);
+      var gepland = false;
+      function controleerBeeld(){
+        gepland = false;
+        var zichtbaar = heroZichtbaar();
+        if(zichtbaar === inBeeld) return;
+        inBeeld = zichtbaar;
+        if(inBeeld){
+          pogingen = 0; hervat = 0; zelfGepauzeerd = false;
+          startVideo(true);
+        } else {
+          zelfGepauzeerd = true;   // deze pauze is van ons, niet hervatten
+          video.pause();
+        }
+      }
+      function planControle(){
+        if(gepland) return;
+        gepland = true;
+        setTimeout(controleerBeeld, 100);
+      }
+      window.addEventListener('scroll', planControle, { passive:true });
+      window.addEventListener('resize', planControle);
+      controleerBeeld();
+
+      /* Vangnet: pauzeert iets buiten ons om de video terwijl de hero
+         gewoon in beeld staat — een energiebesparing, een browserregel,
+         een venster dat even naar de achtergrond gaat — dan pakken we hem
+         weer op. Met een teller ertegen, zodat we niet eindeloos gaan
+         duwen tegen een browser die het echt niet wil. */
+      video.addEventListener('pause', function(){
+        if(video.ended || zelfGepauzeerd || document.hidden) return;
+        if(!inBeeld || !magSpelen) return;
+        if(++hervat > 6) return;
+        setTimeout(function(){
+          if(video.paused && inBeeld && !zelfGepauzeerd) startVideo(false);
+        }, 250);
+      });
+
+      // Terug uit een andere tab: browsers pauzeren video's op de
+      // achtergrond, dus pakken we de draad hier weer op.
+      document.addEventListener('visibilitychange', function(){
+        if(!document.hidden && inBeeld){ pogingen = 0; startVideo(false); }
+      });
+
+      /* Houdt de browser de boot alsnog af, dan is de eerste handeling van
+         de bezoeker een geldig startsein. Zodra hij één keer echt gelopen
+         heeft hebben we dit vangnet niet meer nodig — en willen we het ook
+         niet meer, anders herstart een willekeurige klik de video. */
+      var gebaren = ['pointerdown','keydown','touchstart'];
+      function losGebaren(){
+        gebaren.forEach(function(ev){ document.removeEventListener(ev, opGebaar); });
+      }
+      function opGebaar(){
+        if(video.paused && inBeeld && magSpelen){ pogingen = 0; startVideo(false); }
+      }
+      gebaren.forEach(function(ev){ document.addEventListener(ev, opGebaar, { passive:true }); });
+      video.addEventListener('playing', losGebaren, { once:true });
     }
+  } catch(e){
+    if(window.nuzonSluitIntro) window.nuzonSluitIntro();
   }
 
   /* ---- voordeel-calculator ---- */

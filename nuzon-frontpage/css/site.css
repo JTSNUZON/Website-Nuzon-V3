@@ -78,18 +78,21 @@ h3{ font-size:1.2rem; }
 .section--soft{ background:var(--bg-soft); border-block:1px solid var(--line); }
 
 /* -------------------------------------------------------------------
-   KLEURVERLOOP VAN DE HOMEPAGE
-   De hero is donker. In plaats van meteen naar wit te springen bouwt de
-   pagina op: twee tinten donker, dan warm goud, dan wit, dan zacht, en
-   onderaan weer donker. De blokken hieronder zetten alleen de tokens
-   opnieuw — kaarten, koppen, lijnen en knoppen erbinnen gebruiken die
-   tokens al, dus die kleuren vanzelf mee.
+   KLEURTRAP VAN DE HOMEPAGE
+   De hero is het donkerst. Elke band daaronder wordt een stapje lichter,
+   tot en met de footer — samen leest dat als één verloop over de pagina
+   in plaats van blokken die om en om wisselen.
+
+   .trap zet alleen de tokens opnieuw; kaarten, koppen, lijnen en knoppen
+   erbinnen gebruiken die tokens al, dus die kleuren vanzelf mee.
+   Per stap: --trap is de band zelf, --bg de kaartkleur daarbinnen.
    ------------------------------------------------------------------- */
-.section--donker,
-.section--donkerWarm{
+.trap{
   --ink:#FFFFFF;
   --body:#C6BDAB;
-  --muted:#8E8574;
+  /* Lichter dan het oorspronkelijke grijs: op de bovenste treden hield dat
+     het net, maar op de lichtste zakte het door de leesbaarheidsgrens. */
+  --muted:#B0A794;
   --line:rgba(255,255,255,.13);
   --line-2:rgba(255,255,255,.20);
   --bg-soft:rgba(255,255,255,.05);
@@ -100,10 +103,21 @@ h3{ font-size:1.2rem; }
   --shadow:0 18px 50px rgba(0,0,0,.34);
   --shadow-lg:0 30px 80px rgba(0,0,0,.46);
   color:var(--body);
-  border-block:1px solid rgba(255,255,255,.09);
+  background:var(--trap);
+  border-block:1px solid rgba(255,255,255,.07);
 }
-.section--donker{     background:var(--dark);   --bg:#211C14; }
-.section--donkerWarm{ background:var(--dark-2); --bg:#2E2617; }
+.trap--1{ --trap:#161208; --bg:#1F1A12; }
+.trap--2{ --trap:#1C1710; --bg:#252017; }
+.trap--3{ --trap:#221D17; --bg:#2B261E; }
+.trap--4{ --trap:#29231C; --bg:#322C24; }
+.trap--5{ --trap:#2F2921; --bg:#383229; }
+.trap--6{ --trap:#363027; --bg:#3F392F; }
+.trap--7{ --trap:#3C362C; --bg:#454033; }
+/* Deze drie schilderen zelf een achtergrond; met twee klassen wint de trap. */
+.jullix.trap,.cta.trap,.foot.trap{ background:var(--trap); }
+/* De kleine regel onderin de footer heeft een vaste grijstint. Die hield het
+   net op de oude, donkere footer, maar op de bovenste trede niet meer. */
+.foot.trap .foot__legal{ color:var(--muted); }
 .section--warm{ background:var(--bg-gold); border-block:1px solid var(--line-2); }
 .section__head{ display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap; margin-bottom:clamp(28px,4vw,44px); }
 .section__head p{ margin:14px 0 0; }
@@ -169,7 +183,10 @@ body.has-hero .topbar:not(.is-scrolled):not(:has(.mega[data-open="true"])) .nav 
    in plaats van erboven. De streep hoort bij de volledige opbouw en zit
    hier bewust niet in — op 20px hoogte wordt dat een propje. Zie .logo
    in de footer voor het complete merk. */
-.brand{ display:flex; align-items:center; gap:11px; margin-right:auto; color:var(--merk-goud); }
+.brand{ display:flex; align-items:center; gap:11px; color:var(--merk-goud); }
+/* "Wat wij doen" staat links naast het logo; de auto-marge erachter duwt de
+   rest van het menu naar rechts. */
+.nav--hoofd{ margin-right:auto; }
 .brand__zon{ width:27px; height:auto; flex:none; color:var(--merk-goud); }
 .brand__text{ display:flex; flex-direction:column; line-height:1; }
 .brand__name{ font-family:var(--font-merk); font-weight:800; font-size:1.16rem; letter-spacing:-.035em; color:var(--merk-inkt); transition:color .35s ease; }
@@ -441,10 +458,6 @@ input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%;
    JULLIX
    =================================================================== */
 .jullix{ background:var(--bg); border-block:1px solid var(--line); }
-/* Krijgt het blok een sectiekleur mee, dan wint die van de eigen --bg,
-   zodat het niet net iets anders donker wordt dan zijn buren. */
-.jullix.section--donker{     background:var(--dark); }
-.jullix.section--donkerWarm{ background:var(--dark-2); }
 .jullix__inner{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(30px,5vw,76px); align-items:center; padding-block:clamp(56px,7vw,100px); }
 .jullix h2{ max-width:14ch; }
 .jullix__badges{ display:flex; gap:12px; flex-wrap:wrap; margin-top:30px; }

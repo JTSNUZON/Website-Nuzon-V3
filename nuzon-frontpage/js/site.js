@@ -179,6 +179,48 @@ var WHATSAPP_BERICHT = "Hallo Nuzon, ik heb een vraag over ";
     markeer();
   });
 
+  /* ---- videoblok ----
+     Speelt met geluid zodra hij in beeld komt. Blokkeert de browser dat
+     (dat mag hij, zonder klik), dan gaat hij verder zonder geluid en zet de
+     knop zichzelf op 'Geluid aan'. */
+  document.querySelectorAll('[data-video]').forEach(function(blok){
+    var video = blok.querySelector('video');
+    var knop  = blok.querySelector('[data-geluid]');
+    var label = knop.querySelector('.videoblok__label');
+
+    function toon(){
+      var uit = video.muted;
+      knop.setAttribute('aria-pressed', uit ? 'true' : 'false');
+      label.textContent = uit ? 'Geluid aan' : 'Geluid uit';
+    }
+    function speel(){
+      var p = video.play();
+      if(p && p.catch){
+        p.catch(function(){
+          // Zonder klik mag alleen geluidloos spelen.
+          video.muted = true; toon(); video.play().catch(function(){});
+        });
+      }
+    }
+
+    knop.addEventListener('click', function(){
+      video.muted = !video.muted;
+      toon();
+      if(video.paused) video.play().catch(function(){});
+    });
+    toon();
+
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(rijen){
+        rijen.forEach(function(r){
+          if(r.isIntersecting){ speel(); } else { video.pause(); }
+        });
+      }, { threshold:.35 }).observe(blok);
+    } else {
+      speel();
+    }
+  });
+
   /* ---- jaartal in de footer ---- */
   var jaar = document.getElementById('jaar');
   if(jaar) jaar.textContent = new Date().getFullYear();

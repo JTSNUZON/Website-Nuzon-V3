@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/site.css?v=13">
+<link rel="stylesheet" href="css/site.css?v=14">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
 </head>
 <body>
@@ -130,10 +130,8 @@
       <p class="lede">Met een thuisbatterij gebruik je de stroom van vandaag vanavond zelf: meer eigen verbruik, minder terugleverkosten en licht in huis bij een stroomstoring. Benieuwd wat voor een batterij bij u zou passen? Vraag dan direct om gratis advies via de knop hieronder.</p>
       <div class="pagehero__actions"><a class="btn btn--onDark" href="#offerte">Gratis advies</a></div>
     </div>
-    <!-- Foto hier vervangen: zet het juiste bestand in assets/foto/ en pas
-         alleen de src en de alt-tekst hieronder aan. -->
     <figure class="pagehero__foto">
-      <img src="assets/foto/thuisbatterij.jpg" alt="Thuisbatterij in een technische ruimte" width="1600" height="1200" loading="eager">
+      <img src="assets/foto/pylontech-batterij-4.jpg" alt="Pylontech-thuisbatterij, ge&iuml;nstalleerd door Nuzon" width="1600" height="1200" loading="eager">
     </figure>
   </div>
 </section>
@@ -141,8 +139,15 @@
 <section class="section">
   <div class="shell">
     <div class="prod">
-      <div class="prod__media prod__media--staand">
-        <img src="assets/foto/thuisbatterij.jpg" alt="Thuisbatterij in een technische ruimte" loading="lazy">
+      <div class="prod__media fotoslider" data-slider>
+        <div class="fotoslider__spoor">
+          <img src="assets/foto/pylontech-batterij-3.jpg" alt="Pylontech-thuisbatterij met omvormer" loading="lazy">
+          <img src="assets/foto/pylontech-batterij-2.jpg" alt="Pylontech-batterijmodules in de opstelling" loading="lazy">
+          <img src="assets/foto/pylontech-batterij-1.jpg" alt="Aangesloten Pylontech-thuisbatterij" loading="lazy">
+        </div>
+        <button type="button" class="fotoslider__pijl fotoslider__pijl--vorige" aria-label="Vorige foto">&#8249;</button>
+        <button type="button" class="fotoslider__pijl fotoslider__pijl--volgende" aria-label="Volgende foto">&#8250;</button>
+        <div class="fotoslider__bolletjes" role="tablist" aria-label="Foto kiezen"></div>
       </div>
       <div>
         <p class="eyebrow">Thuisbatterij</p>
@@ -163,8 +168,15 @@
     </div>
 
     <div class="prod prod--flip" style="margin-top:clamp(56px,7vw,100px)">
-      <div class="prod__media prod__media--staand">
-        <img src="assets/foto/meterkast.jpg" alt="Meterkast met groepenkast en aansluiting voor noodstroom" loading="lazy">
+      <div class="prod__media videoblok" data-video>
+        <video class="videoblok__video" playsinline loop preload="metadata"
+               poster="assets/foto/meterkast.jpg" aria-label="Noodstroom in werking">
+          <source src="assets/video/noodstroom.mp4" type="video/mp4">
+        </video>
+        <button type="button" class="videoblok__geluid" data-geluid aria-pressed="false">
+          <span class="videoblok__icoon" aria-hidden="true"></span>
+          <span class="videoblok__label">Geluid uit</span>
+        </button>
       </div>
       <div>
         <p class="eyebrow">Noodstroom</p>
@@ -256,7 +268,7 @@
   </svg>
 </a>
 
-<script src="js/site.js?v=13"></script>
+<script src="js/site.js?v=14"></script>
 <script src="js/funnel.js?v=1"></script>
 
 </body>

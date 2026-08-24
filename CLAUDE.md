@@ -20,6 +20,13 @@ Voor je begint te werken: eerst `git pull` om werk van anderen op te halen.
 - Communiceer in het Nederlands, informeel en direct
 - Code, klassenamen en commentaar in de bestanden zijn ook Nederlands — hou dat zo
 
+## Zelf controleren voor je oplevert
+Elke wijziging aan de site eerst zelf in de browser bekijken — screenshot of
+Playwright-scriptje — voordat je 'm afmeldt. Niet alleen de code nalezen: de
+pagina echt openen, het gedrag aandrijven (hoveren, klikken, toetsenbord,
+telefoonformaat) en het beeld vastleggen. Laat daarna een voorbeeld zien van
+wat je gemaakt hebt.
+
 ## Commando's
 Er is geen buildstap, geen packagemanager, geen testsuite en geen linter.
 De map `nuzon-frontpage/` is letterlijk wat er live staat.

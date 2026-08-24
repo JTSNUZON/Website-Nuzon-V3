@@ -545,6 +545,9 @@ input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%;
   :root{ --bar:64px; }
   body{ font-size:16px; }
   .nav .hide-sm{ display:none; }
+  /* De Producten-knop staat hier niet in de balk, dus het bijbehorende
+     paneel hoort er ook niet te zijn. */
+  .mega--prod{ display:none; }
 
   /* De balk moet op één regel passen: minder ruimte, kortere merknaam,
      en een compactere knop. */

@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/site.css?v=11">
+<link rel="stylesheet" href="css/site.css?v=12">
 </head>
 <body>
 
@@ -57,8 +57,7 @@
 
     <nav class="nav" aria-label="Hoofdmenu">
       <button id="megaBtn" aria-expanded="false" aria-controls="mega">Wat wij doen<span class="caret">&#9662;</span></button>
-      <!-- Producten staat er alvast; het menu eronder moet nog gevuld worden. -->
-      <button id="prodBtn" type="button" class="hide-sm">Producten</button>
+      <button id="prodBtn" type="button" class="hide-sm" aria-expanded="false" aria-controls="prodMega">Producten<span class="caret">&#9662;</span></button>
       <a href="/#besparen" class="hide-sm">Besparen</a>
       <a href="/#reviews" class="hide-sm">Reviews</a>
       <a href="/ons-verhaal" class="hide-sm">Ons verhaal</a>
@@ -107,6 +106,44 @@
           <ul>
             <li><a href="/zakelijk">Zakelijk overzicht</a></li>
             <li><a href="/batterijopslag-zakelijk">Batterijopslag</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tweede paneel: dezelfde schuifbeweging als hierboven, maar met de
+       producten zelf in plaats van de vier hoofdstukken. -->
+  <div class="mega mega--prod" id="prodMega" data-open="false">
+    <div class="mega__inner">
+      <div class="mega__grid">
+        <div>
+          <h4><a href="/opwekken">Zonnepanelen &#8594;</a></h4>
+          <ul>
+            <li><a href="/opwekken#zonnepanelen">Full-black panelen</a></li>
+            <li><a href="/zakelijk">Panelen op bedrijfsdak</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4><a href="/opslaan">Thuisbatterij &#8594;</a></h4>
+          <ul>
+            <li><a href="/opslaan#thuisbatterij">Batterij bij je verbruik</a></li>
+            <li><a href="/opslaan#noodstroom">Noodstroom</a></li>
+            <li><a href="/batterijopslag-zakelijk">Batterijopslag zakelijk</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4><a href="/laden-en-stroom">Laden &amp; stroom &#8594;</a></h4>
+          <ul>
+            <li><a href="/laden-en-stroom#laadpaal">Laadpaal</a></li>
+            <li><a href="/laden-en-stroom">Dynamisch contract</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4><a href="/#jullix">Slim energiebeheer &#8594;</a></h4>
+          <ul>
+            <li><a href="/#jullix">Jullix energiebeheer</a></li>
+            <li><a href="/#besparen">Bereken je voordeel</a></li>
           </ul>
         </div>
       </div>
@@ -265,7 +302,7 @@
   </svg>
 </a>
 
-<script src="js/site.js?v=11"></script>
+<script src="js/site.js?v=12"></script>
 
 </body>
 </html>

@@ -69,49 +69,64 @@ var WHATSAPP_BERICHT = "Hallo Nuzon, ik heb een vraag over ";
             + (WHATSAPP_BERICHT ? '?text=' + encodeURIComponent(WHATSAPP_BERICHT) : '');
   }
 
-  /* ---- mega menu ---- */
-  var btn = document.getElementById('megaBtn'), mega = document.getElementById('mega');
-  if(btn && mega){
+  /* ---- menu's in de balk ----
+     Twee panelen ('Wat wij doen' en 'Producten') met precies dezelfde
+     schuifbeweging. Er kan er maar een tegelijk open staan: ga je met de
+     muis naar de andere knop, dan wisselt het paneel meteen. */
+  var menus = [
+    { knop: document.getElementById('megaBtn'),  paneel: document.getElementById('mega')     },
+    { knop: document.getElementById('prodBtn'),  paneel: document.getElementById('prodMega') }
+  ].filter(function(m){ return m.knop && m.paneel; });
+
+  if(menus.length){
     var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-    function openMega(){
-      btn.setAttribute('aria-expanded', 'true');
-      mega.dataset.open = 'true';
+    function isOpen(m){ return m.paneel.dataset.open === 'true'; }
+    function sluit(m){
+      m.knop.setAttribute('aria-expanded', 'false');
+      m.paneel.dataset.open = 'false';
     }
-    function closeMega(){
-      btn.setAttribute('aria-expanded', 'false');
-      mega.dataset.open = 'false';
+    function sluitAlles(){ menus.forEach(sluit); }
+    function open(m){
+      menus.forEach(function(a){ if(a !== m) sluit(a); });
+      m.knop.setAttribute('aria-expanded', 'true');
+      m.paneel.dataset.open = 'true';
     }
 
-    btn.addEventListener('click', function(e){
-      var open = btn.getAttribute('aria-expanded') === 'true';
-      // Met een muis heeft hover het menu al geopend; een klik mag dat niet
-      // meteen weer dichtklappen. Toetsenbordgebruik (e.detail === 0) toggelt wel.
-      if(open && canHover && e.detail !== 0) return;
-      if(open){ closeMega(); } else { openMega(); }
+    menus.forEach(function(m){
+      m.knop.addEventListener('click', function(e){
+        // Met een muis heeft hover het menu al geopend; een klik mag dat niet
+        // meteen weer dichtklappen. Toetsenbordgebruik (e.detail === 0) toggelt wel.
+        if(isOpen(m) && canHover && e.detail !== 0) return;
+        if(isOpen(m)){ sluit(m); } else { open(m); }
+      });
+      m.paneel.querySelectorAll('a').forEach(function(a){
+        a.addEventListener('click', sluitAlles);
+      });
     });
 
     if(canHover){
-      // De knop en het paneel zitten allebei in de topbalk, dus de muis kan
+      // De knoppen en de panelen zitten allebei in de topbalk, dus de muis kan
       // van de een naar de ander zonder iets te verlaten. Daarom sluiten we
       // op de balk als geheel: geen vertraging nodig en toch geen geflikker.
-      var bar = btn.closest('.topbar') || mega.parentNode;
-      btn.addEventListener('mouseenter', openMega);
-      bar.addEventListener('mouseleave', closeMega);
+      var bar = menus[0].knop.closest('.topbar') || menus[0].paneel.parentNode;
+      menus.forEach(function(m){
+        m.knop.addEventListener('mouseenter', function(){ open(m); });
+      });
+      bar.addEventListener('mouseleave', sluitAlles);
       // Ga je naar een ander item in de balk, dan sluit het menu ook meteen.
       // Ook de knoppen tellen mee, want niet elk item is een link.
+      var knoppen = menus.map(function(m){ return m.knop; });
       document.querySelectorAll('.nav a, .nav button').forEach(function(el){
-        if(el !== btn) el.addEventListener('mouseenter', closeMega);
+        if(knoppen.indexOf(el) === -1) el.addEventListener('mouseenter', sluitAlles);
       });
     }
 
     document.addEventListener('keydown', function(e){
-      if(e.key === 'Escape' && mega.dataset.open === 'true'){
-        closeMega(); btn.focus();
-      }
-    });
-    document.querySelectorAll('#mega a').forEach(function(a){
-      a.addEventListener('click', closeMega);
+      if(e.key !== 'Escape') return;
+      menus.forEach(function(m){
+        if(isOpen(m)){ sluit(m); m.knop.focus(); }
+      });
     });
   }
 

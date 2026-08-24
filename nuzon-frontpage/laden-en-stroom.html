@@ -9,8 +9,9 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 40'%3E%3Crect width='48' height='40' rx='9' fill='%23201E1D'/%3E%3Cg transform='translate(0,-4.4)' fill='none' stroke='%23C08C1C' stroke-width='3.4' stroke-linecap='round'%3E%3Cpath d='M16.8 34 A7.2 7.2 0 0 1 31.2 34 Z' fill='%23C08C1C' stroke='none'/%3E%3Cline x1='33.96' y1='28.25' x2='39.16' y2='25.25'/%3E%3Cline x1='29.75' y1='24.04' x2='32.75' y2='18.85'/%3E%3Cline x1='24' y1='22.5' x2='24' y2='16.5'/%3E%3Cline x1='18.25' y1='24.04' x2='15.25' y2='18.85'/%3E%3Cline x1='14.04' y1='28.25' x2='8.84' y2='25.25'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/site.css?v=12">
+<link media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css?v=13">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
 </head>
 <body>
 
@@ -57,7 +58,6 @@
 
     <nav class="nav" aria-label="Hoofdmenu">
       <button id="megaBtn" aria-expanded="false" aria-controls="mega">Wat wij doen<span class="caret">&#9662;</span></button>
-      <button id="prodBtn" type="button" class="hide-sm" aria-expanded="false" aria-controls="prodMega">Producten<span class="caret">&#9662;</span></button>
       <a href="/#besparen" class="hide-sm">Besparen</a>
       <a href="/#reviews" class="hide-sm">Reviews</a>
       <a href="/ons-verhaal" class="hide-sm">Ons verhaal</a>
@@ -99,56 +99,20 @@
           <h4><a href="/laden-en-stroom">Laden &amp; stroom &#8594;</a></h4>
           <ul>
             <li><a href="/laden-en-stroom#laadpaal">Laadpaal</a></li>
+            <li><a href="/laden-en-stroom#dynamische-stroom">Dynamische stroom</a></li>
           </ul>
         </div>
         <div>
-          <h4><a href="/zakelijk">Zakelijk &#8594;</a></h4>
+          <h4><a href="/zakelijk">Zakelijk of particulier &#8594;</a></h4>
           <ul>
             <li><a href="/zakelijk">Zakelijk overzicht</a></li>
-            <li><a href="/batterijopslag-zakelijk">Batterijopslag</a></li>
+            <li><a href="/">Particulier overzicht</a></li>
           </ul>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Tweede paneel: dezelfde schuifbeweging als hierboven, maar met de
-       producten zelf in plaats van de vier hoofdstukken. -->
-  <div class="mega mega--prod" id="prodMega" data-open="false">
-    <div class="mega__inner">
-      <div class="mega__grid">
-        <div>
-          <h4><a href="/opwekken">Zonnepanelen &#8594;</a></h4>
-          <ul>
-            <li><a href="/opwekken#zonnepanelen">Full-black panelen</a></li>
-            <li><a href="/zakelijk">Panelen op bedrijfsdak</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4><a href="/opslaan">Thuisbatterij &#8594;</a></h4>
-          <ul>
-            <li><a href="/opslaan#thuisbatterij">Batterij bij je verbruik</a></li>
-            <li><a href="/opslaan#noodstroom">Noodstroom</a></li>
-            <li><a href="/batterijopslag-zakelijk">Batterijopslag zakelijk</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4><a href="/laden-en-stroom">Laden &amp; stroom &#8594;</a></h4>
-          <ul>
-            <li><a href="/laden-en-stroom#laadpaal">Laadpaal</a></li>
-            <li><a href="/laden-en-stroom">Dynamisch contract</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4><a href="/#jullix">Slim energiebeheer &#8594;</a></h4>
-          <ul>
-            <li><a href="/#jullix">Jullix energiebeheer</a></li>
-            <li><a href="/#besparen">Bereken je voordeel</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
 </header>
 
 <div class="shell">
@@ -162,8 +126,8 @@
   <div class="shell pagehero__inner">
     <p class="eyebrow">Laden &amp; stroom</p>
     <h1>Laad je auto op je eigen zon</h1>
-    <p class="lede">Een slimme laadpaal die automatisch laadt op het overschot van je panelen of op het laagste uurtarief. Aangestuurd door Jullix, ge&iuml;nstalleerd door eigen monteurs.</p>
-    <div class="pagehero__actions"><a class="btn" href="/#besparen">Bereken mijn voordeel</a><a class="btn btn--onDark" href="#offerte">Vraag advies aan</a></div>
+    <p class="lede">Een slimme laadpaal die automatisch laadt op het overschot van je panelen of op het laagste uurtarief. Aangestuurd door Jullix, ge&iuml;nstalleerd door eigen monteurs. Klaar om slim te laden?</p>
+    <div class="pagehero__actions"><a class="btn btn--onDark" href="#offerte">Gratis advies</a></div>
   </div>
 </section>
 
@@ -176,20 +140,18 @@
       <div>
         <p class="eyebrow">Laadpaal</p>
         <h2 id="laadpaal">Laden op het goedkoopste moment van de dag</h2>
-        <p class="lede" style="margin-top:16px">Je laadpaal kijkt mee met je opwek en met de uurprijzen. Schijnt de zon, dan gaat het overschot naar je auto. Is het bewolkt, dan wacht hij tot stroom goedkoop is.</p>
+        <p class="lede" style="margin-top:16px">De laadpaal kijkt mee met uw opwek en de uurprijzen. Schijnt de zon, dan gaat het overschot naar uw auto (als u zonnepanelen heeft). Is het bewolkt, dan wacht de laadpaal tot de stroom goedkoop is.</p>
         <ul class="check">
           <li>Tot 22 kW laadvermogen</li>
-          <li>Laden op overschot van je zonnepanelen</li>
-          <li>Lastbalancering, zodat je aansluiting het aankan</li>
+          <li>Lastbalancering, zodat de aansluiting het aankan</li>
           <li>Volledig aan te sturen vanuit de app</li>
         </ul>
-        <div class="prod__spec">
+        <div class="prod__spec prod__spec--twee">
           <div><strong>22 kW</strong><span>maximaal laden</span></div>
-          <div><strong>Type 2</strong><span>standaard stekker</span></div>
-          <div><strong>1 dag</strong><span>installatie</span></div>
+          <div><strong>App</strong><span>aangestuurd</span></div>
         </div>
         <div class="prod__actions">
-          <a class="btn" href="#offerte">Vraag advies aan</a>
+          <a class="btn" href="#offerte">Gratis advies</a>
           <a class="btn btn--ghost" href="/#jullix">Over Jullix</a>
         </div>
       </div>
@@ -202,7 +164,7 @@
     <div class="section__head">
       <div>
         <p class="eyebrow">Dynamische stroom</p>
-        <h2>Betaal de echte uurprijs</h2>
+        <h2 id="dynamische-stroom">Betaal de echte uurprijs</h2>
         <p class="lede">Met een dynamisch contract betaal je per uur wat stroom op dat moment kost. Daardoor kan Jullix je batterij en je auto laden wanneer het het voordeligst is. Hiervoor werken we samen met NieuweStroom &mdash; Nuzon is zelf geen energieleverancier.</p>
       </div>
     </div>
@@ -211,21 +173,6 @@
       <article class="usp"><span class="num">02</span><h3>Combineert met opslag</h3><p>Goedkope uren gaan de batterij in, dure uren gebruik je die.</p></article>
       <article class="usp"><span class="num">03</span><h3>Automatisch geregeld</h3><p>Jullix beslist; jij hoeft er niet naar te kijken.</p></article>
       <article class="usp"><span class="num">04</span><h3>Advies via Nuzon</h3><p>We leggen uit wanneer dynamisch wel en niet verstandig is.</p></article>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CTA ============ -->
-<section class="cta" id="offerte">
-  <div class="shell cta__inner">
-    <div>
-      <p class="eyebrow">Gratis en vrijblijvend</p>
-      <h2>Klaar om slim te laden?</h2>
-      <p>We kijken naar je auto, je aansluiting en je verbruik, en adviseren wat past.</p>
-    </div>
-    <div class="cta__actions">
-      <a class="btn" href="mailto:info@nuzon.nl">Vraag gratis advies aan</a>
-      <a class="btn btn--onDark" href="tel:+31307816767">030 781 6767</a>
     </div>
   </div>
 </section>
@@ -303,7 +250,7 @@
   </svg>
 </a>
 
-<script src="js/site.js?v=12"></script>
+<script src="js/site.js?v=13"></script>
 <script src="js/funnel.js?v=1"></script>
 
 </body>

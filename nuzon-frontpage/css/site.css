@@ -545,9 +545,6 @@ input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%;
   :root{ --bar:64px; }
   body{ font-size:16px; }
   .nav .hide-sm{ display:none; }
-  /* De Producten-knop staat hier niet in de balk, dus het bijbehorende
-     paneel hoort er ook niet te zijn. */
-  .mega--prod{ display:none; }
 
   /* De balk moet op één regel passen: minder ruimte, kortere merknaam,
      en een compactere knop. */
@@ -647,6 +644,34 @@ input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%;
 .prod__media--staand img{ aspect-ratio:4/5; }
 .prod h2{ scroll-margin-top:calc(var(--bar) + 20px); }
 .prod__spec{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:26px; }
+.prod__spec--twee{ grid-template-columns:repeat(2,1fr); }
+.prod__slot{ margin:22px 0 0; font-weight:600; color:var(--ink); }
+
+/* Kopjes op de subpagina's in gewone schrijfwijze; alleen de homepage houdt
+   de kapitalen. */
+.pagehero .eyebrow,.prod .eyebrow,.section__head .eyebrow{ text-transform:none; letter-spacing:.06em; font-size:.82rem; }
+
+/* Pagina-hero met een foto ernaast. */
+.pagehero--metFoto .pagehero__inner{ display:grid; grid-template-columns:1.02fr .98fr; gap:clamp(26px,4vw,56px); align-items:center; }
+.pagehero__foto{ margin:0; border-radius:8px; overflow:hidden; border:1px solid rgba(255,255,255,.14); box-shadow:var(--shadow-lg); }
+.pagehero__foto img{ width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
+
+/* Fotoslider: pijlen links en rechts, bolletjes onderaan. */
+.fotoslider{ position:relative; }
+.fotoslider__spoor{ display:flex; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; }
+.fotoslider__spoor::-webkit-scrollbar{ display:none; }
+.fotoslider__spoor img{ flex:0 0 100%; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; scroll-snap-align:center; }
+.fotoslider__pijl{ position:absolute; top:50%; transform:translateY(-50%); width:42px; height:42px;
+  display:flex; align-items:center; justify-content:center; border:0; border-radius:50%; cursor:pointer;
+  background:rgba(255,255,255,.9); color:var(--ink); font-size:24px; line-height:1;
+  box-shadow:0 4px 16px rgba(20,16,6,.24); transition:background .2s, transform .2s; }
+.fotoslider__pijl:hover{ background:#fff; }
+.fotoslider__pijl--vorige{ left:12px; }
+.fotoslider__pijl--volgende{ right:12px; }
+.fotoslider__bolletjes{ position:absolute; left:0; right:0; bottom:14px; display:flex; justify-content:center; gap:9px; }
+.fotoslider__bolletjes button{ width:9px; height:9px; padding:0; border-radius:50%; cursor:pointer;
+  border:1px solid rgba(255,255,255,.85); background:transparent; transition:background .2s; }
+.fotoslider__bolletjes button[aria-selected="true"]{ background:#fff; }
 .prod__spec div{ border:1px solid var(--line); border-radius:6px; background:var(--bg); padding:16px 14px; }
 .prod__spec strong{ display:block; color:var(--ink); font-weight:800; font-size:1.15rem; letter-spacing:-.02em; margin-bottom:2px; }
 .prod__spec span{ font-size:.85rem; color:var(--muted); }
@@ -665,4 +690,5 @@ input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%;
 @media (max-width:720px){
   .usps{ grid-template-columns:1fr; }
   .prod__spec{ grid-template-columns:1fr; }
+  .pagehero--metFoto .pagehero__inner{ grid-template-columns:1fr; }
 }

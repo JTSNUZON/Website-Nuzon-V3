@@ -9,8 +9,9 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 40'%3E%3Crect width='48' height='40' rx='9' fill='%23201E1D'/%3E%3Cg transform='translate(0,-4.4)' fill='none' stroke='%23C08C1C' stroke-width='3.4' stroke-linecap='round'%3E%3Cpath d='M16.8 34 A7.2 7.2 0 0 1 31.2 34 Z' fill='%23C08C1C' stroke='none'/%3E%3Cline x1='33.96' y1='28.25' x2='39.16' y2='25.25'/%3E%3Cline x1='29.75' y1='24.04' x2='32.75' y2='18.85'/%3E%3Cline x1='24' y1='22.5' x2='24' y2='16.5'/%3E%3Cline x1='18.25' y1='24.04' x2='15.25' y2='18.85'/%3E%3Cline x1='14.04' y1='28.25' x2='8.84' y2='25.25'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/site.css?v=12">
+<link media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css?v=13">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
 </head>
 <body>
 
@@ -57,7 +58,6 @@
 
     <nav class="nav" aria-label="Hoofdmenu">
       <button id="megaBtn" aria-expanded="false" aria-controls="mega">Wat wij doen<span class="caret">&#9662;</span></button>
-      <button id="prodBtn" type="button" class="hide-sm" aria-expanded="false" aria-controls="prodMega">Producten<span class="caret">&#9662;</span></button>
       <a href="/#besparen" class="hide-sm">Besparen</a>
       <a href="/#reviews" class="hide-sm">Reviews</a>
       <a href="/ons-verhaal" class="hide-sm">Ons verhaal</a>
@@ -99,56 +99,20 @@
           <h4><a href="/laden-en-stroom">Laden &amp; stroom &#8594;</a></h4>
           <ul>
             <li><a href="/laden-en-stroom#laadpaal">Laadpaal</a></li>
+            <li><a href="/laden-en-stroom#dynamische-stroom">Dynamische stroom</a></li>
           </ul>
         </div>
         <div>
-          <h4><a href="/zakelijk">Zakelijk &#8594;</a></h4>
+          <h4><a href="/zakelijk">Zakelijk of particulier &#8594;</a></h4>
           <ul>
             <li><a href="/zakelijk">Zakelijk overzicht</a></li>
-            <li><a href="/batterijopslag-zakelijk">Batterijopslag</a></li>
+            <li><a href="/">Particulier overzicht</a></li>
           </ul>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Tweede paneel: dezelfde schuifbeweging als hierboven, maar met de
-       producten zelf in plaats van de vier hoofdstukken. -->
-  <div class="mega mega--prod" id="prodMega" data-open="false">
-    <div class="mega__inner">
-      <div class="mega__grid">
-        <div>
-          <h4><a href="/opwekken">Zonnepanelen &#8594;</a></h4>
-          <ul>
-            <li><a href="/opwekken#zonnepanelen">Full-black panelen</a></li>
-            <li><a href="/zakelijk">Panelen op bedrijfsdak</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4><a href="/opslaan">Thuisbatterij &#8594;</a></h4>
-          <ul>
-            <li><a href="/opslaan#thuisbatterij">Batterij bij je verbruik</a></li>
-            <li><a href="/opslaan#noodstroom">Noodstroom</a></li>
-            <li><a href="/batterijopslag-zakelijk">Batterijopslag zakelijk</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4><a href="/laden-en-stroom">Laden &amp; stroom &#8594;</a></h4>
-          <ul>
-            <li><a href="/laden-en-stroom#laadpaal">Laadpaal</a></li>
-            <li><a href="/laden-en-stroom">Dynamisch contract</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4><a href="/#jullix">Slim energiebeheer &#8594;</a></h4>
-          <ul>
-            <li><a href="/#jullix">Jullix energiebeheer</a></li>
-            <li><a href="/#besparen">Bereken je voordeel</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
 </header>
 
 <div class="shell">
@@ -158,12 +122,19 @@
   </nav>
 </div>
 
-<section class="pagehero">
+<section class="pagehero pagehero--metFoto">
   <div class="shell pagehero__inner">
-    <p class="eyebrow">Opslaan</p>
-    <h1>Sla je zonne-energie op</h1>
-    <p class="lede">Met een thuisbatterij gebruik je de stroom van vandaag vanavond zelf: meer eigen verbruik, minder terugleverkosten en licht in huis bij een stroomstoring.</p>
-    <div class="pagehero__actions"><a class="btn" href="/#besparen">Bereken mijn voordeel</a><a class="btn btn--onDark" href="#offerte">Vraag advies aan</a></div>
+    <div class="pagehero__tekst">
+      <p class="eyebrow">Opslaan</p>
+      <h1>Sla je zonne-energie op</h1>
+      <p class="lede">Met een thuisbatterij gebruik je de stroom van vandaag vanavond zelf: meer eigen verbruik, minder terugleverkosten en licht in huis bij een stroomstoring. Benieuwd wat voor een batterij bij u zou passen? Vraag dan direct om gratis advies via de knop hieronder.</p>
+      <div class="pagehero__actions"><a class="btn btn--onDark" href="#offerte">Gratis advies</a></div>
+    </div>
+    <!-- Foto hier vervangen: zet het juiste bestand in assets/foto/ en pas
+         alleen de src en de alt-tekst hieronder aan. -->
+    <figure class="pagehero__foto">
+      <img src="assets/foto/thuisbatterij.jpg" alt="Thuisbatterij in een technische ruimte" width="1600" height="1200" loading="eager">
+    </figure>
   </div>
 </section>
 
@@ -176,20 +147,16 @@
       <div>
         <p class="eyebrow">Thuisbatterij</p>
         <h2 id="thuisbatterij">Een batterij die past bij jouw verbruik</h2>
-        <p class="lede" style="margin-top:16px">Modulair uit te breiden, zodat je begint met wat je nodig hebt en later bijplaatst. Jullix bepaalt automatisch wanneer laden en ontladen het meest oplevert.</p>
+        <p class="lede" style="margin-top:16px">Perfecte manier om verloren zonnestroom op te slaan en te gebruiken wanneer de zon er niet meer is. Eventueel modulair uitbreidbaar, zodat er altijd mogelijkheid is tot uitbreiding. Ons EMS-systeem bepaalt automatisch wanneer laden en ontladen het meest oplevert.</p>
         <ul class="check">
-          <li>Modulair van 5 tot 20 kWh</li>
-          <li>Slim laden en ontladen via Jullix</li>
+          <li>Klaar voor de salderingsregeling</li>
+          <li>Geen verloren zonnestroom</li>
+          <li>Slim laden en ontladen via EMS</li>
           <li>Werkt samen met dynamische stroom</li>
-          <li>Klaar voor het einde van de salderingsregeling</li>
+          <li>Modulair van 5 tot 25 kWh</li>
         </ul>
-        <div class="prod__spec">
-          <div><strong>5&ndash;20 kWh</strong><span>modulair</span></div>
-          <div><strong>10 jr</strong><span>productgarantie</span></div>
-          <div><strong>1 dag</strong><span>installatie</span></div>
-        </div>
         <div class="prod__actions">
-          <a class="btn" href="#offerte">Vraag advies aan</a>
+          <a class="btn" href="#offerte">Gratis advies</a>
           <a class="btn btn--ghost" href="/#jullix">Over Jullix</a>
         </div>
       </div>
@@ -201,32 +168,17 @@
       </div>
       <div>
         <p class="eyebrow">Noodstroom</p>
-        <h2 id="noodstroom">Licht en internet blijven aan bij stroomuitval</h2>
-        <p class="lede" style="margin-top:16px">Met de noodstroomfunctie schakelt je huis over op je eigen opgeslagen energie. Je belangrijkste groepen blijven werken: verlichting, koelkast, router en cv.</p>
+        <h2 id="noodstroom">Licht en internet behouden tijdens een stroomuitval</h2>
+        <p class="lede" style="margin-top:16px">Met onze noodstroominstallatie schakelt je huis bij een stroomuitval automatisch over op je eigen opgeslagen energie. Zo blijven de belangrijkste groepen werken: verlichting, koelkast, router en cv. Dat is bovendien per persoon aan te passen.</p>
         <ul class="check">
-          <li>Automatisch overschakelen bij uitval</li>
-          <li>Zelf te kiezen welke groepen doorlopen</li>
-          <li>Overdag vult de zon de batterij weer aan</li>
+          <li>Automatische overschakeling bij uitval</li>
+          <li>Zelf kiezen welke groepen doorlopen</li>
+          <li>Overdag vult de zon de batterij aan</li>
         </ul>
         <div class="prod__actions">
-          <a class="btn" href="#offerte">Vraag advies aan</a>
+          <a class="btn" href="#offerte">Gratis advies</a>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CTA ============ -->
-<section class="cta" id="offerte">
-  <div class="shell cta__inner">
-    <div>
-      <p class="eyebrow">Gratis en vrijblijvend</p>
-      <h2>Wil je weten welke batterij bij je past?</h2>
-      <p>We kijken naar je verbruik, je opwek en je meterkast, en rekenen door wat het oplevert.</p>
-    </div>
-    <div class="cta__actions">
-      <a class="btn" href="mailto:info@nuzon.nl">Vraag gratis advies aan</a>
-      <a class="btn btn--onDark" href="tel:+31307816767">030 781 6767</a>
     </div>
   </div>
 </section>
@@ -304,7 +256,7 @@
   </svg>
 </a>
 
-<script src="js/site.js?v=12"></script>
+<script src="js/site.js?v=13"></script>
 <script src="js/funnel.js?v=1"></script>
 
 </body>

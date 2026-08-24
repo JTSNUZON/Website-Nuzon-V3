@@ -9,8 +9,9 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 40'%3E%3Crect width='48' height='40' rx='9' fill='%23201E1D'/%3E%3Cg transform='translate(0,-4.4)' fill='none' stroke='%23C08C1C' stroke-width='3.4' stroke-linecap='round'%3E%3Cpath d='M16.8 34 A7.2 7.2 0 0 1 31.2 34 Z' fill='%23C08C1C' stroke='none'/%3E%3Cline x1='33.96' y1='28.25' x2='39.16' y2='25.25'/%3E%3Cline x1='29.75' y1='24.04' x2='32.75' y2='18.85'/%3E%3Cline x1='24' y1='22.5' x2='24' y2='16.5'/%3E%3Cline x1='18.25' y1='24.04' x2='15.25' y2='18.85'/%3E%3Cline x1='14.04' y1='28.25' x2='8.84' y2='25.25'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/site.css?v=12">
+<link media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css?v=13">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
 </head>
 <body>
 
@@ -57,7 +58,6 @@
 
     <nav class="nav" aria-label="Hoofdmenu">
       <button id="megaBtn" aria-expanded="false" aria-controls="mega">Wat wij doen<span class="caret">&#9662;</span></button>
-      <button id="prodBtn" type="button" class="hide-sm" aria-expanded="false" aria-controls="prodMega">Producten<span class="caret">&#9662;</span></button>
       <a href="/#besparen" class="hide-sm">Besparen</a>
       <a href="/#reviews" class="hide-sm">Reviews</a>
       <a href="/ons-verhaal" class="hide-sm">Ons verhaal</a>
@@ -99,56 +99,20 @@
           <h4><a href="/laden-en-stroom">Laden &amp; stroom &#8594;</a></h4>
           <ul>
             <li><a href="/laden-en-stroom#laadpaal">Laadpaal</a></li>
+            <li><a href="/laden-en-stroom#dynamische-stroom">Dynamische stroom</a></li>
           </ul>
         </div>
         <div>
-          <h4><a href="/zakelijk">Zakelijk &#8594;</a></h4>
+          <h4><a href="/zakelijk">Zakelijk of particulier &#8594;</a></h4>
           <ul>
             <li><a href="/zakelijk">Zakelijk overzicht</a></li>
-            <li><a href="/batterijopslag-zakelijk">Batterijopslag</a></li>
+            <li><a href="/">Particulier overzicht</a></li>
           </ul>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Tweede paneel: dezelfde schuifbeweging als hierboven, maar met de
-       producten zelf in plaats van de vier hoofdstukken. -->
-  <div class="mega mega--prod" id="prodMega" data-open="false">
-    <div class="mega__inner">
-      <div class="mega__grid">
-        <div>
-          <h4><a href="/opwekken">Zonnepanelen &#8594;</a></h4>
-          <ul>
-            <li><a href="/opwekken#zonnepanelen">Full-black panelen</a></li>
-            <li><a href="/zakelijk">Panelen op bedrijfsdak</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4><a href="/opslaan">Thuisbatterij &#8594;</a></h4>
-          <ul>
-            <li><a href="/opslaan#thuisbatterij">Batterij bij je verbruik</a></li>
-            <li><a href="/opslaan#noodstroom">Noodstroom</a></li>
-            <li><a href="/batterijopslag-zakelijk">Batterijopslag zakelijk</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4><a href="/laden-en-stroom">Laden &amp; stroom &#8594;</a></h4>
-          <ul>
-            <li><a href="/laden-en-stroom#laadpaal">Laadpaal</a></li>
-            <li><a href="/laden-en-stroom">Dynamisch contract</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4><a href="/#jullix">Slim energiebeheer &#8594;</a></h4>
-          <ul>
-            <li><a href="/#jullix">Jullix energiebeheer</a></li>
-            <li><a href="/#besparen">Bereken je voordeel</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
 </header>
 
 <div class="shell">
@@ -158,39 +122,57 @@
   </nav>
 </div>
 
-<section class="pagehero">
+<section class="pagehero pagehero--metFoto">
   <div class="shell pagehero__inner">
-    <p class="eyebrow">Opwekken</p>
-    <h1>Wek je eigen stroom op</h1>
-    <p class="lede">Premium full-black zonnepanelen, vakkundig ge&iuml;nstalleerd in &eacute;&eacute;n dag door onze eigen monteurs. Maximale opbrengst, een strak dak en 25 jaar opbrengstgarantie.</p>
-    <div class="pagehero__actions"><a class="btn" href="/#besparen">Bereken mijn voordeel</a><a class="btn btn--onDark" href="#offerte">Plan een dakcheck</a></div>
+    <div class="pagehero__tekst">
+      <p class="eyebrow">Opwekken</p>
+      <h1>Wek je eigen stroom op</h1>
+      <p class="lede">Vakkundige zonne-installatie door eigen monteurs voor maximale opbrengst en nette installatie.</p>
+      <div class="pagehero__actions"><a class="btn" href="/#besparen">Bereken mijn voordeel</a><a class="btn btn--onDark" href="#offerte">Plan een dakcheck</a></div>
+    </div>
+    <!-- TIJDELIJK: dit is foto 1 nog niet. Zet het bestand in assets/foto/ en
+         pas alleen de src en de alt-tekst hieronder aan. -->
+    <figure class="pagehero__foto">
+      <img src="assets/reviews/damen-zonnepanelen.jpg" alt="Monteurs plaatsen zonnepanelen op een pannendak" width="1600" height="1200" loading="eager">
+    </figure>
   </div>
 </section>
 
 <section class="section">
   <div class="shell">
     <div class="prod">
-      <div class="prod__media">
-        <img src="assets/foto/zonnepanelen.jpg" alt="Zonnepanelen op een Nederlandse woning" loading="lazy">
+      <div class="prod__media fotoslider" data-slider>
+        <!-- De eerste foto is de bestaande. De vier daarna zijn TIJDELIJK
+             ingevuld met bestaande sitefoto's; vervang ze door foto 2 t/m 5. -->
+        <div class="fotoslider__spoor">
+          <img src="assets/foto/zonnepanelen.jpg" alt="Zonnepanelen op een Nederlandse woning" loading="lazy">
+          <img src="assets/reviews/damen-zonnepanelen.jpg" alt="Monteurs plaatsen zonnepanelen terug op een pannendak" loading="lazy">
+          <img src="assets/reviews/de-weger-dakwerk.jpg" alt="Monteurs aan het werk op dak en nok" loading="lazy">
+          <img src="assets/hero/hero-eindbeeld.jpg" alt="Installatie van Nuzon in bedrijf" loading="lazy">
+          <img src="assets/reviews/willekens-omvormer.jpg" alt="Omvormer netjes weggewerkt naast de cv-ketel" loading="lazy">
+        </div>
+        <button type="button" class="fotoslider__pijl fotoslider__pijl--vorige" aria-label="Vorige foto">&#8249;</button>
+        <button type="button" class="fotoslider__pijl fotoslider__pijl--volgende" aria-label="Volgende foto">&#8250;</button>
+        <div class="fotoslider__bolletjes" role="tablist" aria-label="Foto kiezen"></div>
       </div>
       <div>
         <p class="eyebrow">Zonnepanelen</p>
-        <h2 id="zonnepanelen">Full-black panelen die opvallen door n&iacute;et op te vallen</h2>
-        <p class="lede" style="margin-top:16px">Wij leggen premium full-black panelen: zwart frame, zwarte achterplaat, geen zichtbare cellijnen. Ze halen een hoog rendement per vierkante meter, dus je hebt er minder nodig voor dezelfde opbrengst.</p>
+        <h2 id="zonnepanelen">Duurzaam stroom opwekken met de kracht van de zon</h2>
+        <p class="lede" style="margin-top:16px">Sinds 2014 installeren wij zonnepanelen voor woningen en bedrijven. Met een goed afgestemde installatie wekt u zelf duurzame energie op en verlaagt u uw energiekosten.</p>
         <ul class="check">
-          <li>Tot 450 Wp per paneel</li>
-          <li>Montage doorgaans binnen &eacute;&eacute;n werkdag</li>
-          <li>Inclusief monitoring van je opbrengst</li>
-          <li>Aanmelding bij je netbeheerder regelen wij</li>
+          <li>Tot 500 Wp per paneel</li>
+          <li>Montage doorgaans binnen &eacute;&eacute;n werkdag (particulier)</li>
+          <li>Inclusief opbrengstmonitoring</li>
+          <li>Micro-omvormers mogelijk bij schaduw</li>
+          <li>Persoonlijk advies en professionele installatie</li>
         </ul>
-        <div class="prod__spec">
-          <div><strong>25 jr</strong><span>opbrengstgarantie</span></div>
-          <div><strong>10 jr</strong><span>productgarantie</span></div>
-          <div><strong>1 dag</strong><span>installatie</span></div>
+        <p class="prod__slot">Haal meer uit de zon en uit uw dak.</p>
+        <div class="prod__spec prod__spec--twee">
+          <div><strong>Garantie</strong><span>zie pdf</span></div>
+          <div><strong>10.000+</strong><span>ge&iuml;nstalleerde panelen</span></div>
         </div>
         <div class="prod__actions">
-          <a class="btn" href="#offerte">Vraag advies aan</a>
-          <a class="btn btn--ghost" href="/#besparen">Bereken je voordeel</a>
+          <a class="btn" href="#offerte">Gratis advies</a>
         </div>
       </div>
     </div>
@@ -202,29 +184,14 @@
     <div class="section__head">
       <div>
         <p class="eyebrow">Waarom nu</p>
-        <h2>Vier goede redenen om over te stappen</h2>
+        <h2>Vier redenen om zonnepanelen te nemen</h2>
       </div>
     </div>
     <div class="usps">
       <article class="usp"><span class="num">01</span><h3>Lagere energierekening</h3><p>Je wekt overdag je eigen stroom op en koopt minder in bij je leverancier.</p></article>
       <article class="usp"><span class="num">02</span><h3>Meer waarde voor je woning</h3><p>Een installatie met garantie telt mee in het energielabel van je huis.</p></article>
       <article class="usp"><span class="num">03</span><h3>Duurzaam en onafhankelijk</h3><p>Minder afhankelijk van prijsschommelingen op de energiemarkt.</p></article>
-      <article class="usp"><span class="num">04</span><h3>Klaar voor de toekomst</h3><p>Je panelen werken straks samen met batterij, laadpaal en warmtepomp.</p></article>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CTA ============ -->
-<section class="cta" id="offerte">
-  <div class="shell cta__inner">
-    <div>
-      <p class="eyebrow">Gratis en vrijblijvend</p>
-      <h2>Benieuwd wat jouw dak kan?</h2>
-      <p>E&eacute;n gesprek, een eerlijke berekening en een plan dat klopt. Geen verkoper aan de deur.</p>
-    </div>
-    <div class="cta__actions">
-      <a class="btn" href="mailto:info@nuzon.nl">Vraag gratis advies aan</a>
-      <a class="btn btn--onDark" href="tel:+31307816767">030 781 6767</a>
+      <article class="usp"><span class="num">04</span><h3>Klaar voor de toekomst</h3><p>Je panelen kunnen in de toekomst samenwerken met batterij, laadpaal en warmtepomp.</p></article>
     </div>
   </div>
 </section>
@@ -302,7 +269,7 @@
   </svg>
 </a>
 
-<script src="js/site.js?v=12"></script>
+<script src="js/site.js?v=13"></script>
 <script src="js/funnel.js?v=1"></script>
 
 </body>

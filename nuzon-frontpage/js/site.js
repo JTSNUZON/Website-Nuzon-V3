@@ -143,6 +143,42 @@ var WHATSAPP_BERICHT = "Hallo Nuzon, ik heb een vraag over ";
     window.addEventListener('scroll', volgScroll, { passive:true });
   }
 
+  /* ---- fotoslider ----
+     Het spoor scrollt horizontaal met scroll-snap; de pijlen schuiven een
+     hele foto op en de bolletjes volgen wat er in beeld staat. */
+  document.querySelectorAll('[data-slider]').forEach(function(sl){
+    var spoor = sl.querySelector('.fotoslider__spoor');
+    var fotos = spoor.querySelectorAll('img');
+    var bak   = sl.querySelector('.fotoslider__bolletjes');
+    if(fotos.length < 2){
+      sl.querySelectorAll('.fotoslider__pijl').forEach(function(b){ b.hidden = true; });
+      return;
+    }
+    var bolletjes = [];
+    fotos.forEach(function(_, i){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('role', 'tab');
+      b.setAttribute('aria-label', 'Foto ' + (i + 1));
+      b.addEventListener('click', function(){ naar(i); });
+      bak.appendChild(b);
+      bolletjes.push(b);
+    });
+    function huidige(){ return Math.round(spoor.scrollLeft / spoor.clientWidth); }
+    function naar(i){
+      var n = (i + fotos.length) % fotos.length;
+      spoor.scrollTo({ left: n * spoor.clientWidth, behavior: 'smooth' });
+    }
+    function markeer(){
+      var n = huidige();
+      bolletjes.forEach(function(b, i){ b.setAttribute('aria-selected', i === n ? 'true' : 'false'); });
+    }
+    sl.querySelector('.fotoslider__pijl--vorige').addEventListener('click', function(){ naar(huidige() - 1); });
+    sl.querySelector('.fotoslider__pijl--volgende').addEventListener('click', function(){ naar(huidige() + 1); });
+    spoor.addEventListener('scroll', markeer, { passive:true });
+    markeer();
+  });
+
   /* ---- jaartal in de footer ---- */
   var jaar = document.getElementById('jaar');
   if(jaar) jaar.textContent = new Date().getFullYear();

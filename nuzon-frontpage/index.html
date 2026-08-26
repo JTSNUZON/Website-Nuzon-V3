@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/site.css?v=20">
+<link rel="stylesheet" href="css/site.css?v=21">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
 </head>
 <body class="has-hero">
@@ -116,8 +116,28 @@
 <section class="hero" aria-label="Nuzon — zonne-energie en thuisbatterijen">
   <div class="hero__media" aria-hidden="true">
     <img class="hero__still" src="assets/hero/hero-eindbeeld.jpg" alt="" width="1600" height="900" fetchpriority="high">
-    <video class="hero__video" id="heroVideo" muted playsinline preload="none"
-           poster="assets/hero/hero-eindbeeld.jpg" tabindex="-1" disablepictureinpicture></video>
+    <video class="hero__video" id="heroVideo" muted playsinline preload="auto"
+           poster="assets/hero/hero-eindbeeld.jpg" tabindex="-1" disablepictureinpicture>
+      <!-- De bronnen staan hier en niet in het script, zodat de browser al
+           begint te laden terwijl hij de pagina leest. Op een telefoon de
+           kleine versie; de webm is er voor browsers zonder H.264 (Chromium
+           en Firefox op Linux spelen de mp4 anders helemaal niet af). -->
+      <source src="assets/hero/hero-mobiel.mp4" type='video/mp4; codecs="avc1.640028"' media="(max-width:720px)">
+      <source src="assets/hero/hero.mp4" type='video/mp4; codecs="avc1.640032"'>
+      <source src="assets/hero/hero.webm" type='video/webm; codecs="vp9"'>
+    </video>
+    <script>
+      /* Wie 'beperkte beweging' aan heeft staan krijgt alleen de
+         stilstaande foto. Dit scriptje staat hier en niet onderaan de
+         pagina, want dan was de video al binnengehaald. */
+      if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches){
+        var nzVideo = document.getElementById('heroVideo');
+        while(nzVideo.firstChild) nzVideo.removeChild(nzVideo.firstChild);
+        nzVideo.preload = 'none';
+        nzVideo.removeAttribute('poster');
+        nzVideo.load();
+      }
+    </script>
   </div>
   <div class="hero__scrim" aria-hidden="true"></div>
 
@@ -437,7 +457,7 @@
   </svg>
 </a>
 
-<script src="js/site.js?v=20"></script>
+<script src="js/site.js?v=21"></script>
 <script src="js/funnel.js?v=1"></script>
 <script>
 /* =====================================================================
@@ -522,7 +542,7 @@ var REVIEWS = [
 
   /* Tweede noodrem, voor de video zelf. Het startsein komt van het
      introscherm in site.js; blijft dat uit (oud script uit de cache, een
-     fout daarboven), dan zou de video nooit beginnen. Na 3,5s pakken we
+     fout daarboven), dan zou de video nooit beginnen. Na 2s pakken we
      het hier zelf op. */
   setTimeout(function(){
     if(magSpelen) return;
@@ -532,7 +552,7 @@ var REVIEWS = [
     document.documentElement.style.overflow = '';
     magSpelen = true;
     startVideo(true);
-  }, 3500);
+  }, 2000);
 
   document.addEventListener('nuzon:intro-klaar', function(){
     magSpelen = true;
@@ -563,30 +583,30 @@ var REVIEWS = [
 
   try{
     if(video && !reduce){
-      var mobiel = window.matchMedia('(max-width: 720px)').matches;
-      var bron = document.createElement('source');
-      bron.src  = mobiel ? 'assets/hero/hero-mobiel.mp4' : 'assets/hero/hero.mp4';
-      bron.type = 'video/mp4';
-      video.appendChild(bron);
-
+      /* De bronnen staan in de html, dus de browser is al aan het laden.
+         load() zou dat overnieuw doen; niet aanroepen dus. */
       // Autoplay lukt alleen gegarandeerd als het element écht muted is;
       // het attribuut alleen is niet altijd genoeg na een herlaadbeurt.
       video.muted = true;
       video.playsInline = true;
-      video.preload = 'auto';
-      video.load();
 
       function toonVideo(){ video.classList.add('is-on'); }
       if(video.readyState >= 2){ toonVideo(); }
       else { video.addEventListener('loadeddata', toonVideo, { once:true }); }
 
-      // Beeld binnen? Dan mag het introscherm weg; de logo-animatie
-      // krijgt eerst even de tijd om af te lopen.
-      video.addEventListener('loadeddata', function(){
+      /* Beeld binnen? Dan mag het introscherm weg en begint de video van
+         voren af aan. Wel een ondergrens: de logo-opbouw duurt ongeveer
+         0,7s, en op een snelle verbinding is de video daar eerder klaar
+         mee dan het logo. Zonder die grens flitst het merk voorbij. */
+      var LOGO_MINIMAAL = 850;
+      function introWeg(){
+        var nu = (window.performance && performance.now) ? performance.now() : LOGO_MINIMAAL;
         setTimeout(function(){
           if(window.nuzonSluitIntro) window.nuzonSluitIntro();
-        }, 1200);
-      }, { once:true });
+        }, Math.max(120, LOGO_MINIMAAL - nu));
+      }
+      if(video.readyState >= 2){ introWeg(); }
+      else { video.addEventListener('loadeddata', introWeg, { once:true }); }
 
       /* In beeld = van voren af aan afspelen, uit beeld = pauze.
 

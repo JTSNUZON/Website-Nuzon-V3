@@ -365,7 +365,7 @@ body.has-hero .topbar:not(.is-scrolled):not(:has(.mega[data-open="true"])) .nav 
   position:fixed; inset:0; z-index:200;
   display:grid; place-items:center;
   background:var(--merk-inkt);
-  transition:opacity .7s ease, transform .9s cubic-bezier(.4,0,.2,1);
+  transition:opacity .45s ease, transform .6s cubic-bezier(.4,0,.2,1);
 }
 .intro__logo{ --logo-breedte:min(300px,62vw); }
 /* Het introscherm heeft altijd de donkere ondergrond, dus het logo hoort
@@ -379,14 +379,14 @@ body.has-hero .topbar:not(.is-scrolled):not(:has(.mega[data-open="true"])) .nav 
    dan haalt niemand dit scherm weg en staart de bezoeker naar een zwart
    vlak. Deze animatie doet dat na 4 seconden alsnog, puur in CSS. */
 @keyframes introNoodrem{ to{ opacity:0; visibility:hidden; pointer-events:none; } }
-.intro{ animation:introNoodrem 0s linear 4s forwards; }
+.intro{ animation:introNoodrem 0s linear 2.6s forwards; }
 
 @keyframes introOp{ from{ opacity:0; transform:translateY(12px); } to{ opacity:1; transform:none; } }
 @keyframes introLijn{ from{ transform:scaleX(0); } to{ transform:scaleX(1); } }
-.intro .logo__zon{  animation:introOp .55s .05s both ease-out; }
-.intro .logo__naam{ animation:introOp .55s .20s both ease-out; }
-.intro .logo__lijn{ animation:introLijn .5s .40s both cubic-bezier(.4,0,.2,1); transform-origin:left center; }
-.intro .logo__tag{  animation:introOp .55s .52s both ease-out; }
+.intro .logo__zon{  animation:introOp .38s .02s both ease-out; }
+.intro .logo__naam{ animation:introOp .38s .12s both ease-out; }
+.intro .logo__lijn{ animation:introLijn .34s .24s both cubic-bezier(.4,0,.2,1); transform-origin:left center; }
+.intro .logo__tag{  animation:introOp .38s .32s both ease-out; }
 
 /* Wie beweging heeft uitgezet krijgt het scherm helemaal niet te zien;
    het script haalt het dan ook meteen weg. */

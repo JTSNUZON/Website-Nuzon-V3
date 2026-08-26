@@ -41,7 +41,7 @@ var WHATSAPP_BERICHT = "Hallo Nuzon, ik heb een vraag over ";
       intro.classList.add('is-weg');
       setTimeout(function(){
         if(intro && intro.parentNode) intro.parentNode.removeChild(intro);
-      }, 1000);
+      }, 700);   // even lang als het wegschuiven in de css duurt
     }
     document.dispatchEvent(new CustomEvent('nuzon:intro-klaar'));
   }
@@ -58,7 +58,7 @@ var WHATSAPP_BERICHT = "Hallo Nuzon, ik heb een vraag over ";
       document.documentElement.style.overflow = 'hidden';
       // Noodrem: het scherm gaat hoe dan ook open. Pagina's met de
       // hero-video krijgen wat langer, want die wachten op het beeld.
-      setTimeout(sluitIntro, document.body.classList.contains('has-hero') ? 2400 : 1200);
+      setTimeout(sluitIntro, document.body.classList.contains('has-hero') ? 1300 : 900);
     }
   }
 

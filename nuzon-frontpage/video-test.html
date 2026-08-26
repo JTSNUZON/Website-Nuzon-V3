@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Videotest &mdash; Nuzon</title>
+<style>
+  body{ margin:0; padding:24px; background:#161208; color:#E8E1D3;
+        font:16px/1.6 system-ui, -apple-system, sans-serif; }
+  main{ max-width:760px; margin-inline:auto; }
+  h1{ font-size:1.4rem; margin:0 0 6px; color:#fff; }
+  p.uitleg{ color:#B0A794; margin:0 0 22px; }
+  .uitslag{ border:1px solid rgba(255,255,255,.16); border-radius:8px; padding:16px 18px; margin-bottom:18px; }
+  .uitslag h2{ font-size:1rem; margin:0 0 10px; color:#FAC61F; letter-spacing:.04em; text-transform:uppercase; }
+  table{ width:100%; border-collapse:collapse; }
+  td{ padding:7px 0; border-bottom:1px solid rgba(255,255,255,.09); vertical-align:top; }
+  td:first-child{ color:#B0A794; width:46%; padding-right:14px; }
+  td:last-child{ font-weight:600; }
+  .ja{ color:#69D07E; } .nee{ color:#FF8A73; }
+  video{ width:100%; max-width:420px; border-radius:6px; background:#000; }
+  button{ font:inherit; font-weight:600; padding:12px 18px; border:0; border-radius:5px;
+          background:#C8941B; color:#14110A; cursor:pointer; margin-top:8px; }
+  textarea{ width:100%; height:160px; margin-top:12px; background:#0F0C06; color:#E8E1D3;
+            border:1px solid rgba(255,255,255,.18); border-radius:6px; padding:10px; font:13px/1.5 monospace; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Videotest</h1>
+  <p class="uitleg">Deze pagina probeert de herovideo af te spelen en schrijft op wat er gebeurt.
+     Laat 'm een paar tellen staan en stuur daarna de tekst uit het vak onderaan door.</p>
+
+  <div class="uitslag">
+    <h2>Wat er gebeurt</h2>
+    <table id="uitslag"></table>
+  </div>
+
+  <div class="uitslag">
+    <h2>De video zelf</h2>
+    <video id="test" muted playsinline preload="auto" controls>
+      <source src="assets/hero/hero-mobiel.mp4" type='video/mp4; codecs="avc1.640028"' media="(max-width:720px)">
+      <source src="assets/hero/hero.mp4" type='video/mp4; codecs="avc1.640032"'>
+      <source src="assets/hero/hero.webm" type='video/webm; codecs="vp9"'>
+    </video>
+    <p class="uitleg" style="margin:12px 0 0">Speelt hij hier wel als je zelf op afspelen drukt?
+       Dan ligt het niet aan het bestand, maar aan het automatisch starten.</p>
+  </div>
+
+  <button type="button" id="kopieer">Kopieer het rapport</button>
+  <textarea id="rapport" readonly></textarea>
+</main>
+
+<script>
+(function(){
+  var v = document.getElementById('test');
+  var tabel = document.getElementById('uitslag');
+  var regels = [];
+
+  function proef(naam, waarde, goed){
+    regels.push([naam, waarde, goed]);
+    var tr = tabel.insertRow();
+    tr.insertCell().textContent = naam;
+    var c = tr.insertCell();
+    c.textContent = waarde;
+    if(goed === true) c.className = 'ja';
+    if(goed === false) c.className = 'nee';
+  }
+
+  var proefEl = document.createElement('video');
+  function kan(type){ return proefEl.canPlayType(type) || 'nee'; }
+
+  var minderBeweging = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  proef('Browser', navigator.userAgent);
+  proef('Schermbreedte', window.innerWidth + ' px');
+  proef('Minder beweging aangevraagd', minderBeweging ? 'JA — dit zet de herovideo uit' : 'nee',
+        minderBeweging ? false : true);
+  proef('Kan mp4 (H.264) spelen', kan('video/mp4; codecs="avc1.640032"'),
+        kan('video/mp4; codecs="avc1.640032"') !== 'nee');
+  proef('Kan mp4 los van het profiel', kan('video/mp4'), kan('video/mp4') !== 'nee');
+  proef('Kan webm (VP9) spelen', kan('video/webm; codecs="vp9"'),
+        kan('video/webm; codecs="vp9"') !== 'nee');
+  if(navigator.getAutoplayPolicy){
+    try{ proef('Automatisch starten toegestaan', navigator.getAutoplayPolicy('mediaelement')); }catch(e){}
+  }
+  if(navigator.connection && navigator.connection.saveData){
+    proef('Databesparing aan', 'JA — browsers laden dan geen video vooraf', false);
+  }
+
+  var gekozen = tabel.insertRow(); gekozen.insertCell().textContent = 'Gekozen bestand';
+  var gekozenC = gekozen.insertCell(); gekozenC.textContent = '(nog niets)';
+  var standRij = tabel.insertRow(); standRij.insertCell().textContent = 'Speelt hij vanzelf';
+  var standC = standRij.insertCell(); standC.textContent = '(nog aan het proberen)';
+  var foutRij = tabel.insertRow(); foutRij.insertCell().textContent = 'Foutmelding';
+  var foutC = foutRij.insertCell(); foutC.textContent = 'geen';
+
+  /* Een <source> die overgeslagen wordt geeft ook een error; dat is geen
+     probleem zolang een van de andere bronnen het wel doet. Die noteren we
+     apart, en de foutregel vullen we pas aan het eind. */
+  var overgeslagen = [];
+  [].forEach.call(v.querySelectorAll('source'), function(s){
+    s.addEventListener('error', function(){ overgeslagen.push(s.src.split('/').pop()); });
+  });
+
+  var p = v.play();
+  var geweigerd = '';
+  if(p && p.catch){ p.catch(function(err){ geweigerd = err && err.name ? err.name + ': ' + err.message : 'geweigerd'; }); }
+
+  setTimeout(function(){
+    gekozenC.textContent = (v.currentSrc || '(geen)').split('/').pop();
+    gekozenC.className = v.currentSrc ? 'ja' : 'nee';
+    var loopt = v.currentTime > 0.1 && !v.paused;
+    standC.textContent = loopt ? ('ja — staat op ' + v.currentTime.toFixed(1) + ' s')
+                               : ('nee' + (geweigerd ? ' (' + geweigerd + ')' : '') + ', stand ' + v.currentTime.toFixed(1) + ' s');
+    standC.className = loopt ? 'ja' : 'nee';
+    if(v.error){
+      foutC.textContent = 'code ' + v.error.code + (v.error.message ? ' — ' + v.error.message : '');
+      foutC.className = 'nee';
+    } else if(v.networkState === 3 || !v.currentSrc){
+      foutC.textContent = 'geen enkele bron bruikbaar'; foutC.className = 'nee';
+    } else if(overgeslagen.length){
+      foutC.textContent = 'geen (overgeslagen: ' + overgeslagen.join(', ') + ')';
+    }
+
+    var uit = regels.map(function(r){ return r[0] + ': ' + r[1]; });
+    uit.push('Gekozen bestand: ' + gekozenC.textContent);
+    uit.push('Speelt vanzelf: ' + standC.textContent);
+    uit.push('Foutmelding: ' + foutC.textContent);
+    uit.push('readyState: ' + v.readyState + ', networkState: ' + v.networkState);
+    document.getElementById('rapport').value = uit.join('\n');
+  }, 3000);
+
+  document.getElementById('kopieer').addEventListener('click', function(){
+    var t = document.getElementById('rapport');
+    t.select();
+    try{ document.execCommand('copy'); this.textContent = 'Gekopieerd'; }
+    catch(e){ this.textContent = 'Selecteer de tekst hieronder en kopieer die'; }
+  });
+})();
+</script>
+</body>
+</html>

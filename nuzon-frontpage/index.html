@@ -590,6 +590,29 @@ var REVIEWS = [
       video.muted = true;
       video.playsInline = true;
 
+      /* Vangnet voor de codec-eis in de bronnen hierboven. Zegt een browser
+         "dat profiel ken ik niet" terwijl hij het bestand best had kunnen
+         spelen, dan blijft er niets over. Gebeurt dat, dan proberen we
+         dezelfde bestanden nog een keer zonder die eis. */
+      function ruimeBronnen(){
+        if(video.dataset.ruim) return;
+        video.dataset.ruim = '1';
+        var mobiel = window.matchMedia('(max-width: 720px)').matches;
+        while(video.firstChild) video.removeChild(video.firstChild);
+        [[mobiel ? 'assets/hero/hero-mobiel.mp4' : 'assets/hero/hero.mp4', 'video/mp4'],
+         ['assets/hero/hero.webm', 'video/webm']].forEach(function(b){
+          var s = document.createElement('source');
+          s.src = b[0]; s.type = b[1];
+          video.appendChild(s);
+        });
+        video.load();
+        startVideo(true);
+      }
+      video.addEventListener('error', ruimeBronnen, true);   // ook van de <source>-elementen
+      setTimeout(function(){
+        if(video.networkState === 3 || (video.readyState === 0 && !video.currentSrc)) ruimeBronnen();
+      }, 1500);
+
       function toonVideo(){ video.classList.add('is-on'); }
       if(video.readyState >= 2){ toonVideo(); }
       else { video.addEventListener('loadeddata', toonVideo, { once:true }); }

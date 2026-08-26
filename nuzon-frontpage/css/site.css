@@ -256,7 +256,7 @@ body.has-hero .topbar:not(.is-scrolled):not(:has(.mega[data-open="true"])) .nav 
 }
 .mega__inner{ overflow:hidden; min-height:0; }
 .mega__grid{
-  display:grid; grid-template-columns:repeat(4,1fr); gap:34px;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:34px;
   max-width:var(--shell); margin-inline:auto; padding:34px var(--pad) 40px;
   transform:translateY(-100%);
   transition:transform var(--mega-tijd) var(--mega-easing);

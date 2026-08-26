@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/site.css?v=14">
+<link rel="stylesheet" href="css/site.css?v=15">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
 </head>
 <body>
@@ -122,20 +122,31 @@
   </nav>
 </div>
 
-<section class="pagehero">
+<section class="pagehero pagehero--metFoto">
   <div class="shell pagehero__inner">
-    <p class="eyebrow">Laden &amp; stroom</p>
-    <h1>Laad je auto op je eigen zon</h1>
-    <p class="lede">Een slimme laadpaal die automatisch laadt op het overschot van je panelen of op het laagste uurtarief. Aangestuurd door Jullix, ge&iuml;nstalleerd door eigen monteurs. Klaar om slim te laden?</p>
-    <div class="pagehero__actions"><a class="btn btn--onDark" href="#offerte">Gratis advies</a></div>
+    <div class="pagehero__tekst">
+      <p class="eyebrow">Laden &amp; stroom</p>
+      <h1>Laad je auto op je eigen zon</h1>
+      <p class="lede">Een slimme laadpaal die automatisch laadt op het overschot van je panelen of op het laagste uurtarief. Aangestuurd door Jullix, ge&iuml;nstalleerd door eigen monteurs. Klaar om slim te laden?</p>
+      <div class="pagehero__actions"><a class="btn btn--onDark" href="#offerte">Gratis advies</a></div>
+    </div>
+    <figure class="pagehero__foto pagehero__foto--staand">
+      <img src="assets/foto/laadpaal-jannes.jpg" alt="Monteur van Nuzon bij een ge&iuml;nstalleerde laadpaal" width="1200" height="1600" loading="eager">
+    </figure>
   </div>
 </section>
 
 <section class="section">
   <div class="shell">
     <div class="prod">
-      <div class="prod__media">
-        <img src="assets/foto/dynamische-stroom.jpg" alt="Grafiek met het verloop van de energieprijs per uur" loading="lazy">
+      <div class="prod__media fotoslider" data-slider>
+        <div class="fotoslider__spoor">
+          <img src="assets/foto/laadpaal-hout.jpg" alt="Laadpaal van Nuzon gemonteerd op een houten gevel" loading="lazy">
+          <img src="assets/foto/laadpaal-peblar.jpg" alt="Peblar-laadpaal, ge&iuml;nstalleerd door Nuzon" loading="lazy">
+        </div>
+        <button type="button" class="fotoslider__pijl fotoslider__pijl--vorige" aria-label="Vorige foto">&#8249;</button>
+        <button type="button" class="fotoslider__pijl fotoslider__pijl--volgende" aria-label="Volgende foto">&#8250;</button>
+        <div class="fotoslider__bolletjes" role="tablist" aria-label="Foto kiezen"></div>
       </div>
       <div>
         <p class="eyebrow">Laadpaal</p>
@@ -250,7 +261,7 @@
   </svg>
 </a>
 
-<script src="js/site.js?v=14"></script>
+<script src="js/site.js?v=15"></script>
 <script src="js/funnel.js?v=1"></script>
 
 </body>

@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/site.css?v=21">
+<link rel="stylesheet" href="css/site.css?v=22">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
 </head>
 <body class="has-hero">
@@ -194,13 +194,13 @@
     </div>
 
     <div class="choice__grid">
-      <a class="choice__card" href="/particulier">
+      <a class="choice__card" href="/particulier" data-tak="particulier">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8M5 9.5V21h14V9.5M9 21v-6h6v6"/></svg>
         <h3>Particulier</h3>
         <p>Zonnepanelen, thuisbatterij en laden voor jouw woning. Bespaar elke dag.</p>
         <span class="go">Voor thuis →</span>
       </a>
-      <a class="choice__card" href="/zakelijk">
+      <a class="choice__card" href="/zakelijk" data-tak="zakelijk">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21V7l8-4v18M11 21V9l8 4v8M3 21h18M7 11h0M7 15h0M15 15h0M15 18h0"/></svg>
         <h3>Zakelijk</h3>
         <p>Zonnepanelen, batterijopslag en laadpleinen voor bedrijven. Verlaag uw kosten.</p>
@@ -209,6 +209,18 @@
     </div>
   </div>
 </section>
+
+<!-- ============ KEUZELAAG — verschijnt na een klik op particulier of zakelijk ============ -->
+<div class="keuzelaag" id="keuzelaag" hidden>
+  <div class="keuzelaag__doek" data-sluit></div>
+  <div class="keuzelaag__paneel" role="dialog" aria-modal="true" aria-labelledby="keuzelaagTitel">
+    <button class="keuzelaag__dicht" type="button" data-sluit aria-label="Sluiten">&#215;</button>
+    <p class="eyebrow" id="keuzelaagTak">Particulier</p>
+    <h2 id="keuzelaagTitel">Waar wil je meer over weten?</h2>
+    <ol class="keuzelaag__lijst" id="keuzelaagLijst"></ol>
+    <a class="keuzelaag__alles" id="keuzelaagAlles" href="/particulier">Of bekijk de hele pagina &#8594;</a>
+  </div>
+</div>
 
 <!-- ============ VOORDEEL BEREKENEN ============ -->
 <section class="section trap trap--2" id="besparen">
@@ -457,7 +469,7 @@
   </svg>
 </a>
 
-<script src="js/site.js?v=21"></script>
+<script src="js/site.js?v=22"></script>
 <script src="js/funnel.js?v=1"></script>
 <script>
 /* =====================================================================
@@ -717,6 +729,108 @@ var REVIEWS = [
     }
   } catch(e){
     if(window.nuzonSluitIntro) window.nuzonSluitIntro();
+  }
+
+  /* ==================================================================
+     KEUZELAAG
+     Klik je op de kaart Particulier of Zakelijk, dan komt er eerst een
+     laagje met de vijf onderwerpen. Die linken naar het stuk op de
+     pagina zelf (/particulier#opslaan), niet naar de losse
+     productpagina's. Zonder javascript blijft de kaart een gewone link
+     naar de hele pagina, dus dan werkt het ook.
+     ================================================================== */
+  var ONDERWERPEN = ['opwekken','opslaan','laden','noodstroom','meterkast'];
+  var TAKKEN = {
+    particulier: {
+      label: 'Particulier',
+      titel: 'Waar wil je meer over weten?',
+      namen: ['Opwekken','Opslaan','Laden','Noodstroom','Meterkast vervangen'],
+      subs: [
+        'Zonnepanelen op je eigen dak',
+        'Je stroom bewaren tot je hem &apos;s avonds nodig hebt',
+        'Je auto laden op je eigen zon',
+        'Licht en internet houden bij een stroomuitval',
+        'Een groepenkast die panelen, batterij en laadpaal aankan'
+      ]
+    },
+    zakelijk: {
+      label: 'Zakelijk',
+      titel: 'Waar wilt u meer over weten?',
+      namen: ['Opwekken','Opslaan','Laden','Noodstroom','Meterkast vervangen'],
+      subs: [
+        'Uw bedrijfsdak of terrein als opwek',
+        'Piekvermogen afvlakken en netcongestie opvangen',
+        'Laadpunten die uw piek niet opdrijven',
+        'Doordraaien op de groepen die u aanwijst',
+        'Verdeelinrichting die de belasting aankan'
+      ]
+    }
+  };
+
+  var laag     = document.getElementById('keuzelaag');
+  var laagLijst= document.getElementById('keuzelaagLijst');
+  var laagTak  = document.getElementById('keuzelaagTak');
+  var laagTitel= document.getElementById('keuzelaagTitel');
+  var laagAlles= document.getElementById('keuzelaagAlles');
+  var kaarten  = document.querySelectorAll('.choice__card[data-tak]');
+  var vanaf    = null;   // de kaart waar we vandaan kwamen, voor de focus terug
+
+  if(laag && kaarten.length){
+    function vulLaag(tak){
+      var t = TAKKEN[tak];
+      laagTak.textContent = t.label;
+      laagTitel.textContent = t.titel;
+      laagAlles.href = '/' + tak;
+      laagLijst.innerHTML = ONDERWERPEN.map(function(anker, i){
+        return '<li><a href="/' + tak + '#' + anker + '">'
+             +   '<span class="keuzelaag__num">' + ('0' + (i + 1)) + '</span>'
+             +   '<span><span class="keuzelaag__naam">' + t.namen[i] + '</span>'
+             +   '<span class="keuzelaag__sub">' + t.subs[i] + '</span></span>'
+             +   '<span class="keuzelaag__pijl" aria-hidden="true">&#8594;</span>'
+             + '</a></li>';
+      }).join('');
+    }
+
+    function openLaag(tak, kaart){
+      vulLaag(tak);
+      vanaf = kaart || null;
+      laag.hidden = false;
+      document.documentElement.style.overflow = 'hidden';
+      // een tel later, anders pakt de browser de overgang niet op
+      requestAnimationFrame(function(){ laag.classList.add('is-open'); });
+      var eerste = laagLijst.querySelector('a');
+      if(eerste) eerste.focus();
+    }
+
+    function sluitLaag(){
+      laag.classList.remove('is-open');
+      document.documentElement.style.overflow = '';
+      setTimeout(function(){ laag.hidden = true; }, 220);
+      if(vanaf){ vanaf.focus(); vanaf = null; }
+    }
+
+    kaarten.forEach(function(kaart){
+      kaart.addEventListener('click', function(e){
+        if(e.metaKey || e.ctrlKey || e.shiftKey || e.button > 0) return;   // nieuw tabblad met rust laten
+        e.preventDefault();
+        openLaag(kaart.getAttribute('data-tak'), kaart);
+      });
+    });
+
+    laag.querySelectorAll('[data-sluit]').forEach(function(el){
+      el.addEventListener('click', sluitLaag);
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && !laag.hidden) sluitLaag();
+      // binnen de laag blijven met de tabtoets
+      if(e.key === 'Tab' && !laag.hidden){
+        var focusbaar = laag.querySelectorAll('a[href], button');
+        if(!focusbaar.length) return;
+        var eerste = focusbaar[0], laatste = focusbaar[focusbaar.length - 1];
+        if(e.shiftKey && document.activeElement === eerste){ e.preventDefault(); laatste.focus(); }
+        else if(!e.shiftKey && document.activeElement === laatste){ e.preventDefault(); eerste.focus(); }
+      }
+    });
   }
 
   /* ---- voordeel-calculator ---- */

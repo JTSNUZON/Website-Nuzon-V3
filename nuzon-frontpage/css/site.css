@@ -612,11 +612,16 @@ input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%;
    =================================================================== */
 .verhaal{ max-width:64ch; margin-inline:auto; font-size:clamp(1.02rem,1.2vw,1.1rem); line-height:1.75; }
 .verhaal p{ margin:0 0 20px; }
-.verhaal h2{
-  font-size:clamp(1.4rem,2.4vw,1.9rem); letter-spacing:-.025em;
-  margin:clamp(46px,5vw,68px) 0 16px; padding-top:clamp(30px,3.4vw,44px);
-  border-top:1px solid var(--line);
+/* Elk deel is nu een eigen band, dus de kop hoeft geen streep meer om
+   zichzelf van het vorige stuk los te maken. */
+.verhaal h2{ font-size:clamp(1.5rem,2.6vw,2.1rem); letter-spacing:-.025em; margin:0 0 20px; }
+.verhaal__nr{
+  margin:0 0 10px; font-size:.78rem; font-weight:700; letter-spacing:.16em;
+  color:var(--gold-deep);
 }
+/* De delen zijn korter dan de lap die het eerst was, dus ze mogen dichter
+   op elkaar staan dan een gewone sectie. */
+.verhaaldeel{ padding-block:clamp(40px,4.6vw,68px); }
 /* Een enkele regel die eruit mag springen: iets groter, met een streep
    ernaast. Staat gewoon in de tekst, dus je leest hem niet dubbel. */
 .verhaal__uitgelicht{
@@ -626,7 +631,7 @@ input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%;
   font-weight:600; letter-spacing:-.015em; color:var(--ink);
 }
 .verhaal__beeld{
-  margin:clamp(34px,4vw,52px) 0; border-radius:8px; overflow:hidden;
+  max-width:920px; margin:clamp(30px,3.6vw,46px) auto 0; border-radius:8px; overflow:hidden;
   border:1px solid var(--line-2); background:var(--bg-soft); box-shadow:var(--shadow);
 }
 .verhaal__beeld img{ display:block; width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; }

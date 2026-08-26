@@ -618,28 +618,54 @@ var REVIEWS = [
         if(video.playbackRate !== SNELHEID) zetSnelheid();
       });
 
-      /* Vangnet voor de codec-eis in de bronnen hierboven. Zegt een browser
-         "dat profiel ken ik niet" terwijl hij het bestand best had kunnen
-         spelen, dan blijft er niets over. Gebeurt dat, dan proberen we
-         dezelfde bestanden nog een keer zonder die eis. */
-      function ruimeBronnen(){
-        if(video.dataset.ruim) return;
-        video.dataset.ruim = '1';
-        var mobiel = window.matchMedia('(max-width: 720px)').matches;
+      /* ----------------------------------------------------------------
+         VANGNET: ZELF EEN ANDER BESTAND PROBEREN
+
+         Een browser kiest normaal zelf uit de <source>-lijst hierboven.
+         Maar er is een geval waarin dat misgaat zonder dat de browser het
+         toegeeft: het bestand komt binnen, alleen kan de machine het niet
+         decoderen. Dan blijft het beeld leeg en springt de speler in één
+         keer naar het laatste frame — je ziet dan het eindbeeld, alsof de
+         video al klaar is. Dat gebeurt bijvoorbeeld op Windows-installaties
+         waar de mediacodecs ontbreken, of als de videokaart de decodering
+         weigert.
+
+         Daar reageren we nu zelf op: geen decodeerbaar beeld (videoWidth
+         blijft 0) of meteen aan het eind zonder gespeeld te hebben, dan
+         pakken we het volgende bestand uit de lijst.
+         ---------------------------------------------------------------- */
+      var mobielScherm = window.matchMedia('(max-width: 720px)').matches;
+      var RESERVE = mobielScherm
+        ? ['hero.webm', 'hero.mp4']
+        : ['hero.webm', 'hero-mobiel.mp4'];
+      var reserveNr = -1;
+
+      function volgendeBron(){
+        reserveNr++;
+        if(reserveNr >= RESERVE.length) return false;   // op, we houden het bij de foto
         while(video.firstChild) video.removeChild(video.firstChild);
-        [[mobiel ? 'assets/hero/hero-mobiel.mp4?v=3' : 'assets/hero/hero.mp4?v=3', 'video/mp4'],
-         ['assets/hero/hero.webm?v=3', 'video/webm']].forEach(function(b){
-          var s = document.createElement('source');
-          s.src = b[0]; s.type = b[1];
-          video.appendChild(s);
-        });
+        video.removeAttribute('src');
+        video.src = 'assets/hero/' + RESERVE[reserveNr] + '?v=3';
         video.load();
         startVideo(true);
+        return true;
       }
-      video.addEventListener('error', ruimeBronnen, true);   // ook van de <source>-elementen
-      setTimeout(function(){
-        if(video.networkState === 3 || (video.readyState === 0 && !video.currentSrc)) ruimeBronnen();
-      }, 1500);
+
+      function heeftBeeld(){
+        return video.videoWidth > 0 && video.videoHeight > 0;
+      }
+      function bronControle(){
+        if(heeftBeeld()) return;                       // alles in orde
+        if(video.readyState === 0 && video.networkState !== 3) return;  // nog aan het laden
+        volgendeBron();
+      }
+      video.addEventListener('error', function(){ if(!heeftBeeld()) volgendeBron(); }, true);
+      video.addEventListener('ended', function(){
+        // klaar terwijl er nooit beeld was: dan heeft hij niet echt gespeeld
+        if(!heeftBeeld()) volgendeBron();
+      });
+      setTimeout(bronControle, 1800);
+      setTimeout(bronControle, 4000);
 
       /* Het beeld zichtbaar maken. Op meerdere momenten proberen: als er
          één signaal uitblijft (dat verschilt per browser) staat er anders

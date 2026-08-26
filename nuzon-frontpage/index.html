@@ -194,13 +194,13 @@
     </div>
 
     <div class="choice__grid">
-      <a class="choice__card" href="/opwekken">
+      <a class="choice__card" href="/particulier">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8M5 9.5V21h14V9.5M9 21v-6h6v6"/></svg>
         <h3>Particulier</h3>
         <p>Zonnepanelen, thuisbatterij en laden voor jouw woning. Bespaar elke dag.</p>
         <span class="go">Voor thuis →</span>
       </a>
-      <a class="choice__card" href="/batterijopslag-zakelijk">
+      <a class="choice__card" href="/zakelijk">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21V7l8-4v18M11 21V9l8 4v8M3 21h18M7 11h0M7 15h0M15 15h0M15 18h0"/></svg>
         <h3>Zakelijk</h3>
         <p>Zonnepanelen, batterijopslag en laadpleinen voor bedrijven. Verlaag uw kosten.</p>
@@ -589,6 +589,18 @@ var REVIEWS = [
       // het attribuut alleen is niet altijd genoeg na een herlaadbeurt.
       video.muted = true;
       video.playsInline = true;
+
+      /* De opname loopt nogal bedaard; op deze snelheid zit er meer vaart
+         in zonder dat het onrustig wordt. Eén getal om aan te draaien.
+         Ook na elke herstart opnieuw zetten: sommige browsers zetten de
+         snelheid terug op 1 na een seek. */
+      var SNELHEID = 1.25;
+      function zetSnelheid(){ try{ video.playbackRate = SNELHEID; }catch(e){} }
+      zetSnelheid();
+      video.addEventListener('play', zetSnelheid);
+      video.addEventListener('ratechange', function(){
+        if(video.playbackRate !== SNELHEID) zetSnelheid();
+      });
 
       /* Vangnet voor de codec-eis in de bronnen hierboven. Zegt een browser
          "dat profiel ken ik niet" terwijl hij het bestand best had kunnen

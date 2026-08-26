@@ -1,11 +1,4 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false,
-  "redirects": [
-    {
-      "source": "/zakelijk",
-      "destination": "/batterijopslag-zakelijk",
-      "permanent": true
-    }
-  ]
+  "trailingSlash": false
 }

@@ -39,9 +39,9 @@
   <div class="uitslag">
     <h2>De video zelf</h2>
     <video id="test" muted playsinline preload="auto" controls>
-      <source src="assets/hero/hero-mobiel.mp4" type='video/mp4; codecs="avc1.640028"' media="(max-width:720px)">
-      <source src="assets/hero/hero.mp4" type='video/mp4; codecs="avc1.640032"'>
-      <source src="assets/hero/hero.webm" type='video/webm; codecs="vp9"'>
+      <source src="assets/hero/hero-mobiel.mp4?v=2" type='video/mp4; codecs="avc1.64001F"' media="(max-width:720px)">
+      <source src="assets/hero/hero.mp4?v=2" type='video/mp4; codecs="avc1.640028"'>
+      <source src="assets/hero/hero.webm?v=2" type='video/webm; codecs="vp9"'>
     </video>
     <p class="uitleg" style="margin:12px 0 0">Speelt hij hier wel als je zelf op afspelen drukt?
        Dan ligt het niet aan het bestand, maar aan het automatisch starten.</p>
@@ -76,8 +76,8 @@
   proef('Schermbreedte', window.innerWidth + ' px');
   proef('Minder beweging aangevraagd', minderBeweging ? 'JA — dit zet de herovideo uit' : 'nee',
         minderBeweging ? false : true);
-  proef('Kan mp4 (H.264) spelen', kan('video/mp4; codecs="avc1.640032"'),
-        kan('video/mp4; codecs="avc1.640032"') !== 'nee');
+  proef('Kan mp4 (H.264) spelen', kan('video/mp4; codecs="avc1.640028"'),
+        kan('video/mp4; codecs="avc1.640028"') !== 'nee');
   proef('Kan mp4 los van het profiel', kan('video/mp4'), kan('video/mp4') !== 'nee');
   proef('Kan webm (VP9) spelen', kan('video/webm; codecs="vp9"'),
         kan('video/webm; codecs="vp9"') !== 'nee');

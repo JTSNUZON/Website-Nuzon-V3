@@ -122,9 +122,9 @@
            begint te laden terwijl hij de pagina leest. Op een telefoon de
            kleine versie; de webm is er voor browsers zonder H.264 (Chromium
            en Firefox op Linux spelen de mp4 anders helemaal niet af). -->
-      <source src="assets/hero/hero-mobiel.mp4" type='video/mp4; codecs="avc1.640028"' media="(max-width:720px)">
-      <source src="assets/hero/hero.mp4" type='video/mp4; codecs="avc1.640032"'>
-      <source src="assets/hero/hero.webm" type='video/webm; codecs="vp9"'>
+      <source src="assets/hero/hero-mobiel.mp4?v=2" type='video/mp4; codecs="avc1.64001F"' media="(max-width:720px)">
+      <source src="assets/hero/hero.mp4?v=2" type='video/mp4; codecs="avc1.640028"'>
+      <source src="assets/hero/hero.webm?v=2" type='video/webm; codecs="vp9"'>
     </video>
     <script>
       /* Wie 'beperkte beweging' aan heeft staan krijgt alleen de
@@ -611,8 +611,8 @@ var REVIEWS = [
         video.dataset.ruim = '1';
         var mobiel = window.matchMedia('(max-width: 720px)').matches;
         while(video.firstChild) video.removeChild(video.firstChild);
-        [[mobiel ? 'assets/hero/hero-mobiel.mp4' : 'assets/hero/hero.mp4', 'video/mp4'],
-         ['assets/hero/hero.webm', 'video/webm']].forEach(function(b){
+        [[mobiel ? 'assets/hero/hero-mobiel.mp4?v=2' : 'assets/hero/hero.mp4?v=2', 'video/mp4'],
+         ['assets/hero/hero.webm?v=2', 'video/webm']].forEach(function(b){
           var s = document.createElement('source');
           s.src = b[0]; s.type = b[1];
           video.appendChild(s);

@@ -116,28 +116,26 @@
 <section class="hero" aria-label="Nuzon — zonne-energie en thuisbatterijen">
   <div class="hero__media" aria-hidden="true">
     <img class="hero__still" src="assets/hero/hero-eindbeeld.jpg" alt="" width="1600" height="900" fetchpriority="high">
-    <video class="hero__video" id="heroVideo" muted playsinline preload="auto"
+    <video class="hero__video" id="heroVideo" muted playsinline autoplay preload="auto"
            poster="assets/hero/hero-eindbeeld.jpg" tabindex="-1" disablepictureinpicture>
       <!-- De bronnen staan hier en niet in het script, zodat de browser al
            begint te laden terwijl hij de pagina leest. Op een telefoon de
            kleine versie; de webm is er voor browsers zonder H.264 (Chromium
-           en Firefox op Linux spelen de mp4 anders helemaal niet af). -->
-      <source src="assets/hero/hero-mobiel.mp4?v=3" type='video/mp4; codecs="avc1.640028"' media="(max-width:720px)">
-      <source src="assets/hero/hero.mp4?v=3" type='video/mp4; codecs="avc1.640032"'>
-      <source src="assets/hero/hero.webm?v=3" type='video/webm; codecs="vp9"'>
+           en Firefox op Linux spelen de mp4 anders helemaal niet af).
+
+           Bewust zonder codec-string erbij: die is preciezer, maar een
+           browser die het profiel niet herkent slaat het bestand dan over,
+           ook als hij het prima had kunnen spelen. Liever een bestand dat
+           begint te laden en eventueel doorschuift naar de volgende bron.
+
+           autoplay staat erbij als vangnet: gaat er iets mis in het script
+           onderaan de pagina, dan begint de video toch. Loopt het script
+           wel, dan zet dat hem netjes terug op het begin zodra het
+           introscherm weg is. -->
+      <source src="assets/hero/hero-mobiel.mp4?v=3" type="video/mp4" media="(max-width:720px)">
+      <source src="assets/hero/hero.mp4?v=3" type="video/mp4">
+      <source src="assets/hero/hero.webm?v=3" type="video/webm">
     </video>
-    <script>
-      /* Wie 'beperkte beweging' aan heeft staan krijgt alleen de
-         stilstaande foto. Dit scriptje staat hier en niet onderaan de
-         pagina, want dan was de video al binnengehaald. */
-      if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches){
-        var nzVideo = document.getElementById('heroVideo');
-        while(nzVideo.firstChild) nzVideo.removeChild(nzVideo.firstChild);
-        nzVideo.preload = 'none';
-        nzVideo.removeAttribute('poster');
-        nzVideo.load();
-      }
-    </script>
   </div>
   <div class="hero__scrim" aria-hidden="true"></div>
 
@@ -593,8 +591,14 @@ var REVIEWS = [
     }
   }
 
+  /* De hero-video draait ook als het systeem om 'beperkte beweging'
+     vraagt. Die voorkeur zet in deze site de intro-animatie en de
+     overgangen uit; de rustig lopende achtergrondbeelden blijven. Dat
+     scheelde eerder een hoop verwarring: op een laptop met de
+     batterijbesparing van Windows aan staat die voorkeur zomaar aan en
+     bleef de hero een stilstaande foto. */
   try{
-    if(video && !reduce){
+    if(video){
       /* De bronnen staan in de html, dus de browser is al aan het laden.
          load() zou dat overnieuw doen; niet aanroepen dus. */
       // Autoplay lukt alleen gegarandeerd als het element écht muted is;
@@ -637,9 +641,15 @@ var REVIEWS = [
         if(video.networkState === 3 || (video.readyState === 0 && !video.currentSrc)) ruimeBronnen();
       }, 1500);
 
+      /* Het beeld zichtbaar maken. Op meerdere momenten proberen: als er
+         één signaal uitblijft (dat verschilt per browser) staat er anders
+         eindeloos een stilstaande foto. */
       function toonVideo(){ video.classList.add('is-on'); }
-      if(video.readyState >= 2){ toonVideo(); }
-      else { video.addEventListener('loadeddata', toonVideo, { once:true }); }
+      ['loadeddata','canplay','playing','timeupdate'].forEach(function(ev){
+        video.addEventListener(ev, toonVideo, { once:true });
+      });
+      if(video.readyState >= 2) toonVideo();
+      setTimeout(function(){ if(video.readyState >= 2) toonVideo(); }, 2500);
 
       /* Beeld binnen? Dan mag het introscherm weg en begint de video van
          voren af aan. Wel een ondergrens: de logo-opbouw duurt ongeveer

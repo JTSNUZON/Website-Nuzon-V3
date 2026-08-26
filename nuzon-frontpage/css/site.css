@@ -329,6 +329,37 @@ body.has-hero .topbar:not(.is-scrolled):not(:has(.mega[data-open="true"])) .nav 
 /* Google-cijfer rechtsonder — klikt door naar de reviews op deze pagina.
    Het hangt op dezelfde rechtermarge als de WhatsApp-knop en precies erboven,
    zodat die twee samen één kolom in de hoek vormen. */
+/* Wegwijzer onderin de hero: midden onder het beeld, met een pijl die
+   rustig op en neer wipt. Brengt je naar 'Kies je startpunt'. */
+.hero__startpunt{
+  position:absolute; z-index:2; left:50%; transform:translateX(-50%);
+  bottom:clamp(16px,2.4vw,28px);
+  display:inline-flex; align-items:center; gap:9px;
+  padding:11px 20px; border-radius:999px;
+  border:1px solid rgba(255,255,255,.34); background:rgba(12,10,5,.42);
+  -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+  color:#fff; font-size:.78rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+  transition:background .2s ease, border-color .2s ease, transform .2s ease;
+}
+.hero__startpunt:hover,.hero__startpunt:focus-visible{
+  background:rgba(12,10,5,.62); border-color:var(--gold-lite);
+  color:var(--gold-lite); transform:translateX(-50%) translateY(-2px);
+}
+.hero__startpunt svg{ width:17px; height:17px; animation:startpuntWip 1.9s ease-in-out infinite; }
+@keyframes startpuntWip{
+  0%,100%{ transform:translateY(-2px); }
+  50%    { transform:translateY(3px); }
+}
+@media (prefers-reduced-motion:reduce){
+  .hero__startpunt svg{ animation:none; }
+}
+/* Op de telefoon hangt hij niet los onderin — daar staat al genoeg — maar
+   valt hij als laatste in de kolom, onder de knoppen. */
+@media (max-width:720px){
+  .hero__startpunt{ position:static; transform:none; align-self:center; margin-top:20px; }
+  .hero__startpunt:hover,.hero__startpunt:focus-visible{ transform:none; }
+}
+
 .hero__rating{
   --wa-marge:clamp(16px,2.4vw,28px);
   --wa-hoogte:60px;

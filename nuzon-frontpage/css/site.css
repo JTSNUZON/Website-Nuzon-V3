@@ -437,12 +437,21 @@ input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%;
    REVIEWS — twee naast elkaar, tekst inklapbaar
    =================================================================== */
 /* De reviews staan in twee kolommen die zich als metselwerk vullen: elke
-   kaart sluit aan op de vorige, met alleen een dunne naad ertussen. Met
-   een grid zou elke rij even hoog worden en viel er onder de kortere
-   kaart een gat. */
-.reviews{ columns:2; column-gap:6px; }
+   kaart sluit aan op de vorige, met alleen een naad van 6px ertussen.
+   Het script onderaan index.html hangt elke kaart onder de kolom die op
+   dat moment het kortst is, zodat beide kolommen even laag eindigen —
+   ook nadat je op 'toon meer reviews' hebt geklikt. */
+.reviews{ display:grid; grid-template-columns:repeat(2,1fr); gap:6px; }
+.reviews__kolom{ display:flex; flex-direction:column; gap:6px; }
+/* De kolommen zijn even hoog; de kaarten in de kortste kolom verdelen de
+   ruimte die overblijft onderling, zodat het blok onderaan recht afsluit
+   in plaats van dat er links of rechts een leeg vlak overblijft. */
+.reviews__kolom .review{ flex:1 1 auto; }
+/* Tijdens het verdelen staat dat uitrekken even uit, anders meet het
+   script de al opgerekte hoogtes en klopt de verdeling niet meer. */
+.reviews.is-verdelen .review{ flex:0 0 auto; }
 .review{
-  margin:0 0 6px; break-inside:avoid; border:1px solid var(--line); border-radius:6px; background:var(--bg);
+  margin:0; border:1px solid var(--line); border-radius:6px; background:var(--bg);
   box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column;
 }
 .review[hidden]{ display:none; }
@@ -578,7 +587,7 @@ input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%;
      ook over lichte plekken. Een zachte schaduw houdt hem leesbaar zonder
      dat het beeld er weer donker van wordt. */
   .hero__body{ text-shadow:0 1px 14px rgba(8,6,2,.62); }
-  .reviews{ columns:1; }
+  .reviews{ grid-template-columns:1fr; }
   .partners{ grid-template-columns:1fr; }
   .mega__grid{ grid-template-columns:1fr; gap:24px; }
   .foot__top{ grid-template-columns:1fr; }

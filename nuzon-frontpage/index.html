@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/site.css?v=19">
+<link rel="stylesheet" href="css/site.css?v=20">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
 </head>
 <body class="has-hero">
@@ -437,7 +437,7 @@
   </svg>
 </a>
 
-<script src="js/site.js?v=19"></script>
+<script src="js/site.js?v=20"></script>
 <script src="js/funnel.js?v=1"></script>
 <script>
 /* =====================================================================
@@ -686,6 +686,7 @@ var REVIEWS = [
   var grid = document.getElementById('reviewGrid');
   var moreBtn = document.getElementById('moreBtn');
   var OPEN = 4;
+  var kaarten = [];   // alle reviewkaarten in leesvolgorde; verdeel() hangt ze in de kolommen
 
   function esc(s){ return String(s).replace(/[&<>"]/g, function(c){
     return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]; }); }
@@ -714,7 +715,7 @@ var REVIEWS = [
 
     fig.innerHTML = html;
     if(i >= OPEN) fig.hidden = true;
-    grid.appendChild(fig);
+    kaarten.push(fig);
 
     var quote = fig.querySelector('blockquote');
     var toggle = fig.querySelector('.review__toggle');
@@ -724,6 +725,43 @@ var REVIEWS = [
     });
   });
 
+  /* Metselwerk: elke kaart gaat onder de kolom die op dat moment het
+     kortst is. Daardoor sluiten de kaarten binnen een kolom strak op
+     elkaar aan én eindigen de kolommen even laag — ook na 'toon meer
+     reviews'. Opnieuw verdelen bij alles wat de hoogtes verandert: een
+     kaart die erbij komt, het venster dat van breedte verandert, of
+     lettertypen en foto's die later binnenkomen.
+
+     Niet bij het uitklappen van één review: dan zou de kaart die je net
+     opende naar de andere kolom kunnen springen. */
+  function aantalKolommen(){
+    return window.matchMedia('(max-width:720px)').matches ? 1 : 2;
+  }
+  var NAAD = 6;
+  function verdeel(){
+    var n = aantalKolommen();
+    var kols = [], hoog = [];
+    grid.classList.add('is-verdelen');   // even niet uitrekken, anders meten we de opgerekte hoogte
+    grid.textContent = '';
+    for(var i = 0; i < n; i++){
+      var k = document.createElement('div');
+      k.className = 'reviews__kolom';
+      grid.appendChild(k);
+      kols.push(k);
+      hoog.push(0);
+    }
+    kaarten.forEach(function(fig){
+      if(fig.hidden){ kols[0].appendChild(fig); return; }   // telt niet mee, staat op display:none
+      var k = 0;
+      for(var i = 1; i < n; i++){ if(hoog[i] < hoog[k]) k = i; }
+      kols[k].appendChild(fig);
+      hoog[k] += fig.getBoundingClientRect().height + NAAD;
+    });
+    grid.classList.remove('is-verdelen');
+  }
+
+  verdeel();
+
   // knop alleen tonen als de tekst daadwerkelijk wordt afgekapt
   function checkClamp(){
     grid.querySelectorAll('.review').forEach(function(fig){
@@ -732,25 +770,24 @@ var REVIEWS = [
       if(!quote.classList.contains('is-clamped')) return;   // staat open, knop hoort te blijven
       toggle.hidden = quote.scrollHeight <= quote.clientHeight + 2;
     });
+    verdeel();
   }
   if(document.fonts && document.fonts.ready){ document.fonts.ready.then(checkClamp); }
   window.addEventListener('load', checkClamp);
+  grid.querySelectorAll('img').forEach(function(img){
+    if(!img.complete) img.addEventListener('load', verdeel);
+  });
   var t; window.addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(checkClamp, 150); });
   checkClamp();
 
-  if(lijst.length <= OPEN){
+  if(kaarten.length <= OPEN){
     moreBtn.parentNode.style.display = 'none';
   } else {
     moreBtn.addEventListener('click', function(){
-      var dicht = grid.querySelector('.review[hidden]');
-      if(dicht){
-        grid.querySelectorAll('.review[hidden]').forEach(function(el){ el.hidden = false; });
-        moreBtn.textContent = 'Toon minder reviews';
-      } else {
-        grid.querySelectorAll('.review').forEach(function(el, i){ if(i >= OPEN) el.hidden = true; });
-        moreBtn.textContent = 'Toon meer reviews';
-        document.getElementById('reviews').scrollIntoView({ block:'start' });
-      }
+      var dicht = kaarten.some(function(el){ return el.hidden; });
+      kaarten.forEach(function(el, i){ el.hidden = dicht ? false : i >= OPEN; });
+      moreBtn.textContent = dicht ? 'Toon minder reviews' : 'Toon meer reviews';
+      if(!dicht) document.getElementById('reviews').scrollIntoView({ block:'start' });
       checkClamp();
     });
   }

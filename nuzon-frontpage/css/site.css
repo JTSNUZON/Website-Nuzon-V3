@@ -608,6 +608,44 @@ input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%;
 .foot__legal .spacer{ margin-left:auto; }
 
 /* ===================================================================
+   PROJECTEN — de blogindex
+   Het eerste project ligt over de volle breedte met de foto naast de
+   tekst; de rest valt in een raster van twee met de foto erboven.
+   =================================================================== */
+.projecten{ display:grid; grid-template-columns:repeat(2,1fr); gap:clamp(20px,2.6vw,32px); align-items:start; }
+.project{
+  display:flex; flex-direction:column; overflow:hidden;
+  border:1px solid var(--line); border-radius:8px; background:var(--bg);
+  box-shadow:var(--shadow); transition:border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.project:hover{ border-color:var(--line-2); box-shadow:var(--shadow-lg); transform:translateY(-2px); }
+.project--groot{ grid-column:1 / -1; flex-direction:row; }
+.project__beeld{ display:block; background:var(--bg-soft); }
+.project__beeld img{ width:100%; height:100%; aspect-ratio:16/10; object-fit:cover; }
+.project--groot .project__beeld{ flex:0 0 46%; }
+.project--groot .project__beeld img{ aspect-ratio:auto; min-height:100%; }
+.project__tekst{ padding:clamp(20px,2.4vw,30px); display:flex; flex-direction:column; gap:12px; flex:1; }
+.project--groot .project__tekst{ justify-content:center; padding:clamp(26px,3.2vw,44px); }
+.project__meta{ display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px; margin:0;
+  font-size:.78rem; font-weight:500; letter-spacing:.05em; color:var(--muted); }
+.project__chip{ font-size:.7rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--gold-deep); background:var(--bg-gold); border:1px solid var(--line-2);
+  border-radius:3px; padding:4px 9px; }
+.project h3{ margin:0; font-size:clamp(1.15rem,1.8vw,1.5rem); letter-spacing:-.02em; }
+.project--groot h3{ font-size:clamp(1.4rem,2.6vw,2rem); }
+.project__tekst p:last-child{ margin:0; line-height:1.65; }
+.projecten__slot{ margin:clamp(30px,4vw,48px) 0 0; font-size:1.02rem; color:var(--body); }
+.projecten__slot a{ color:var(--gold-deep); border-bottom:1px solid var(--line-2); padding-bottom:2px; }
+.projecten__slot a:hover{ border-color:var(--gold); }
+
+@media (max-width:860px){
+  .projecten{ grid-template-columns:1fr; }
+  .project--groot{ flex-direction:column; }
+  .project--groot .project__beeld{ flex:none; }
+  .project--groot .project__beeld img{ aspect-ratio:16/10; min-height:0; }
+}
+
+/* ===================================================================
    PROSE — lopende tekst op de juridische pagina's
    =================================================================== */
 .prose{ max-width:68ch; }

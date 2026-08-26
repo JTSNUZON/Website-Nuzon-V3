@@ -74,8 +74,8 @@
 
   proef('Browser', navigator.userAgent);
   proef('Schermbreedte', window.innerWidth + ' px');
-  proef('Minder beweging aangevraagd', minderBeweging ? 'JA — dit zet de herovideo uit' : 'nee',
-        minderBeweging ? false : true);
+  proef('Minder beweging aangevraagd',
+        minderBeweging ? 'JA — de intro-animaties gaan dan uit, de herovideo draait gewoon' : 'nee');
   proef('Kan mp4 (H.264) spelen', kan('video/mp4; codecs="avc1.640032"'),
         kan('video/mp4; codecs="avc1.640032"') !== 'nee');
   proef('Kan mp4 los van het profiel', kan('video/mp4'), kan('video/mp4') !== 'nee');

@@ -436,9 +436,13 @@ input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%;
 /* ===================================================================
    REVIEWS — twee naast elkaar, tekst inklapbaar
    =================================================================== */
-.reviews{ display:grid; grid-template-columns:repeat(2,1fr); gap:clamp(16px,2vw,24px); align-items:start; }
+/* De reviews staan in twee kolommen die zich als metselwerk vullen: elke
+   kaart sluit aan op de vorige, met alleen een dunne naad ertussen. Met
+   een grid zou elke rij even hoog worden en viel er onder de kortere
+   kaart een gat. */
+.reviews{ columns:2; column-gap:6px; }
 .review{
-  margin:0; border:1px solid var(--line); border-radius:6px; background:var(--bg);
+  margin:0 0 6px; break-inside:avoid; border:1px solid var(--line); border-radius:6px; background:var(--bg);
   box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column;
 }
 .review[hidden]{ display:none; }
@@ -574,7 +578,8 @@ input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%;
      ook over lichte plekken. Een zachte schaduw houdt hem leesbaar zonder
      dat het beeld er weer donker van wordt. */
   .hero__body{ text-shadow:0 1px 14px rgba(8,6,2,.62); }
-  .reviews,.partners{ grid-template-columns:1fr; }
+  .reviews{ columns:1; }
+  .partners{ grid-template-columns:1fr; }
   .mega__grid{ grid-template-columns:1fr; gap:24px; }
   .foot__top{ grid-template-columns:1fr; }
   .logo{ --logo-breedte:200px; }

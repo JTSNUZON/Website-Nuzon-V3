@@ -55,6 +55,9 @@ html{ scroll-behavior:smooth; scroll-padding-top:calc(var(--bar) + 12px); }
 .shell{ max-width:var(--shell); margin-inline:auto; padding-inline:var(--pad); }
 
 h1,h2,h3{ font-family:var(--font); color:var(--ink); font-weight:700; line-height:1.12; letter-spacing:-.025em; margin:0; }
+/* Nederlandse samenstellingen zijn lang; op een smal scherm mogen ze
+   breken in plaats van de pagina op te rekken. */
+h1,h2,h3,p,li,figcaption,.btn{ overflow-wrap:break-word; }
 h1{ font-size:clamp(2.3rem,5.2vw,4rem); font-weight:800; letter-spacing:-.035em; }
 h2{ font-size:clamp(1.8rem,3.4vw,2.7rem); font-weight:800; letter-spacing:-.03em; }
 h3{ font-size:1.2rem; }
@@ -123,6 +126,9 @@ h3{ font-size:1.2rem; }
 .foot.trap .foot__legal{ color:var(--muted); }
 .section--warm{ background:var(--bg-gold); border-block:1px solid var(--line-2); }
 .section__head{ display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap; margin-bottom:clamp(28px,4vw,44px); }
+/* Zonder deze regel rekt een lang woord de flexkolom op in plaats van af
+   te breken, en scrolt de pagina zijwaarts op een smal scherm. */
+.section__head > *{ min-width:0; }
 .section__head p{ margin:14px 0 0; }
 
 /* ===================================================================
@@ -576,6 +582,89 @@ input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%;
   .wa svg{ width:28px; height:28px; }
   .wa__label{ display:none; }
   .wa::after{ border-radius:25px; }
+}
+
+/* ===================================================================
+   TELEFOON — de laatste slag voor kleine schermen
+   Drie dingen: de balk moet in één regel passen tot 320px, alles wat je
+   aantikt moet een vingermaat hebben (44px), en de kleinste labels
+   worden een maatje groter zodat ze op een telefoon leesbaar blijven.
+   =================================================================== */
+.btn__kort{ display:none; }
+
+@media (max-width:430px){
+  /* De balkinhoud is op deze breedtes breder dan het scherm; met deze
+     maten past logo + menu + knop weer naast elkaar. Het raakvlak van de
+     twee knoppen blijft bewust rond de 40px hoog. */
+  .brand__zon{ width:23px; }
+  .brand__name{ font-size:1.02rem; }
+  .nav{ gap:10px; }
+  .nav button{ font-size:.76rem; padding-block:11px; }
+  .topbar .btn{ padding:.78em .8em; font-size:.72rem; }
+}
+/* Nog smaller: dan pas gaan de letters een maatje omlaag. */
+@media (max-width:375px){
+  .nav button{ font-size:.72rem; }
+  .topbar .btn{ padding:.8em .72em; font-size:.68rem; }
+}
+/* Onder 360px wint zelfs dat het niet; daar heet de knop kortweg
+   'Advies'. De volledige tekst staat overal elders. */
+@media (max-width:359px){
+  .btn__vol{ display:none; }
+  .btn__kort{ display:inline; }
+}
+
+@media (max-width:720px){
+  /* Vingermaat. De regels staan visueel op dezelfde plek; het vlak
+     eromheen wordt groter zodat je er met je duim naast kunt zitten. */
+  .foot li a,.foot__legal a{ display:inline-block; padding-block:11px; }
+  .foot ul{ gap:0; }
+  .foot__legal{ gap:4px 24px; }
+  .crumbs{ padding:6px 0; }
+  .crumbs a,.crumbs span[aria-current]{ display:inline-block; padding-block:9px; }
+  .review__toggle{ padding-block:10px; }
+  .google-link{ padding-block:10px; }
+  .fotoslider__bolletjes{ gap:14px; bottom:10px; }
+  .fotoslider__bolletjes button{ width:10px; height:10px;
+    box-shadow:0 0 0 8px transparent; } /* onzichtbaar groter raakvlak */
+
+  /* De pijlen van de fotoslider staan iets hoger dan het midden, zodat ze
+     niet samenvallen met de zwevende WhatsApp-knop rechtsonder. */
+  .fotoslider__pijl{ top:38%; }
+
+  /* Op de telefoon staat de tekst over de volle breedte van het beeld en
+     valt de uitleg vaak op een licht stuk video. De sluier wordt daarom
+     onderin zwaarder; het middenstuk blijft open zodat je het beeld ziet. */
+  .hero__scrim{
+    background:linear-gradient(180deg,
+      rgba(12,10,5,.62) 0%, rgba(12,10,5,.28) 24%,
+      rgba(12,10,5,.30) 42%, rgba(12,10,5,.64) 60%,
+      rgba(12,10,5,.80) 78%, rgba(12,10,5,.86) 100%);
+  }
+
+  /* Koppen mogen op de telefoon met een afbreekstreepje afbreken. */
+  h1,h2,h3{ hyphens:auto; }
+
+  /* De bronbadge van een review ("JTS Installatietechniek") past niet
+     naast de sterren op een smal scherm; hij mag eronder vallen. */
+  .review__top{ flex-wrap:wrap; }
+  .review .src{ white-space:normal; }
+
+  /* De schuif van de rekenhulp: het gekleurde spoor blijft even dun, maar
+     het vlak dat je met je duim kunt pakken wordt drie keer zo hoog. */
+  input[type=range]{ height:36px; padding-block:14px; background-clip:content-box; border-radius:0; }
+  input[type=range]::-webkit-slider-thumb{ width:30px; height:30px; }
+  input[type=range]::-moz-range-thumb{ width:28px; height:28px; }
+
+  /* De kleinste labels: op een telefoon werd dit 10 px. */
+  .eyebrow{ font-size:.82rem; }
+  .meta{ font-size:.8rem; }
+  .review .src{ font-size:.72rem; }
+  .role{ font-size:.72rem; }
+  .go,.choice__card .go{ font-size:.82rem; }
+  .usp .num{ font-size:.8rem; }
+  .hero__rating-sub{ font-size:.78rem; }
+  .foot__legal{ font-size:.82rem; }
 }
 
 /* telefoonknop in de topbalk */

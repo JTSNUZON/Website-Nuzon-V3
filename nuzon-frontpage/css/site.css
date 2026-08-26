@@ -664,7 +664,28 @@ input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%;
 .project h3{ margin:0; font-size:clamp(1.15rem,1.8vw,1.5rem); letter-spacing:-.02em; }
 .project--groot h3{ font-size:clamp(1.4rem,2.6vw,2rem); }
 .project__tekst p:last-child{ margin:0; line-height:1.65; }
+/* De kop is de link; het vlak eronder maakt de hele kaart klikbaar.
+   Zo blijft er in de code één duidelijke link staan in plaats van een
+   kaart vol overlappende links. */
+.project{ position:relative; }
+.project__link{ color:inherit; }
+.project__link::after{ content:""; position:absolute; inset:0; border-radius:8px; }
+.project:hover .project__link{ color:var(--gold-deep); }
+.project__link:focus-visible::after{ outline:2px solid var(--gold); outline-offset:3px; }
+.project__meer{ margin-top:auto; padding-top:6px; font-size:.82rem; font-weight:600;
+  letter-spacing:.06em; color:var(--gold-deep); }
+
 .projecten__slot{ margin:clamp(30px,4vw,48px) 0 0; font-size:1.02rem; color:var(--body); }
+
+/* Projectpagina: de hoofdfoto en de navigatie eronder. */
+.projectfoto{ margin:0 0 clamp(32px,4vw,52px); border-radius:8px; overflow:hidden;
+  border:1px solid var(--line-2); background:var(--bg-soft); box-shadow:var(--shadow); }
+.projectfoto img{ display:block; width:100%; height:auto; aspect-ratio:16/10; object-fit:cover; }
+.projectfoto figcaption{ padding:12px 16px; font-size:.86rem; color:var(--muted); }
+.projectnav{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px;
+  margin-top:clamp(36px,4.4vw,56px); padding-top:24px; border-top:1px solid var(--line); }
+.projectnav a{ font-size:.92rem; font-weight:600; color:var(--gold-deep); padding-block:8px; }
+.projectnav a:hover{ color:var(--gold); }
 .projecten__slot a{ color:var(--gold-deep); border-bottom:1px solid var(--line-2); padding-bottom:2px; }
 .projecten__slot a:hover{ border-color:var(--gold); }
 

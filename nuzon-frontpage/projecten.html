@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/site.css?v=36">
+<link rel="stylesheet" href="css/site.css?v=37">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
 </head>
 <body>
@@ -128,72 +128,80 @@
      PROJECTEN
 
      Een project toevoegen: kopieer een <article class="project"> hieronder,
-     zet er je eigen foto, titel, plaats, datum en tekst in. Het eerste
-     blok heeft de klasse project--groot en staat daardoor over de volle
-     breedte; de rest valt in een raster van twee. Zet het nieuwste project
-     bovenaan.
+     zet er je eigen foto, titel, plaats, datum en tekst in, en maak een
+     bijbehorende pagina door project-1.html te kopieren. De link in de
+     kop wijst daarheen en bedekt de hele kaart, dus je kunt overal op de
+     kaart klikken. Het eerste blok heeft de klasse project--groot en
+     staat daardoor over de volle breedte; de rest valt in een raster van
+     twee. Zet het nieuwste project bovenaan.
      ================================================================== -->
 <section class="section">
   <div class="shell">
     <div class="projecten">
       <article class="project project--groot">
-        <a class="project__beeld" href="#project-1" aria-hidden="true" tabindex="-1">
+        <div class="project__beeld">
           <img src="assets/foto/plek/project-1.svg" alt="" loading="lazy">
-        </a>
+        </div>
         <div class="project__tekst">
           <p class="project__meta"><span class="project__chip">Zonnepanelen</span><span>Plaatsnaam</span><span>maand 2026</span></p>
-          <h3 id="project-1">Voorbeeldproject — vervang deze tekst</h3>
+          <h3><a class="project__link" href="/project-1">Voorbeeldproject — vervang deze tekst</a></h3>
           <p>Hier komt het verhaal van het project: wat de klant wilde, wat we hebben aangelegd en waar we tegenaan liepen. Twee tot vier zinnen is genoeg — lang genoeg om te laten zien wat er kwam kijken, kort genoeg om te lezen.</p>
+          <span class="project__meer">Lees het hele verhaal &#8594;</span>
         </div>
       </article>
       <article class="project">
-        <a class="project__beeld" href="#project-2" aria-hidden="true" tabindex="-1">
+        <div class="project__beeld">
           <img src="assets/foto/plek/project-2.svg" alt="" loading="lazy">
-        </a>
+        </div>
         <div class="project__tekst">
           <p class="project__meta"><span class="project__chip">Thuisbatterij</span><span>Plaatsnaam</span><span>maand 2026</span></p>
-          <h3 id="project-2">Voorbeeldproject — vervang deze tekst</h3>
+          <h3><a class="project__link" href="/project-2">Voorbeeldproject — vervang deze tekst</a></h3>
           <p>Nog een voorbeeld. Noem gerust het aantal panelen, de capaciteit van de batterij of het laadvermogen; dat maakt het concreet voor wie hetzelfde overweegt.</p>
+          <span class="project__meer">Lees het hele verhaal &#8594;</span>
         </div>
       </article>
       <article class="project">
-        <a class="project__beeld" href="#project-3" aria-hidden="true" tabindex="-1">
+        <div class="project__beeld">
           <img src="assets/foto/plek/project-3.svg" alt="" loading="lazy">
-        </a>
+        </div>
         <div class="project__tekst">
           <p class="project__meta"><span class="project__chip">Laadpaal</span><span>Plaatsnaam</span><span>maand 2026</span></p>
-          <h3 id="project-3">Voorbeeldproject — vervang deze tekst</h3>
+          <h3><a class="project__link" href="/project-3">Voorbeeldproject — vervang deze tekst</a></h3>
           <p>Een korte beschrijving van de situatie en de oplossing. Een foto van vóór en ná doet het hier goed.</p>
+          <span class="project__meer">Lees het hele verhaal &#8594;</span>
         </div>
       </article>
       <article class="project">
-        <a class="project__beeld" href="#project-4" aria-hidden="true" tabindex="-1">
+        <div class="project__beeld">
           <img src="assets/foto/plek/project-4.svg" alt="" loading="lazy">
-        </a>
+        </div>
         <div class="project__tekst">
           <p class="project__meta"><span class="project__chip">Meterkast</span><span>Plaatsnaam</span><span>maand 2026</span></p>
-          <h3 id="project-4">Voorbeeldproject — vervang deze tekst</h3>
+          <h3><a class="project__link" href="/project-4">Voorbeeldproject — vervang deze tekst</a></h3>
           <p>Ook het werk dat niemand ziet mag hier staan: een groepenkast die vervangen moest voordat de rest kon draaien.</p>
+          <span class="project__meer">Lees het hele verhaal &#8594;</span>
         </div>
       </article>
       <article class="project">
-        <a class="project__beeld" href="#project-5" aria-hidden="true" tabindex="-1">
+        <div class="project__beeld">
           <img src="assets/foto/plek/project-5.svg" alt="" loading="lazy">
-        </a>
+        </div>
         <div class="project__tekst">
           <p class="project__meta"><span class="project__chip">Zakelijk</span><span>Plaatsnaam</span><span>maand 2026</span></p>
-          <h3 id="project-5">Voorbeeldproject — vervang deze tekst</h3>
+          <h3><a class="project__link" href="/project-5">Voorbeeldproject — vervang deze tekst</a></h3>
           <p>Bij een bedrijfsproject is het interessant om te vertellen wat het opleverde: lagere piek, minder inkoop, of ruimte om te groeien op dezelfde aansluiting.</p>
+          <span class="project__meer">Lees het hele verhaal &#8594;</span>
         </div>
       </article>
       <article class="project">
-        <a class="project__beeld" href="#project-6" aria-hidden="true" tabindex="-1">
+        <div class="project__beeld">
           <img src="assets/foto/plek/project-6.svg" alt="" loading="lazy">
-        </a>
+        </div>
         <div class="project__tekst">
           <p class="project__meta"><span class="project__chip">Noodstroom</span><span>Plaatsnaam</span><span>maand 2026</span></p>
-          <h3 id="project-6">Voorbeeldproject — vervang deze tekst</h3>
+          <h3><a class="project__link" href="/project-6">Voorbeeldproject — vervang deze tekst</a></h3>
           <p>En hier het laatste voorbeeld. Voeg een project toe door het blok in de code te kopiëren en de tekst, de foto en de gegevens te vervangen.</p>
+          <span class="project__meer">Lees het hele verhaal &#8594;</span>
         </div>
       </article>
     </div>
@@ -274,7 +282,7 @@
   </svg>
 </a>
 
-<script src="js/site.js?v=36"></script>
+<script src="js/site.js?v=37"></script>
 <script src="js/funnel.js?v=2"></script>
 
 </body>

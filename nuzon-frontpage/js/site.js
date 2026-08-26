@@ -62,6 +62,43 @@ var WHATSAPP_BERICHT = "Hallo Nuzon, ik heb een vraag over ";
     }
   }
 
+  /* ---- fotorij ----
+     Vegen op een telefoon doet de browser zelf. Op een computer zonder
+     touchpad valt er weinig te vegen, dus daar mag je de rij met de muis
+     verslepen. Een klik die geen sleep werd blijft gewoon een klik. */
+  document.querySelectorAll('[data-fotorij] .fotorij__spoor').forEach(function(spoor){
+    var neer = false, startX = 0, startScroll = 0, versleept = false;
+
+    spoor.addEventListener('pointerdown', function(e){
+      if(e.pointerType === 'touch') return;          // dat regelt de browser al
+      neer = true; versleept = false;
+      startX = e.clientX; startScroll = spoor.scrollLeft;
+      spoor.setPointerCapture(e.pointerId);
+    });
+
+    spoor.addEventListener('pointermove', function(e){
+      if(!neer) return;
+      var verschil = e.clientX - startX;
+      if(!versleept && Math.abs(verschil) > 4){ versleept = true; spoor.classList.add('is-slepen'); }
+      if(versleept){ spoor.scrollLeft = startScroll - verschil; }
+    });
+
+    function los(e){
+      if(!neer) return;
+      neer = false;
+      spoor.classList.remove('is-slepen');
+      if(spoor.hasPointerCapture && e && spoor.hasPointerCapture(e.pointerId)) spoor.releasePointerCapture(e.pointerId);
+    }
+    spoor.addEventListener('pointerup', los);
+    spoor.addEventListener('pointercancel', los);
+    spoor.addEventListener('pointerleave', los);
+
+    // na het slepen niet ook nog de link eronder openen
+    spoor.addEventListener('click', function(e){
+      if(versleept){ e.preventDefault(); e.stopPropagation(); versleept = false; }
+    }, true);
+  });
+
   /* ---- WhatsApp ---- */
   var wa = document.getElementById('waLink');
   if(wa){

@@ -677,6 +677,34 @@ input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%;
 
 .projecten__slot{ margin:clamp(30px,4vw,48px) 0 0; font-size:1.02rem; color:var(--body); }
 
+/* ===================================================================
+   FOTORIJ — de horizontale strook bovenaan een projectpagina
+   Je schuift hem opzij met een veeg (telefoon), met het touchpad, of
+   door hem met de muis te verslepen. Geen pijlen: de foto die half uit
+   beeld loopt laat zien dat er meer is.
+   =================================================================== */
+.fotorij{ margin-top:clamp(22px,3vw,34px); }
+.fotorij__spoor{
+  display:flex; gap:0;                    /* geen naad: de foto's raken elkaar */
+  overflow-x:auto; overscroll-behavior-x:contain;
+  scroll-snap-type:x proximity;
+  scrollbar-width:none; -ms-overflow-style:none;
+  cursor:grab;
+}
+.fotorij__spoor::-webkit-scrollbar{ display:none; }
+.fotorij__spoor.is-slepen{ cursor:grabbing; scroll-snap-type:none; }
+.fotorij__spoor.is-slepen img{ pointer-events:none; }
+.fotorij__item{
+  flex:0 0 clamp(250px,36vw,480px); margin:0; scroll-snap-align:start;
+  border:0; border-radius:0; background:var(--bg-soft); overflow:hidden;
+}
+.fotorij__item img{ display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover;
+  -webkit-user-drag:none; user-select:none; }
+
+@media (max-width:720px){
+  .fotorij__item{ flex-basis:78vw; }
+}
+
 /* Projectpagina: de hoofdfoto en de navigatie eronder. */
 .projectfoto{ margin:0 0 clamp(32px,4vw,52px); border-radius:8px; overflow:hidden;
   border:1px solid var(--line-2); background:var(--bg-soft); box-shadow:var(--shadow); }

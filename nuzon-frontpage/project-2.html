@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/site.css?v=37">
+<link rel="stylesheet" href="css/site.css?v=39">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
 </head>
 <body>
@@ -123,16 +123,35 @@
     <h1>Voorbeeldproject 2 &mdash; vervang deze titel</h1>
     <p class="lede">Hier komt de opening van het verhaal: in twee zinnen waar dit project over ging en waarom het interessant is om te lezen.</p>
   </div>
+
+  <!-- ==================================================================
+       FOTOROL van dit project. Alle foto's staan hier naast elkaar; je
+       veegt of sleept ze opzij. Een foto toevoegen: kopieer een
+       <figure class="fotorij__item"> hieronder en zet je eigen bestand
+       erin. Er is geen maximum; hoe meer je erin zet, hoe verder de rij
+       doorloopt. De eerste krijgt loading="eager" (die is meteen in
+       beeld), de rest loading="lazy".
+       ================================================================== -->
+  <div class="fotorij" data-fotorij>
+    <div class="fotorij__spoor" tabindex="0" role="region" aria-label="Foto's van dit project">
+        <figure class="fotorij__item">
+          <img src="assets/foto/plek/rij-1.svg" alt="Foto 1 van dit project" loading="eager">
+        </figure>
+        <figure class="fotorij__item">
+          <img src="assets/foto/plek/rij-2.svg" alt="Foto 2 van dit project" loading="lazy">
+        </figure>
+        <figure class="fotorij__item">
+          <img src="assets/foto/plek/rij-3.svg" alt="Foto 3 van dit project" loading="lazy">
+        </figure>
+        <figure class="fotorij__item">
+          <img src="assets/foto/plek/rij-4.svg" alt="Foto 4 van dit project" loading="lazy">
+        </figure>
+    </div>
+  </div>
 </section>
 
 <section class="section">
   <div class="shell">
-
-    <figure class="projectfoto">
-      <!-- HOOFDFOTO van project 2 -->
-      <img src="assets/foto/plek/project-2.svg" alt="Plek voor de hoofdfoto van project 2" width="1600" height="1000" loading="eager">
-      <figcaption>Onderschrift bij de foto &mdash; optioneel, mag ook weg.</figcaption>
-    </figure>
 
     <div class="verhaal">
 
@@ -237,7 +256,7 @@
   </svg>
 </a>
 
-<script src="js/site.js?v=37"></script>
+<script src="js/site.js?v=39"></script>
 <script src="js/funnel.js?v=2"></script>
 
 </body>

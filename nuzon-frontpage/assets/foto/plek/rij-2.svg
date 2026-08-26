@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1050" width="1400" height="1050" role="img" aria-label="Plek voor foto 2">
+  <rect width="1400" height="1050" fill="#241E15"/>
+  <text x="700" y="540" text-anchor="middle" font-family="Archivo, Inter, system-ui, sans-serif"
+        font-size="340" font-weight="800" fill="#FAC61F" letter-spacing="-10">2</text>
+  <text x="700" y="650" text-anchor="middle" font-family="Inter, system-ui, sans-serif"
+        font-size="46" font-weight="600" fill="#C6BDAB" letter-spacing="10">FOTO</text>
+</svg>

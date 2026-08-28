@@ -561,6 +561,7 @@ input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%;
 .jullix h2{ max-width:14ch; }
 .jullix__badges{ display:flex; gap:12px; flex-wrap:wrap; margin-top:30px; }
 .jullix__shot{ border:1px solid var(--line-2); border-radius:16px; overflow:hidden; background:#fff; box-shadow:var(--shadow-lg); max-width:420px; margin-inline:auto; }
+.jullix__shot img{ width:100%; height:auto; }
 .jullix__cap{ margin-top:14px; text-align:center; }
 
 /* ===================================================================

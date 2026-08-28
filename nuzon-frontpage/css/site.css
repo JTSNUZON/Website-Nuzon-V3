@@ -961,6 +961,11 @@ input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%;
 /* Staand genomen herofoto: hoger kader, dan valt er nauwelijks iets weg. */
 .pagehero__foto--staand img{ aspect-ratio:4/5; }
 
+/* Vier foto's als blokjes naast de tekst, in plaats van één herofoto. */
+.pagehero__mozaiek{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.pagehero__mozaiek figure{ margin:0; border-radius:8px; overflow:hidden; border:1px solid rgba(255,255,255,.14); box-shadow:var(--shadow-lg); }
+.pagehero__mozaiek img{ display:block; width:100%; height:100%; aspect-ratio:1/1; object-fit:cover; }
+
 /* Fotoslider: pijlen links en rechts, bolletjes onderaan. */
 .fotoslider{ position:relative; }
 .fotoslider__spoor{ display:flex; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; }

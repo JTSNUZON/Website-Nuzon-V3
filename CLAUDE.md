@@ -9,11 +9,14 @@ Na elke afgeronde wijziging: `git add -A` en committen met een korte
 Nederlandse beschrijving. Dat hoeft niet gevraagd te worden.
 
 **Pushen naar main gebeurt nooit uit jezelf.** Wacht op een expliciete
-bevestiging van de gebruiker in de chat met het woord "push" — pas dan
-`git push`. Zonder dat woord blijven wijzigingen lokaal gecommit, ook als
-ze al klaar en getest zijn.
+bevestiging van de gebruiker in de chat met het woord "push". Doe dan
+EERST `git pull` om te checken of iemand anders intussen iets heeft
+gepusht, en pas daarna `git push`. Zo voorkomen we dubbel werk en dat
+iemands wijzigingen overschreven worden. Levert die pull conflicten op,
+los die dan eerst zichtbaar op (of vraag het na) voor je pusht.
 
-Voor je begint te werken: eerst `git pull` om werk van anderen op te halen.
+Voor je begint te werken: ook dan eerst `git pull` om werk van anderen
+op te halen.
 
 ## Context
 - Project: NuZon website V3 (nuzon-frontpage)

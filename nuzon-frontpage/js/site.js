@@ -176,6 +176,19 @@ var WHATSAPP_BERICHT = "Hallo Nuzon, ik heb een vraag over ";
     spoor.addEventListener('click', function(e){
       if(versleept){ e.preventDefault(); e.stopPropagation(); versleept = false; }
     }, true);
+
+    /* --- pijlknoppen: één foto per klik verder --- */
+    var rij = spoor.closest('[data-fotorij]');
+    if(rij){
+      function stapBreedte(){
+        var item = spoor.querySelector('.fotorij__item');
+        return item ? item.getBoundingClientRect().width : spoor.clientWidth;
+      }
+      var vorige = rij.querySelector('.fotorij__pijl--vorige');
+      var volgende = rij.querySelector('.fotorij__pijl--volgende');
+      if(vorige)   vorige.addEventListener('click', function(){ spoor.scrollBy({ left: -stapBreedte(), behavior: 'smooth' }); });
+      if(volgende) volgende.addEventListener('click', function(){ spoor.scrollBy({ left:  stapBreedte(), behavior: 'smooth' }); });
+    }
   });
 
   /* ---- WhatsApp ---- */

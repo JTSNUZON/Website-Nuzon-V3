@@ -709,10 +709,24 @@ input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%;
 /* ===================================================================
    FOTORIJ — de horizontale strook bovenaan een projectpagina
    Je schuift hem opzij met een veeg (telefoon), met het touchpad, of
-   door hem met de muis te verslepen. Geen pijlen: de foto die half uit
-   beeld loopt laat zien dat er meer is.
+   door hem met de muis te verslepen. Er staan ook twee pijlknoppen op
+   de foto's, zodat meteen duidelijk is dat je verder kunt bladeren.
    =================================================================== */
-.fotorij{ margin-top:clamp(22px,3vw,34px); }
+.fotorij{ margin-top:clamp(22px,3vw,34px); position:relative; }
+.fotorij__pijl{
+  position:absolute; top:50%; transform:translateY(-50%); z-index:2;
+  width:44px; height:44px; display:flex; align-items:center; justify-content:center;
+  border:0; border-radius:50%; cursor:pointer;
+  background:rgba(255,255,255,.92); color:var(--ink); font-size:26px; line-height:1;
+  box-shadow:0 4px 16px rgba(20,16,6,.28); transition:background .2s, transform .2s;
+}
+.fotorij__pijl:hover{ background:#fff; }
+.fotorij__pijl:active{ transform:translateY(-50%) scale(.94); }
+.fotorij__pijl--vorige{ left:12px; }
+.fotorij__pijl--volgende{ right:12px; }
+@media (max-width:560px){
+  .fotorij__pijl{ width:38px; height:38px; font-size:22px; }
+}
 .fotorij__spoor{
   display:flex; gap:0;                    /* geen naad: de foto's raken elkaar */
   overflow-x:auto; overscroll-behavior-x:contain;
@@ -989,6 +1003,11 @@ input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%;
 .pagehero__foto img{ width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
 /* Staand genomen herofoto: hoger kader, dan valt er nauwelijks iets weg. */
 .pagehero__foto--staand img{ aspect-ratio:4/5; }
+
+/* Vier foto's als blokjes naast de tekst, in plaats van één herofoto. */
+.pagehero__mozaiek{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.pagehero__mozaiek figure{ margin:0; border-radius:8px; overflow:hidden; border:1px solid rgba(255,255,255,.14); box-shadow:var(--shadow-lg); }
+.pagehero__mozaiek img{ display:block; width:100%; height:100%; aspect-ratio:1/1; object-fit:cover; }
 
 /* Fotoslider: pijlen links en rechts, bolletjes onderaan. */
 .fotoslider{ position:relative; }

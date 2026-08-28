@@ -8,11 +8,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Na elke afgeronde wijziging: `git add -A` en committen met een korte
 Nederlandse beschrijving. Dat hoeft niet gevraagd te worden.
 
-**Pushen naar main gebeurt nooit uit jezelf.** Laat zien wat er klaarstaat
-en vraag om akkoord; pas daarna `git push`. Krijg je een aparte werkbranch
-opgedragen, dan gaat die voor op main en mag je daar wel naartoe pushen.
+**Pushen naar main gebeurt nooit uit jezelf.** Wacht op een expliciete
+bevestiging van de gebruiker in de chat met het woord "push". Doe dan
+EERST `git pull` om te checken of iemand anders intussen iets heeft
+gepusht, en pas daarna `git push`. Zo voorkomen we dubbel werk en dat
+iemands wijzigingen overschreven worden. Levert die pull conflicten op,
+los die dan eerst zichtbaar op (of vraag het na) voor je pusht.
 
-Voor je begint te werken: eerst `git pull` om werk van anderen op te halen.
+Voor je begint te werken: ook dan eerst `git pull` om werk van anderen
+op te halen.
 
 ## Context
 - Project: NuZon website V3 (nuzon-frontpage)

@@ -8,9 +8,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Na elke afgeronde wijziging: `git add -A` en committen met een korte
 Nederlandse beschrijving. Dat hoeft niet gevraagd te worden.
 
-**Pushen naar main gebeurt nooit uit jezelf.** Laat zien wat er klaarstaat
-en vraag om akkoord; pas daarna `git push`. Krijg je een aparte werkbranch
-opgedragen, dan gaat die voor op main en mag je daar wel naartoe pushen.
+**Pushen naar main gebeurt nooit uit jezelf.** Wacht op een expliciete
+bevestiging van de gebruiker in de chat met het woord "push" — pas dan
+`git push`. Zonder dat woord blijven wijzigingen lokaal gecommit, ook als
+ze al klaar en getest zijn.
 
 Voor je begint te werken: eerst `git pull` om werk van anderen op te halen.
 

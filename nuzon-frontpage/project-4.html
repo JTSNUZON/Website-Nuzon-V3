@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/site.css?v=39">
+<link rel="stylesheet" href="css/site.css?v=40">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
 </head>
 <body>
@@ -131,6 +131,9 @@
        erin. Er is geen maximum; hoe meer je erin zet, hoe verder de rij
        doorloopt. De eerste krijgt loading="eager" (die is meteen in
        beeld), de rest loading="lazy".
+       De rij loopt rond: schuif je voorbij de laatste foto, dan komt de
+       eerste er weer achteraan (en andersom). Dat regelt site.js zelf,
+       je hoeft hier niets voor te dupliceren.
        ================================================================== -->
   <div class="fotorij" data-fotorij>
     <div class="fotorij__spoor" tabindex="0" role="region" aria-label="Foto's van dit project">
@@ -256,7 +259,7 @@
   </svg>
 </a>
 
-<script src="js/site.js?v=39"></script>
+<script src="js/site.js?v=40"></script>
 <script src="js/funnel.js?v=2"></script>
 
 </body>

@@ -65,22 +65,93 @@ var WHATSAPP_BERICHT = "Hallo Nuzon, ik heb een vraag over ";
   /* ---- fotorij ----
      Vegen op een telefoon doet de browser zelf. Op een computer zonder
      touchpad valt er weinig te vegen, dus daar mag je de rij met de muis
-     verslepen. Een klik die geen sleep werd blijft gewoon een klik. */
+     verslepen. Een klik die geen sleep werd blijft gewoon een klik.
+
+     De rij loopt rond: achter de laatste foto komt de eerste weer, en
+     andersom net zo. Dat doen we door de hele reeks een paar keer te
+     klonen en de scrollpositie stilletjes een ronde terug te zetten
+     zodra je er een voorbij bent. Je ziet daar niets van, want op dat
+     moment staat er precies hetzelfde in beeld. */
   document.querySelectorAll('[data-fotorij] .fotorij__spoor').forEach(function(spoor){
-    var neer = false, startX = 0, startScroll = 0, versleept = false;
+
+    /* --- rondlopen --- */
+    var origineel = Array.prototype.slice.call(spoor.children);
+    var lus = 0;                 // breedte van een hele ronde
+    var herstelt = false;        // staat een correctie te wachten?
+
+    function maakKloon(item){
+      var kloon = item.cloneNode(true);
+      kloon.setAttribute('aria-hidden', 'true');
+      kloon.dataset.kloon = 'ja';
+      Array.prototype.forEach.call(kloon.querySelectorAll('img'), function(img){
+        img.setAttribute('loading', 'lazy');
+      });
+      return kloon;
+    }
+
+    function bouwRonde(){
+      if(!origineel.length) return;
+
+      // terug naar kaal: alleen de echte foto's
+      Array.prototype.slice.call(spoor.children).forEach(function(kind){
+        if(kind.dataset && kind.dataset.kloon) spoor.removeChild(kind);
+      });
+
+      var reeks = spoor.scrollWidth;
+      if(reeks <= spoor.clientWidth + 1){ lus = 0; return; }  // past er gewoon in
+
+      // Een ronde moet breder zijn dan het scherm, anders zie je bij het
+      // terugzetten een sprong. Zijn het er weinig, dan herhalen we ze.
+      var herhaal = Math.max(1, Math.ceil((spoor.clientWidth * 1.5) / reeks));
+      var strook = document.createDocumentFragment();
+      for(var ronde = 0; ronde < herhaal * 3 - 1; ronde++){
+        origineel.forEach(function(item){ strook.appendChild(maakKloon(item)); });
+      }
+      spoor.appendChild(strook);
+
+      lus = reeks * herhaal;
+      spoor.scrollLeft = lus;                 // begin in de middelste ronde
+    }
+
+    function herstel(){
+      if(!lus) return;
+      if(spoor.scrollLeft >= lus * 2)      spoor.scrollLeft -= lus;
+      else if(spoor.scrollLeft < lus * 0.5) spoor.scrollLeft += lus;
+    }
+
+    spoor.addEventListener('scroll', function(){
+      if(!lus || herstelt) return;
+      herstelt = true;
+      requestAnimationFrame(function(){ herstel(); herstelt = false; });
+    }, { passive:true });
+
+    bouwRonde();
+    window.addEventListener('load', bouwRonde);
+    if(window.ResizeObserver){
+      var vorigeBreedte = spoor.clientWidth;
+      new ResizeObserver(function(){
+        if(spoor.clientWidth === vorigeBreedte) return;
+        vorigeBreedte = spoor.clientWidth;
+        bouwRonde();
+      }).observe(spoor);
+    }
+
+    /* --- slepen met de muis --- */
+    var neer = false, laatsteX = 0, versleept = false;
 
     spoor.addEventListener('pointerdown', function(e){
       if(e.pointerType === 'touch') return;          // dat regelt de browser al
       neer = true; versleept = false;
-      startX = e.clientX; startScroll = spoor.scrollLeft;
+      laatsteX = e.clientX;
       spoor.setPointerCapture(e.pointerId);
     });
 
     spoor.addEventListener('pointermove', function(e){
       if(!neer) return;
-      var verschil = e.clientX - startX;
-      if(!versleept && Math.abs(verschil) > 4){ versleept = true; spoor.classList.add('is-slepen'); }
-      if(versleept){ spoor.scrollLeft = startScroll - verschil; }
+      var stap = laatsteX - e.clientX;
+      laatsteX = e.clientX;
+      if(!versleept && Math.abs(stap) > 4){ versleept = true; spoor.classList.add('is-slepen'); }
+      if(versleept){ spoor.scrollLeft += stap; herstel(); }
     });
 
     function los(e){

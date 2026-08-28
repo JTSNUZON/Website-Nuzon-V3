@@ -1,0 +1,6 @@
+# Nuzon BV — https://www.nuzon.nl
+User-agent: *
+Allow: /
+Disallow: /video-test
+
+Sitemap: https://www.nuzon.nl/sitemap.xml

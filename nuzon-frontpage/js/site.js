@@ -27,6 +27,13 @@ var WHATSAPP_BERICHT = "Hallo Nuzon, ik heb een vraag over ";
   var intro = document.getElementById('intro');
   var introWeg = false;
 
+  // Het logo hoort bij binnenkomst, niet bij elke klik. Wie al op de site
+  // is, klikt door zonder wachten — dat scheelt de bezoeker tijd en het
+  // scheelt Google het beeld dat de pagina traag is. Bij een nieuw bezoek
+  // (nieuw tabblad, later terug) draait hij gewoon weer.
+  var alGezien = false;
+  try { alGezien = sessionStorage.getItem('nuzon-intro') === 'gezien'; } catch(e){}
+
   function naarAnkerOfTop(){
     var doel = location.hash && document.getElementById(location.hash.slice(1));
     if(doel){ doel.scrollIntoView(); } else { window.scrollTo(0, 0); }
@@ -43,12 +50,13 @@ var WHATSAPP_BERICHT = "Hallo Nuzon, ik heb een vraag over ";
         if(intro && intro.parentNode) intro.parentNode.removeChild(intro);
       }, 700);   // even lang als het wegschuiven in de css duurt
     }
+    try { sessionStorage.setItem('nuzon-intro', 'gezien'); } catch(e){}
     document.dispatchEvent(new CustomEvent('nuzon:intro-klaar'));
   }
   window.nuzonSluitIntro = sluitIntro;
 
   if(intro){
-    if(reduce){
+    if(reduce || alGezien){
       intro.parentNode.removeChild(intro);
       intro = null;
       introWeg = true;
@@ -58,7 +66,7 @@ var WHATSAPP_BERICHT = "Hallo Nuzon, ik heb een vraag over ";
       document.documentElement.style.overflow = 'hidden';
       // Noodrem: het scherm gaat hoe dan ook open. Pagina's met de
       // hero-video krijgen wat langer, want die wachten op het beeld.
-      setTimeout(sluitIntro, document.body.classList.contains('has-hero') ? 1300 : 900);
+      setTimeout(sluitIntro, document.body.classList.contains('has-hero') ? 1100 : 700);
     }
   }
 

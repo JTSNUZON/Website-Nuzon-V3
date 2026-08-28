@@ -1045,6 +1045,9 @@ input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%;
 .prod__spec span{ font-size:.85rem; color:var(--muted); }
 .prod__actions{ display:flex; gap:12px; flex-wrap:wrap; margin-top:28px; }
 
+/* Een kop in zo'n blok is meestal gewone tekst; is het een link (zoals op
+   de 404-pagina), dan mag je dat zien. */
+.usp h3 a{ color:var(--gold); }
 .usps{ display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(14px,1.8vw,22px); }
 .usp{ border:1px solid var(--line); border-radius:6px; background:var(--bg); padding:clamp(20px,2.4vw,28px); }
 .usp h3{ font-size:1.05rem; margin-bottom:8px; }

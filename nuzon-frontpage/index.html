@@ -333,13 +333,13 @@
     </div>
 
     <div class="choice__grid">
-      <a class="choice__card" href="/particulier" data-tak="particulier">
+      <a class="choice__card" href="/opwekken" data-tak="particulier">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8M5 9.5V21h14V9.5M9 21v-6h6v6"/></svg>
         <h3>Particulier</h3>
         <p>Zonnepanelen, thuisbatterij en laden voor jouw woning. Bespaar elke dag.</p>
         <span class="go">Voor thuis →</span>
       </a>
-      <a class="choice__card" href="/zakelijk" data-tak="zakelijk">
+      <a class="choice__card" href="/batterijopslag-zakelijk" data-tak="zakelijk">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21V7l8-4v18M11 21V9l8 4v8M3 21h18M7 11h0M7 15h0M15 15h0M15 18h0"/></svg>
         <h3>Zakelijk</h3>
         <p>Zonnepanelen, batterijopslag en laadpleinen voor bedrijven. Verlaag uw kosten.</p>
@@ -357,7 +357,6 @@
     <p class="eyebrow" id="keuzelaagTak">Particulier</p>
     <h2 id="keuzelaagTitel">Waar wil je meer over weten?</h2>
     <ol class="keuzelaag__lijst" id="keuzelaagLijst"></ol>
-    <a class="keuzelaag__alles" id="keuzelaagAlles" href="/particulier">Of bekijk de hele pagina &#8594;</a>
   </div>
 </div>
 
@@ -959,6 +958,24 @@ var REVIEWS = [
      naar de hele pagina, dus dan werkt het ook.
      ================================================================== */
   var ONDERWERPEN = ['opwekken','opslaan','laden','noodstroom','meterkast'];
+  // Waar elk onderwerp heen gaat. Particulier en zakelijk hebben (nog) geen
+  // eigen overzichtspagina, dus wijzen we rechtstreeks naar het onderdeel.
+  var DOELEN = {
+    particulier: {
+      opwekken:  '/opwekken#zonnepanelen',
+      opslaan:   '/opslaan#thuisbatterij',
+      laden:     '/laden-en-stroom#laadpaal',
+      noodstroom:'/opslaan#noodstroom',
+      meterkast: '/laden-en-stroom'
+    },
+    zakelijk: {
+      opwekken:  '/opwekken#zonnepanelen',
+      opslaan:   '/batterijopslag-zakelijk',
+      laden:     '/laden-en-stroom#laadpaal',
+      noodstroom:'/opslaan#noodstroom',
+      meterkast: '/laden-en-stroom'
+    }
+  };
   var TAKKEN = {
     particulier: {
       label: 'Particulier',
@@ -999,9 +1016,8 @@ var REVIEWS = [
       var t = TAKKEN[tak];
       laagTak.textContent = t.label;
       laagTitel.textContent = t.titel;
-      laagAlles.href = '/' + tak;
       laagLijst.innerHTML = ONDERWERPEN.map(function(anker, i){
-        return '<li><a href="/' + tak + '#' + anker + '">'
+        return '<li><a href="' + DOELEN[tak][anker] + '">'
              +   '<span class="keuzelaag__num">' + ('0' + (i + 1)) + '</span>'
              +   '<span><span class="keuzelaag__naam">' + t.namen[i] + '</span>'
              +   '<span class="keuzelaag__sub">' + t.subs[i] + '</span></span>'
